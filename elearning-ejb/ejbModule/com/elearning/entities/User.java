@@ -1,15 +1,16 @@
 package com.elearning.entities;
 
 import java.io.Serializable;
-import javax.persistence.*;
+import java.util.Date;
 
+import javax.persistence.*;
 
 /**
  * The persistent class for the user database table.
  * 
  */
 @Entity
-@Table(name="user")
+@Table(name = "user")
 public class User implements Serializable {
 	private static final long serialVersionUID = 1L;
 
@@ -21,11 +22,16 @@ public class User implements Serializable {
 	private String password;
 
 	private String username;
-	
+
+	@Column(name = "confirmation_token")
 	private String confirmationToken;
 
-    public User() {
-    }
+	@Temporal(TemporalType.DATE)
+	@Column(name = "create_at")
+	private Date createdAt;
+
+	public User() {
+	}
 
 	public int getId() {
 		return this.id;
@@ -65,6 +71,19 @@ public class User implements Serializable {
 
 	public String getConfirmationToken() {
 		return confirmationToken;
+	}
+
+	public void setCreatedAt(Date createdAt) {
+		this.createdAt = createdAt;
+	}
+
+	public Date getCreatedAt() {
+		return createdAt;
+	}
+
+	@PrePersist
+	void onCreate() {
+		this.setCreatedAt(new Date());
 	}
 
 }
