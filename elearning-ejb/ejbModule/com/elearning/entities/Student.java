@@ -21,6 +21,8 @@ public class Student implements Serializable {
 	private String password;
 
 	private String username;
+	
+	private String confirmationToken;
 
     public Student() {
     }
@@ -55,6 +57,14 @@ public class Student implements Serializable {
 
 	public void setUsername(String username) {
 		this.username = username;
+	}
+
+	public void setConfirmationToken(String confirmationToken) {
+		this.confirmationToken = confirmationToken;
+	}
+
+	public String getConfirmationToken() {
+		return confirmationToken;
 	}
 
 }
