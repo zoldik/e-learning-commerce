@@ -25,10 +25,20 @@ public class User implements Serializable {
 
 	@Column(name = "confirmation_token")
 	private String confirmationToken;
+	
+	private Boolean enabled;
+	
+	@Temporal(TemporalType.DATE)
+	@Column(name = "last_login")
+	private Date lastLogin;
 
 	@Temporal(TemporalType.DATE)
 	@Column(name = "create_at")
 	private Date createdAt;
+	
+	@Temporal(TemporalType.DATE)
+	@Column(name = "updated_at")
+	private Date updatedAt;
 
 	public User() {
 	}
@@ -73,6 +83,22 @@ public class User implements Serializable {
 		return confirmationToken;
 	}
 
+	public void setEnabled(Boolean enabled) {
+		this.enabled = enabled;
+	}
+
+	public Boolean getEnabled() {
+		return enabled;
+	}
+
+	public void setLastLogin(Date lastLogin) {
+		this.lastLogin = lastLogin;
+	}
+
+	public Date getLastLogin() {
+		return lastLogin;
+	}
+
 	public void setCreatedAt(Date createdAt) {
 		this.createdAt = createdAt;
 	}
@@ -81,9 +107,22 @@ public class User implements Serializable {
 		return createdAt;
 	}
 
+	public void setUpdatedAt(Date updatedAt) {
+		this.updatedAt = updatedAt;
+	}
+
+	public Date getUpdatedAt() {
+		return updatedAt;
+	}
+	
 	@PrePersist
 	void onCreate() {
 		this.setCreatedAt(new Date());
+	}
+	
+	@PreUpdate
+	void onUpdate() {
+		this.setUpdatedAt(new Date());
 	}
 
 }
