@@ -4,7 +4,7 @@ import java.util.Map;
 import org.apache.struts2.interceptor.SessionAware;
 import org.apache.struts2.interceptor.validation.SkipValidation;
 
-import com.test.beans.User;
+import org.elearning.entities.User;
 import com.opensymphony.xwork2.ActionSupport;
 import com.opensymphony.xwork2.ModelDriven;
 
