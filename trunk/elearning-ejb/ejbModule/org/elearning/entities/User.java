@@ -122,5 +122,13 @@ public class User implements Serializable {
 	public String getAdress() {
 		return adress;
 	}
+	
+	public void clearModel(){
+		this.email=null;
+		this.firstName=null;
+		this.lastName=null;
+		this.login=null;
+		this.password=null;
+	}
 
 }
