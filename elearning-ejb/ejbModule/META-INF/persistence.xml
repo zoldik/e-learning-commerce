@@ -2,8 +2,26 @@
 <persistence version="2.0" xmlns="http://java.sun.com/xml/ns/persistence" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://java.sun.com/xml/ns/persistence http://java.sun.com/xml/ns/persistence/persistence_2_0.xsd">
 	<persistence-unit name="elearning-ejb">
 		<jta-data-source>java:/ElearningDS</jta-data-source>
-		<class>com.elearning.entities.Student</class>
-		<class>com.elearning.entities.User</class>
+		<class>org.elearning.entities.User</class>
+		<class>org.elearning.entities.Teacher</class>
+		<class>org.elearning.entities.Student</class>
+		<class>org.elearning.entities.Session</class>
+		<class>org.elearning.entities.Schedule</class>
+		<class>org.elearning.entities.Role</class>
+		<class>org.elearning.entities.Material</class>
+		<class>org.elearning.entities.Library</class>
+		<class>org.elearning.entities.HiringRequest</class>
+		<class>org.elearning.entities.Group</class>
+		<class>org.elearning.entities.FormationRequest</class>
+		<class>org.elearning.entities.Formation</class>
+		<class>org.elearning.entities.External</class>
+		<class>org.elearning.entities.Domain</class>
+		<class>org.elearning.entities.Client</class>
+		<class>org.elearning.entities.Classroom</class>
+		<class>org.elearning.entities.Category</class>
+		<class>org.elearning.entities.CV</class>
+		<class>org.elearning.entities.Affiliate</class>
+		<class>org.elearning.entities.Administrator</class>
 		<properties>
          <property name="hibernate.dialect" value="org.hibernate.dialect.MySQL5InnoDBDialect"/>
          <property name="hibernate.hbm2ddl.auto" value="update"/>
