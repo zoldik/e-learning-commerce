@@ -9,7 +9,7 @@
 </head>
 <body>
 	<s:form action="register">
-		<s:textfield name="username" key="username.label"/>
+		<s:textfield name="login" key="username.label"/>
 		<s:textfield name="email" key="email.label"/>
 		<s:password name="password" key="password.label"/>
 		<s:textfield name="firstName" key="firstname.label"/>
