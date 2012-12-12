@@ -7,11 +7,9 @@
 		<class>org.elearning.entities.Student</class>
 		<class>org.elearning.entities.Session</class>
 		<class>org.elearning.entities.Schedule</class>
-		<class>org.elearning.entities.Role</class>
 		<class>org.elearning.entities.Material</class>
 		<class>org.elearning.entities.Library</class>
 		<class>org.elearning.entities.HiringRequest</class>
-		<class>org.elearning.entities.Group</class>
 		<class>org.elearning.entities.FormationRequest</class>
 		<class>org.elearning.entities.Formation</class>
 		<class>org.elearning.entities.External</class>
@@ -22,6 +20,8 @@
 		<class>org.elearning.entities.CV</class>
 		<class>org.elearning.entities.Affiliate</class>
 		<class>org.elearning.entities.Administrator</class>
+		<class>org.elearning.entities.Group</class>
+		<class>org.elearning.entities.Role</class>
 		<validation-mode>AUTO</validation-mode>
 		<properties>
          <property name="hibernate.dialect" value="org.hibernate.dialect.MySQL5InnoDBDialect"/>
