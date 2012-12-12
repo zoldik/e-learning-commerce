@@ -22,6 +22,7 @@
 		<class>org.elearning.entities.CV</class>
 		<class>org.elearning.entities.Affiliate</class>
 		<class>org.elearning.entities.Administrator</class>
+		<validation-mode>AUTO</validation-mode>
 		<properties>
          <property name="hibernate.dialect" value="org.hibernate.dialect.MySQL5InnoDBDialect"/>
          <property name="hibernate.hbm2ddl.auto" value="update"/>
