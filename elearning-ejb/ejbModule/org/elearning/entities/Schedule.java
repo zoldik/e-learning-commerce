@@ -12,8 +12,10 @@ public class Schedule implements Serializable {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int id;
 	
+	@OneToOne
 	private Formation formation;
-	@Column(name = "session_list")
+	
+	
 	private ArrayList<Session> sessionList;
 
 	public Schedule() {
@@ -32,7 +34,6 @@ public class Schedule implements Serializable {
 		this.formation = formation;
 	}
 
-	@OneToOne
 	public Formation getFormation() {
 		return formation;
 	}
