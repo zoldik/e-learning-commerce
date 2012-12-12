@@ -43,6 +43,7 @@ public class Formation implements Serializable {
 	@Column(name = "start_date")
 	@Temporal(TemporalType.DATE)
 	private Date startDate;
+	
 	@Column(name = "end_date")
 	@Temporal(TemporalType.DATE)
 	private Date endDate;
