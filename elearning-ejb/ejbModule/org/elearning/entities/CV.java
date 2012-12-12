@@ -8,7 +8,7 @@ import javax.persistence.*;
 public class CV implements Serializable {
 
 	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@GeneratedValue(strategy = GenerationType.AUTO)
 	private int id;
 	private String experience;
 	private String training;
