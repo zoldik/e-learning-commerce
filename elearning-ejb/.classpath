@@ -13,5 +13,6 @@
 			<attribute name="owner.project.facets" value="jpt.jpa"/>
 		</attributes>
 	</classpathentry>
+	<classpathentry kind="lib" path="C:/jboss-4.2.2.GA/server/default/lib/jboss-ejb3x.jar"/>
 	<classpathentry kind="output" path="build/classes"/>
 </classpath>
