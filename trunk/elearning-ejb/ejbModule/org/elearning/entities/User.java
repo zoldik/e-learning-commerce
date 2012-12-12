@@ -8,7 +8,7 @@ import javax.persistence.*;
 public class User implements Serializable {
 
 	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@GeneratedValue(strategy = GenerationType.AUTO)
 	private int id;
 	private String category;
 	@Column(name = "first_name")
@@ -20,9 +20,9 @@ public class User implements Serializable {
 	private String adress;
 	private String email;
 	@Column(name = "phone")
-	private int phone;
+	private String phone;
 	@Column(name = "fax")
-	private int fax;
+	private String fax;
 	
 	@ManyToOne(targetEntity=Group.class)
 	@JoinColumn(name="group_id", referencedColumnName="id")
@@ -90,12 +90,12 @@ public class User implements Serializable {
 	}
 
 
-	public void setPhone(int phone) {
+	public void setPhone(String phone) {
 		this.phone = phone;
 	}
 
 
-	public int getFax() {
+	public String getFax() {
 		return fax;
 	}
 
