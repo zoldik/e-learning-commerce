@@ -2,6 +2,7 @@ package org.elearning.entities;
 
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.Date;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -18,7 +19,7 @@ import javax.persistence.TemporalType;
 @Entity
 public class Formation implements Serializable {
 	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@GeneratedValue(strategy = GenerationType.AUTO)
 	private int id;
 	private String name;
 	private String duration;
@@ -30,9 +31,15 @@ public class Formation implements Serializable {
 	@OneToOne(targetEntity=Library.class)
 	private Library library;
 	
+	@OneToOne(targetEntity=Schedule.class)
 	private Schedule schedule;
-	private ArrayList<Student> student;
-	private ArrayList<Teacher> teacher;
+	
+	@ManyToMany(targetEntity=Student.class, mappedBy="formations")
+	private Collection<Student> students;
+	
+	@ManyToMany(targetEntity=Teacher.class, mappedBy="formations")
+	private Collection<Teacher> teachers;
+	
 	@Column(name = "start_date")
 	@Temporal(TemporalType.DATE)
 	private Date startDate;
@@ -106,22 +113,19 @@ public class Formation implements Serializable {
 		this.schedule = schedule;
 	}
 
-	@ManyToMany
-	public ArrayList<Student> getStudent() {
-		return student;
+	public Collection<Student> getStudents() {
+		return students;
 	}
 
-	public void setStudent(ArrayList<Student> student) {
-		this.student = student;
+	public void setStudents(Collection<Student> students) {
+		this.students = students;
 	}
 
-	@ManyToMany
-	public ArrayList<Teacher> getTeacher() {
-		return teacher;
+	public Collection<Teacher> getTeachers() {
+		return teachers;
 	}
 
-	public void setTeacher(ArrayList<Teacher> teacher) {
-		this.teacher = teacher;
+	public void setTeachers(Collection<Teacher> teachers) {
+		this.teachers = teachers;
 	}
-
 }
