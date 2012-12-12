@@ -25,6 +25,9 @@ public class Student extends User implements Serializable {
 	@JoinTable(name="student_formation",joinColumns=@JoinColumn(name="student_id"),inverseJoinColumns=@JoinColumn(name="formation_id"))
 	private Collection<Formation> formations;
 
+	@OneToOne(targetEntity=CV.class)
+	private CV cv;
+	
 	public Student() {
 		super();
 	}
@@ -53,5 +56,12 @@ public class Student extends User implements Serializable {
 		this.formations = formations;
 	}
 
+	public CV getCv() {
+		return cv;
+	}
+
+	public void setCv(CV cv) {
+		this.cv = cv;
+	}
 	
 }
