@@ -15,14 +15,14 @@ public class User implements Serializable {
 	private String firstName;
 	@Column(name = "last_name")
 	private String lastName;
-	private String login;
+	private String username;
 	private String password;
 	private String adress;
 	private String email;
-	@Column(name = "phone_numver")
-	private int phoneNumber;
-	@Column(name = "fax_number")
-	private int faxNumber;
+	@Column(name = "phone")
+	private int phone;
+	@Column(name = "fax")
+	private int fax;
 	
 	@ManyToOne(targetEntity=Group.class)
 	@JoinColumn(name="group_id", referencedColumnName="id")
@@ -75,13 +75,35 @@ public class User implements Serializable {
 		this.lastName = lastName;
 	}
 
-	public String getLogin() {
-		return login;
+	public String getUsername() {
+		return username;
 	}
 
-	public void setLogin(String login) {
-		this.login = login;
+
+	public void setUsername(String username) {
+		this.username = username;
 	}
+
+
+	public int getPhone() {
+		return phone;
+	}
+
+
+	public void setPhone(int phone) {
+		this.phone = phone;
+	}
+
+
+	public int getFax() {
+		return fax;
+	}
+
+
+	public void setFax(int fax) {
+		this.fax = fax;
+	}
+
 
 	public String getPassword() {
 		return password;
@@ -99,22 +121,6 @@ public class User implements Serializable {
 		this.email = email;
 	}
 
-	public int getPhoneNumber() {
-		return this.phoneNumber;
-	}
-
-	public void setPhoneNumber(int phoneNumber) {
-		this.phoneNumber = phoneNumber;
-	}
-
-	public int getFaxNumber() {
-		return this.faxNumber;
-	}
-
-	public void setFaxNumber(int faxNumber) {
-		this.faxNumber = faxNumber;
-	}
-
 	public void setAdress(String adress) {
 		this.adress = adress;
 	}
@@ -127,7 +133,7 @@ public class User implements Serializable {
 		this.email=null;
 		this.firstName=null;
 		this.lastName=null;
-		this.login=null;
+		this.password=null;
 		this.password=null;
 	}
 
