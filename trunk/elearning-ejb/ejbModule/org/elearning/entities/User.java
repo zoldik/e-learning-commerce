@@ -85,7 +85,7 @@ public class User implements Serializable {
 	}
 
 
-	public int getPhone() {
+	public String getPhone() {
 		return phone;
 	}
 
@@ -100,7 +100,7 @@ public class User implements Serializable {
 	}
 
 
-	public void setFax(int fax) {
+	public void setFax(String fax) {
 		this.fax = fax;
 	}
 
