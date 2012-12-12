@@ -13,6 +13,12 @@ public class CV implements Serializable {
 	private String experience;
 	private String training;
 	private String degree;
+	
+	@OneToOne
+	Student student;
+	
+	@OneToOne
+	External external;
 
 	public CV() {
 		super();
@@ -48,6 +54,22 @@ public class CV implements Serializable {
 
 	public void setDegree(String degree) {
 		this.degree = degree;
+	}
+
+	public Student getStudent() {
+		return student;
+	}
+
+	public void setStudent(Student student) {
+		this.student = student;
+	}
+
+	public External getExternal() {
+		return external;
+	}
+
+	public void setExternal(External external) {
+		this.external = external;
 	}
 
 }
