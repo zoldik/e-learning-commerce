@@ -7,12 +7,13 @@ import java.util.Date;
 import javax.persistence.*;
 
 @Entity
+@DiscriminatorValue("student")
 public class Student extends User implements Serializable {
 
 	@Temporal(TemporalType.DATE)
 	@Column(name = "date_of_birth")
 	private Date dateOfBirth;
-	private String Situation;
+	private String situation;
 
 	public Student() {
 		super();
@@ -27,11 +28,11 @@ public class Student extends User implements Serializable {
 	}
 
 	public String getSituation() {
-		return this.Situation;
+		return this.situation;
 	}
 
 	public void setSituation(String Situation) {
-		this.Situation = Situation;
+		this.situation = Situation;
 	}
 
 }
