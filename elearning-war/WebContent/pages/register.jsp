@@ -9,10 +9,13 @@
 </head>
 <body>
 	<s:form action="register">
-		<s:textfield name="login" key="username.label"/>
+		<s:textfield name="username" key="username.label"/>
 		<s:textfield name="email" key="email.label"/>
 		<s:password name="password" key="password.label"/>
 		<s:textfield name="firstName" key="firstname.label"/>
+		<s:textfield name="lastName" key="lastname.label"/>
+		<s:textfield name="adress" key="adress.label"/>
+		<s:number name=""/>
 		<s:textfield name="lastName" key="lastname.label"/>
 		<s:submit key="form.register.submit"/>
 	</s:form>

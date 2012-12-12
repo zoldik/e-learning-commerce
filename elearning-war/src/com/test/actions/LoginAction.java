@@ -1,11 +1,19 @@
 package com.test.actions;
 
 import java.util.Map;
+
+import javax.ejb.EJB;
+
+import org.elearning.sessions.UserSessionLocal;
+import org.elearning.sessions.UserSessionRemote;
+
 import com.opensymphony.xwork2.ActionContext;
 import com.opensymphony.xwork2.ActionSupport;
 
 public class LoginAction extends ActionSupport{
 	
+	@EJB
+	UserSessionLocal userService;
 	/**
 	 * 
 	 */
