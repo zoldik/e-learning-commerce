@@ -5,6 +5,7 @@ import java.lang.String;
 import javax.persistence.*;
 
 @Entity
+@DiscriminatorValue("customer")
 public class Client extends User implements Serializable {
 
 	private String Organization;

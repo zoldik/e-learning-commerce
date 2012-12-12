@@ -5,6 +5,8 @@ import java.lang.String;
 import javax.persistence.*;
 
 @Entity
+@Inheritance(strategy=InheritanceType.JOINED)
+@DiscriminatorColumn(name="type")
 public class User implements Serializable {
 
 	@Id

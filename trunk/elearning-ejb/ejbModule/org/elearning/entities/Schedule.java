@@ -11,6 +11,7 @@ public class Schedule implements Serializable {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int id;
+	
 	private Formation formation;
 	@Column(name = "session_list")
 	private ArrayList<Session> sessionList;
