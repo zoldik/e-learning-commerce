@@ -15,8 +15,6 @@
 		<s:textfield name="firstName" key="firstname.label"/>
 		<s:textfield name="lastName" key="lastname.label"/>
 		<s:textfield name="adress" key="adress.label"/>
-		<s:number name=""/>
-		<s:textfield name="lastName" key="lastname.label"/>
 		<s:submit key="form.register.submit"/>
 	</s:form>
 </body>
