@@ -5,7 +5,7 @@ EN" "http://www.opensymphony.com/xwork/xwork-validator-1.0.2.dtd">
 -->
 
 <!DOCTYPE validators PUBLIC "-//OpenSymphony Group//XWork Validator 1.0.2// 
-EN" "http://localhost:8080/test/pages/xwork-validator-1.0.2.dtd">  
+EN" "http://localhost:8080/elearning-war/pages/xwork-validator-1.0.2.dtd">  
  
 <validators> 
  
