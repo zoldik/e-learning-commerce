@@ -2,33 +2,53 @@ package org.elearning.entities;
 
 import java.io.Serializable;
 import java.lang.String;
+import java.util.Date;
+
 import javax.persistence.*;
 
 @Entity
 @Inheritance(strategy=InheritanceType.JOINED)
-@DiscriminatorColumn(name="type")
+@DiscriminatorColumn(name="type", discriminatorType=DiscriminatorType.STRING)
+@DiscriminatorValue("user")
 public class User implements Serializable {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
-	private int id;
-	private String category;
-	@Column(name = "first_name")
-	private String firstName;
-	@Column(name = "last_name")
-	private String lastName;
-	private String username;
-	private String password;
-	private String adress;
-	private String email;
-	@Column(name = "phone")
-	private String phone;
-	@Column(name = "fax")
-	private String fax;
+	protected int id;
 	
-	@ManyToOne(targetEntity=Group.class)
+	@Column(name = "first_name")
+	protected String firstName;
+	
+	@Column(name = "last_name")
+	protected String lastName;
+	
+	@Column(name = "username", unique=true)
+	protected String username;
+	
+	private String password;
+	
+	protected String adress;
+	
+	@Column(name = "email", unique=true)
+	protected String email;
+	
+	@Column(name = "phone")
+	protected String phone;
+	
+	@Column(name = "fax")
+	protected String fax;
+	
+	@ManyToOne(targetEntity=Group.class,cascade=CascadeType.ALL)
 	@JoinColumn(name="group_id", referencedColumnName="id")
-	private Group group;
+	protected Group group;
+	
+	@Temporal(TemporalType.DATE)
+	@Column(name="created_at")
+	protected Date createdAt;
+	
+	@Temporal(TemporalType.DATE)
+	@Column(name="updated_at")
+	protected Date updatedAt;
 
 	public User() {
 		super();
@@ -52,15 +72,7 @@ public class User implements Serializable {
 	public void setId(int id) {
 		this.id = id;
 	}
-
-	public void setCategory(String category) {
-		this.category = category;
-	}
-
-	public String getCategory() {
-		return category;
-	}
-
+	
 	public String getFirstName() {
 		return this.firstName;
 	}
@@ -129,6 +141,37 @@ public class User implements Serializable {
 
 	public String getAdress() {
 		return adress;
+	}
+	
+	public Date getUpdatedAt() {
+		return updatedAt;
+	}
+
+	public void setUpdatedAt(Date updatedAt) {
+		this.updatedAt = updatedAt;
+	}
+	
+	
+
+	public Date getCreatedAt() {
+		return createdAt;
+	}
+
+
+	public void setCreatedAt(Date createdAt) {
+		this.createdAt = createdAt;
+	}
+
+
+	@PreUpdate
+	public void onUpdate(){
+		this.updatedAt=new Date();
+	}
+	
+	@PrePersist
+	public void onCreate(){
+		this.createdAt=new Date();
+		this.updatedAt=new Date();
 	}
 	
 	public void clearModel(){
