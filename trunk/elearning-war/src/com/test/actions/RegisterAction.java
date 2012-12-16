@@ -8,17 +8,16 @@ import javax.naming.NameNotFoundException;
 import org.apache.struts2.interceptor.SessionAware;
 import org.apache.struts2.interceptor.validation.SkipValidation;
 
+import org.elearning.entities.Group;
+import org.elearning.entities.Teacher;
 import org.elearning.entities.User;
-import org.elearning.sessions.UserSessionLocal;
 import org.elearning.sessions.UserSessionRemote;
 
 import com.opensymphony.xwork2.ActionSupport;
 import com.opensymphony.xwork2.ModelDriven;
 
-public class RegisterAction extends ActionSupport implements ModelDriven<User>, SessionAware {
+public class RegisterAction extends ActionSupport implements ModelDriven<Teacher>, SessionAware {
 
-//	@EJB
-//	UserSessionLocal userService;
 	/**
 	 * 
 	 */
@@ -27,11 +26,11 @@ public class RegisterAction extends ActionSupport implements ModelDriven<User>, 
 	private Map<String, Object> session;
 
 	@Override
-	public User getModel() {
+	public Teacher getModel() {
 		if(session.get("model")==null){
-			session.put("model", new User());
+			session.put("model", new Teacher());
 		}
-		return (User)session.get("model");
+		return (Teacher)session.get("model");
 			
 	}
 	
@@ -48,7 +47,9 @@ public class RegisterAction extends ActionSupport implements ModelDriven<User>, 
 		{
 			InitialContext ctx=new InitialContext();
 			UserSessionRemote userService=(UserSessionRemote)ctx.lookup("UserSession/remote");
-			userService.persist((User) this.getModel());
+			Teacher user= this.getModel();
+			user.setGroup(new Group());
+			userService.persist((Teacher) this.getModel());
 		} 
 		catch (NameNotFoundException e) {
 			e.printStackTrace();
@@ -59,7 +60,7 @@ public class RegisterAction extends ActionSupport implements ModelDriven<User>, 
 
 	@SkipValidation
 	public String clearModel(){
-		((User) getModel()).clearModel();
+		((Teacher) getModel()).clearModel();
 		return INPUT;
 	}
 	
