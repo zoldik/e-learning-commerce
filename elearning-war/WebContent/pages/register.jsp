@@ -1,21 +1,22 @@
-<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
-    pageEncoding="ISO-8859-1"%>
-<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
-<%@ taglib uri="/struts-tags" prefix="s" %>
-<html>
-<head>
-<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
-<title><s:text name="register.title"/></title>
-</head>
-<body>
-	<s:form action="register">
-		<s:textfield name="username" key="username.label"/>
-		<s:textfield name="email" key="email.label"/>
-		<s:password name="password" key="password.label"/>
-		<s:textfield name="firstName" key="firstname.label"/>
-		<s:textfield name="lastName" key="lastname.label"/>
-		<s:textfield name="adress" key="adress.label"/>
-		<s:submit key="form.register.submit"/>
-	</s:form>
-</body>
-</html>
+<%@ taglib uri="/struts-tags" prefix="s"%>
+<%@ taglib prefix="sb" uri="/struts-bootstrap-tags"%>
+<%@ taglib prefix="sj" uri="/struts-jquery-tags"%>
+
+<s:actionerror theme="bootstrap" />
+<s:actionmessage theme="bootstrap" />
+<s:fielderror theme="bootstrap" />
+<s:form action="register" theme="bootstrap" cssClass="form-horizontal">
+	<s:textfield name="username" key="username.label"
+		tooltip="Enter your username here" />
+	<s:textfield name="email" key="email.label" tooltip="Enter your email" />
+	<s:password name="password" key="password.label"
+		tooltip="Enter your password" />
+	<s:textfield name="firstName" key="firstname.label" 
+		tooltip="Enter your firstname here"/>
+	<s:textfield name="lastName" key="lastname.label" 
+		tooltip="Enter your lastname here" />
+	<s:textfield name="adress" key="adress.label" 
+		tooltip="Enter your adress here" />
+	<s:submit cssClass="btn btn-inverse pull-right"
+		key="form.register.submit" />
+</s:form>
