@@ -1,0 +1,9 @@
+@CHARSET "ISO-8859-1";
+body{
+	padding-top: 90px;	
+}
+
+.container-fluid{
+	padding-left: 50px;
+	padding-right: 50px;
+	}
