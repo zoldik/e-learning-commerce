@@ -1,7 +1,0 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<decorators defaultdir="/decorators">
- <decorator name="main" page="/templates/baseLayout.jsp">
-  <pattern>/*</pattern>
- </decorator>
- <decorator name="panel" page="panel.jsp" />
-</decorators>
