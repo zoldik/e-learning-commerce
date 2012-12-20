@@ -38,7 +38,7 @@ public class User implements Serializable {
 	@Column(name = "fax")
 	protected String fax;
 	
-	@ManyToOne(targetEntity=Group.class,cascade=CascadeType.ALL)
+	@ManyToOne(targetEntity=Group.class)
 	@JoinColumn(name="group_id", referencedColumnName="id")
 	protected Group group;
 	
