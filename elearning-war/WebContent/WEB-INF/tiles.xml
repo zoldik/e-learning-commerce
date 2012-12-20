@@ -5,18 +5,35 @@
 "http://tiles.apache.org/dtds/tiles-config_2_0.dtd">
 
 <tiles-definitions>
-  
-  <definition name="base" template="/templates/layout.jsp">
-      <put-attribute name="title"  value="Welcome"/>
-      <put-attribute name="header" value="/templates/header.jsp"/>
-      <put-attribute name="menu"   value="/templates/sideBar.jsp"/>
-      <put-attribute name="body"   value="/templates/content.jsp"/>
-      <put-attribute name="footer"   value="/templates/footer.jsp"/>
-  </definition>
-  
-  <definition name=".register" extends="base">
-      <put-attribute name="title"  value="Enregistrement"/>
-      <put-attribute name="body"  value="/pages/register.jsp"/>
-  </definition>
-  
+
+	<definition name="base" template="/templates/layout.jsp">
+		<put-attribute name="title" value="Welcome" />
+		<put-attribute name="header" value="/templates/header.jsp" />
+		<put-attribute name="menu" value="/templates/sideBar.jsp" />
+		<put-attribute name="body" value="/templates/content.jsp" />
+		<put-attribute name="footer" value="/templates/footer.jsp" />
+	</definition>
+
+	<definition name=".register" extends="base">
+		<put-attribute name="title" value="Enregistrement" />
+		<put-attribute name="body" value="/pages/register.jsp" />
+	</definition>
+
+	<definition name=".dashboard" extends="base">
+		<put-attribute name="header" value="/admin/header.jsp" />
+		<put-attribute name="menu" value="" />
+		<put-attribute name="title" value="Tableau de bord" />
+		<put-attribute name="body" value="/admin/content.jsp" />
+	</definition>
+	
+	<definition name=".list" extends=".dashboard">
+		<put-attribute name="title" value="Liste des enseignants" />
+		<put-attribute name="body" value="/admin/list.jsp" />
+	</definition>
+	
+	<definition name=".add" extends=".dashboard">
+		<put-attribute name="title" value="Nouvel Enseignant" />
+		<put-attribute name="body" value="/admin/add.jsp" />
+	</definition>
+
 </tiles-definitions>
