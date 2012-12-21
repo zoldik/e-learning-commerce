@@ -53,7 +53,7 @@
 			</ul>
 			<ul class="nav pull-right">
 			
-				<s:url id="registerURL" action="register!input" namespace="/pages"/>
+				<s:url id="registerURL" action="registerStep1!input" namespace="/pages"/>
 				 
 			    <li  class="<s:property value="#classRegister"/>">
 				    <s:a href="%{registerURL}">
