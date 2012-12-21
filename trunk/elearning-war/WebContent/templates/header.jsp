@@ -3,6 +3,7 @@
 
 <s:set var="classRegister" value=""/>
 <s:set var="classIndex" value=""/>
+<s:set var="classContact" value=""/>
 <s:set var="actionName" value="com.opensymphony.xwork2.ActionContext.name"/>
 
 <s:if test="%{#actionName=='register'}">
@@ -10,6 +11,9 @@
 </s:if>
 <s:elseif test="%{#actionName=='index'}">
 	<s:set var="classIndex">active</s:set>
+</s:elseif>
+<s:elseif test="%{#actionName=='contact'}">
+	<s:set var="classContact">active</s:set>
 </s:elseif>
 
 <div class="navbar-inner">
@@ -22,12 +26,29 @@
 		<div class="nav-collapse">
 			<ul class="nav">
 				<s:url var="indexUrl" action="index" namespace="/" />
-				<li class="<s:property value="#classIndex"/>"><s:a href="%{indexUrl}">Home</s:a>
+				<li class="<s:property value="#classIndex"/>">
+					<s:a href="%{indexUrl}">Accueil</s:a>
 				</li>
 				<li class="divider-vertical"></li>
-				<s:url var="aboutUrl" action="about" />
+				<s:url var="presenattionUrl" action="presentation" namespace="/pages"/>
 				<li>
-					<s:a href="%{aboutUrl}">About </s:a>
+					<s:a href="%{presenattionUrl}"> Présentation </s:a>
+				</li>
+				<li class="divider-vertical"></li>
+				<li class="dropdown">
+					<a href="#" class="dropdown-toggle" data-toggle="dropdown"> 
+						Filiale 
+						<b class="caret"></b> 
+					</a>
+					
+					<s:action name="listAffiliate" namespace="/pages" executeResult="true"/>
+					
+					
+				</li>
+				<li class="divider-vertical"></li>
+				<s:url var="contactUrl" action="contact!input" namespace="/pages"/>
+				<li class='<s:property value="#classContact"/>'>
+					<s:a href="%{contactUrl}">Contact </s:a>
 				</li>
 			</ul>
 			<ul class="nav pull-right">
