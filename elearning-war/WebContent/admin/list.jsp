@@ -1,16 +1,17 @@
 <%@ taglib uri="/struts-tags" prefix="s"%>
 <%@ taglib prefix="sb" uri="/struts-bootstrap-tags"%>
 <%@ taglib prefix="sj" uri="/struts-jquery-tags"%>
+
+<div class="pull-right">
+	<ul>
+		<s:url var="createURL" action="create!input" namespace="/admin" />
+		<li class="btn"><s:a href="%{createURL}">ajouter un nouvel enseignant</s:a>
+		</li>
+	</ul>
+</div>
 <s:if test="teachers.size() > 0">
 	<s:form action="batch" name="batch-actions">
-	<div class="span12">
-		<div class="pull-right">
-			<ul>
-				<s:url var="createURL" action="create!input" namespace="/admin" />
-				<li class="btn"><s:a href="%{createURL}">ajouter un nouvel enseignant</s:a>
-				</li>
-			</ul>
-		</div>
+		<div class="span12">	
 		<table class="table table-bordered">
 			<thead>
 				<tr class="">
