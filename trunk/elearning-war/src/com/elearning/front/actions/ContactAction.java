@@ -29,7 +29,7 @@ public class ContactAction extends ActionSupport implements
 	public String execute() throws Exception {
 		String from = contactModel.getMailFrom();
 		String[] args = new String[] {contactModel.getFullName(), contactModel.getMessage(), from};
-        String[] recipients = new String[] { "fattouchsquall@gmail.com" };
+        String[] recipients = new String[] { "aymen1212@gmail.com" };
         String subject = getText("contact.mail.subject");
         String message = getText("contact.mail.content",args);
        
