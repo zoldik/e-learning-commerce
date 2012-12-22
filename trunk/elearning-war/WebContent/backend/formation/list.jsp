@@ -26,22 +26,29 @@
 					<s:iterator value="formations" status="formationStatus">
 						<tr>
 							<td class=""><input type="checkbox" name="idx[]"
-								value="<s:property value="id" />" />
-							</td>
-							<td><s:property value="name" />
-							</td>
+								value="<s:property value="id" />" /></td>
+							<td><s:property value="name" /></td>
 							<td><s:url id="editURL" action="edit"
 									namespace="/admin/formation">
 									<s:param name="id" value="%{id}" />:)
-								</s:url> <s:a href="%{editURL}">
+								</s:url> 
+								<s:a href="%{editURL}">
 									<img
 										src="<s:url value="images/edit.png" namespace="/admin/formation"/>" />
-								</s:a> <s:url id="deleteURL" action="delete"
+								</s:a>
+								 <s:url id="deleteURL" action="delete"
 									namespace="/admin/formation">
 									<s:param name="id" value="%{id}" />
-								</s:url> <s:a href="%{deleteURL}">
-									<img
-										src="<s:url value="images/delete.png" namespace="/adminformation"/>" />
+								</s:url> 
+								<s:a href="%{deleteURL}">
+									<img src="<s:url value="images/delete.png" namespace="/adminformation"/>" />
+								</s:a>
+								<s:url id="scheduleURL" action="newSchedule"
+									namespace="/admin/formation">
+									<s:param name="id" value="%{id}" />
+								</s:url> 
+								<s:a href="%{scheduleURL}">
+									Ajouter emploi du temps
 								</s:a>
 							</td>
 						</tr>
@@ -53,9 +60,11 @@
 							<ul>
 								<li><s:url var="firstPageURL" action="list" namespace="">
 										<s:param name="page" value="1"></s:param>
-									</s:url> <s:a href="%{firstPageURL}" /></li>
+									</s:url> <s:a href="%{firstPageURL}" />
+								</li>
 							</ul>
-						</div></td>
+						</div>
+					</td>
 				</tr>
 			</table>
 		</div>
