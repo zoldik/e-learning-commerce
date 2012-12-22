@@ -10,35 +10,46 @@
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <sj:head compressed="false" />
 <sb:head />
-<link rel="stylesheet" href="<s:url value="/css/main.css" namespace="/"/>" type="text/css">
-<title><tiles:insertAttribute name="title" />
-</title>
+<link rel="stylesheet"
+	href="<s:url value="/css/main.css" namespace="/"/>" type="text/css">
+<title><tiles:insertAttribute name="title" /></title>
 </head>
 <body>
-
-	<div class="navbar navbar-inverse navbar-fixed-top">
-		<tiles:insertAttribute name="header" />
-	</div>
-
 	<div class="container-fluid">
-		<div class="row-fluid">
-			<tiles:insertAttribute name="menu" />
-			
-			<tiles:insertAttribute name="body" />
+	<div class="row-fluid">
+		<div class="header">
+			<div class="banner">
+				<div class="container">
+					<h3>Centre Islamique Abdullah Ben Massoud</h3>
+				</div>
+			</div>
+
+			<div class="navbar navbar-inverse">
+				<tiles:insertAttribute name="header" />
+			</div>
 		</div>
+
+		
+			<tiles:insertAttribute name="menu" />
+
+			<tiles:insertAttribute name="body" />
+		
 		<div class="footer">
 			<tiles:insertAttribute name="footer" />
 		</div>
+		
+		</div>		
 	</div>
+
 	<script type="text/javascript">
-// 	jQuery(document).ready(function(){
-// 		jQuery("ul.nav").children("li").click(function(){
-// 			jQuery(this).addClass("active");
-// 			jQuery("ul.nav").children("li").each(function(){
-// 				jQuery(this).removeClass("active");
-// 			});
-// 		});
-// 	});
+		// 	jQuery(document).ready(function(){
+		// 		jQuery("ul.nav").children("li").click(function(){
+		// 			jQuery(this).addClass("active");
+		// 			jQuery("ul.nav").children("li").each(function(){
+		// 				jQuery(this).removeClass("active");
+		// 			});
+		// 		});
+		// 	});
 	</script>
 </body>
 </html>

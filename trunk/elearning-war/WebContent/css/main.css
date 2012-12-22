@@ -1,9 +1,36 @@
 @CHARSET "ISO-8859-1";
-body{
-	padding-top: 90px;	
+
+body {
+	background: url('../images/droit.jpg') repeat;
 }
 
-.container-fluid{
-	padding-left: 50px;
-	padding-right: 50px;
+html,body {
+	height: 100%;
+}
+
+.container-fluid {
+	margin: 0 80px;
+	height: 100%;
+}
+
+.row-fluid {
+	background-color: white;
+	height: 100%;
+	position: relative;
+}
+
+.banner {
+	background: url('../images/ban.jpg') no-repeat transparent;
+	padding: 20px 0;
+	color: white;
+}
+
+.affiliates-container {
+	padding: 20px 0;
+}
+
+.footer{
+	position: absolute;
+bottom: 0;
+width: 100%;       
 	}
