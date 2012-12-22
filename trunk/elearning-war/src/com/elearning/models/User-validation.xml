@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- 
+<!DOCTYPE validators PUBLIC "-//OpenSymphony Group//XWork Validator 1.0.2// 
+EN" "http://www.opensymphony.com/xwork/xwork-validator-1.0.2.dtd"> 
+-->
+
+<!DOCTYPE validators PUBLIC "-//OpenSymphony Group//XWork Validator 1.0.2// 
+EN" "http://localhost:8080/elearning-war/pages/xwork-validator-1.0.2.dtd">  
+ 
+<validators> 
+ 
+  <field name="mailTo" > 
+    <field-validator type="requiredstring" short-circuit="true"> 
+      <message key="email.error"/> 
+    </field-validator> 
+    <field-validator type="email" short-circuit="true"> 
+      <message key="email.error"/> 
+    </field-validator> 
+  </field> 
+ 
+  <field name="name" > 
+    <field-validator type="requiredstring" short-circuit="true"> 
+      <message key="chaine.error"/> 
+    </field-validator> 
+    <field-validator type="stringlength" short-circuit="true"> 
+      <param name="minLength">3</param> 
+      <param name="maxLength">10</param> 
+      <message key="chaine.error"/> 
+    </field-validator> 
+  </field> 
+ 
+</validators> 
