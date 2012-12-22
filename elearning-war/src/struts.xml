@@ -126,7 +126,7 @@
 		<action name="create" class="com.elearning.admin.actions.FormationAction"
 			method="save">
 			<result name="success" type="redirect">list</result>
-			<result name="populate" type="tiles">admin.formation.add</result>
+			<result name="input" type="tiles">admin.formation.add</result>
 		</action>
 
 		<action name="edit" class="com.elearning.admin.actions.FormationAction"
