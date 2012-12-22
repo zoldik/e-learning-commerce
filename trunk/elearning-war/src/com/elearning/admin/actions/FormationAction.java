@@ -1,6 +1,7 @@
 package com.elearning.admin.actions;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -23,7 +24,7 @@ public class FormationAction extends ActionSupport implements
 
 	private Map<String, Object> request;
 	private Formation formation = new Formation();
-	private List<Affiliate> affiliates = new ArrayList<Affiliate>();
+	private HashMap<Integer, String> affiliateSelect = new HashMap<Integer,String>();
 	private List<Formation> formations = new ArrayList<Formation>();
 	private FormationSessionRemote formationService;
 	private AffiliateSessionRemote affiliateService;
@@ -86,7 +87,10 @@ public class FormationAction extends ActionSupport implements
 	}
 	
 	public String popoulate(){
-		affiliates = affiliateService.findAll();
+		List<Affiliate> affiliates = affiliateService.findAll();
+		for(Affiliate affiliate : affiliates){
+			affiliateSelect.put(affiliate.getId(),affiliate.getName());
+		}
 		return "populate";
 	}
 
@@ -94,6 +98,17 @@ public class FormationAction extends ActionSupport implements
 	public void setRequest(Map<String, Object> request) {
 		this.request = request;
 	}
+
+	public HashMap<Integer, String>  getAffiliateSelect() {
+		return affiliateSelect;
+	}
+
+	public void setAffiliateSelect(HashMap<Integer, String>  affiliateSelect) {
+		this.affiliateSelect = affiliateSelect;
+	}
+	
+	
+	
 
 	
 }
