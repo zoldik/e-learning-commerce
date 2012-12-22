@@ -1,7 +1,7 @@
 @CHARSET "ISO-8859-1";
 
 body {
-	background: url('../images/droit.jpg') repeat;
+	background: url('../images/droit.jpg') repeat fixed;
 }
 
 html,body {
