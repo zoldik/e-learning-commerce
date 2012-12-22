@@ -30,21 +30,31 @@
 		<put-attribute name="body" value="/pages/contact.jsp" />
 	</definition>
 
-	<definition name=".dashboard" extends="base">
-		<put-attribute name="header" value="/admin/header.jsp" />
-		<put-attribute name="menu" value="" />
+	<definition name="admin.dashbord" template="/backend/layout.jsp">
+		<put-attribute name="header" value="/backend/header.jsp" />
 		<put-attribute name="title" value="Tableau de bord" />
-		<put-attribute name="body" value="/admin/content.jsp" />
+		<put-attribute name="body" value="/backend/content.jsp" />
+		<put-attribute name="footer" value="/templates/footer.jsp" />
 	</definition>
 	
-	<definition name=".list" extends=".dashboard">
+	<definition name=".list" extends="admin.dashbord">
 		<put-attribute name="title" value="Liste des enseignants" />
-		<put-attribute name="body" value="/admin/list.jsp" />
+		<put-attribute name="body" value="/backend/list.jsp" />
 	</definition>
 	
-	<definition name=".add" extends=".dashboard">
+	<definition name=".add" extends="admin.dashbord">
 		<put-attribute name="title" value="Nouvel Enseignant" />
-		<put-attribute name="body" value="/admin/add.jsp" />
+		<put-attribute name="body" value="/backend/add.jsp" />
+	</definition>
+	
+	<definition name="admin.formation.list" extends="admin.dashbord">
+		<put-attribute name="title" value="Liste des formations" />
+		<put-attribute name="body" value="/backend/formation/list.jsp" />
+	</definition>
+	
+	<definition name="admin.formation.add" extends="admin.dashbord">
+		<put-attribute name="title" value="Nouvelle formation" />
+		<put-attribute name="body" value="/backend/formation/add.jsp" />
 	</definition>
 
 </tiles-definitions>
