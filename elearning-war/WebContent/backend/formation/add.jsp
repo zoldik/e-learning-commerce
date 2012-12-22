@@ -15,7 +15,6 @@
 		label="Date début" tooltip="Date début de formation" />
 	<sj:datepicker name="formation.endDate" id="endDate" parentTheme="bootstrap"
 		label="Date fin" tooltip="Date fin de formation" />
-	<s:select name="formation.affiliate.id" list="affiliateSelect"></s:select>
 	<s:submit cssClass="btn btn-inverse pull-right"
 		key="form.register.submit" />
 	<%-- 	</s:push> --%>

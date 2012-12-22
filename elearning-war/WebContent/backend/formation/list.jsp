@@ -10,7 +10,7 @@
 		</li>
 	</ul>
 </div>
-<s:if test="teachers.size() > 0">
+<s:if test="teachers.length() > 0">
 	<s:form action="batch" name="batch-actions">
 		<div class="span12">
 			<table class="table table-bordered">
@@ -43,13 +43,24 @@
 								<s:a href="%{deleteURL}">
 									<img src="<s:url value="images/delete.png" namespace="/backend"/>" />
 								</s:a>
-								<s:url id="scheduleURL" action="newSchedule"
-									namespace="/admin/formation">
-									<s:param name="id" value="%{id}" />
-								</s:url> 
-								<s:a href="%{scheduleURL}">
-									Ajouter emploi du temps
-								</s:a>
+								
+								<s:if test="schedule!=null">
+									<s:url var="newScheduleURL" action="addSchedule" namespace="/admin/formation">
+										<s:param name="id" value="%{id}" />
+									</s:url> 
+									<s:a href="%{newScheduleURL}">
+										Ajouter emploi du temps
+									</s:a>
+								</s:if>
+								<s:else>
+									<s:url var="editScheduleURL" action="editSchedule" namespace="/admin/formation">
+										<s:param name="id" value="%{schedule.id}" />
+									</s:url>
+									<s:a href="%{editScheduleURL}">
+										Editer emploi du temps
+									</s:a>
+								</s:else>
+								
 							</td>
 						</tr>
 					</s:iterator>
