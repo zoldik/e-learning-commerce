@@ -34,14 +34,14 @@
 								</s:url> 
 								<s:a href="%{editURL}">
 									<img
-										src="<s:url value="images/edit.png" namespace="/admin/formation"/>" />
+										src="<s:url value="images/edit.png" namespace="/backend"/>" />
 								</s:a>
 								 <s:url id="deleteURL" action="delete"
 									namespace="/admin/formation">
 									<s:param name="id" value="%{id}" />
 								</s:url> 
 								<s:a href="%{deleteURL}">
-									<img src="<s:url value="images/delete.png" namespace="/adminformation"/>" />
+									<img src="<s:url value="images/delete.png" namespace="/backend"/>" />
 								</s:a>
 								<s:url id="scheduleURL" action="newSchedule"
 									namespace="/admin/formation">
