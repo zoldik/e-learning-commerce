@@ -14,7 +14,7 @@
 		</result-types>
 		
 		<default-action-ref name="index" />
-		<action name="index">
+		<action name="index" class="com.elearning.front.actions.AffiliateAction" method="list">
 			<result type="tiles">base</result>
 		</action>
 		
@@ -26,9 +26,9 @@
 				class="org.apache.struts2.views.tiles.TilesResult" />
 		</result-types>
 		
-		<action name="register" class="com.elearning.front.actions.RegisterAction">
-			<result name="input" type="tiles">.register</result>
-			<result name="success" type="tiles">.register</result>
+		<action name="registerStep1" class="com.elearning.front.actions.RegisterStepAction">
+			<result name="input" type="tiles">base.register-step1</result>
+			<result name="registerStudent" type="tiles">.register</result>
 		</action>
 
 		<action name="login" class="com.elearning.front.actions.LoginAction"
@@ -39,8 +39,18 @@
 		</action>
 		
 		<action name="translate" class="com.elearning.front.actions.Locale">
-			<result name="success">index.jsp</result>
+			<result name="success" >index.jsp</result>
 		</action>
+		
+		<action name="contact" class="com.elearning.front.actions.ContactAction">
+			<result name="input" type="tiles">.contact</result>
+			<result name="success" type="redirect">contact</result>
+		</action>
+		
+		<action name="listAffiliate" class="com.elearning.front.actions.AffiliateAction" method="list">
+			<result name="success">/pages/afilialeList.jsp</result>
+		</action>
+		
 	</package>
 	
 	<package name="admin" namespace="/admin" extends="struts-default">
@@ -49,8 +59,9 @@
 			<result-type name="tiles"
 				class="org.apache.struts2.views.tiles.TilesResult" />
 		</result-types>
+		<default-action-ref name="dashboard" />
 		
-		<action name="default" class="com.elearning.admin.actions.TeacherAction">
+		<action name="dashboard" class="com.elearning.admin.actions.TeacherAction">
 			<result name="success" type="tiles">.dashbord</result>
 		</action>
 		
