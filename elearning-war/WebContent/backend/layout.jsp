@@ -10,24 +10,28 @@
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <sj:head compressed="false" />
 <sb:head />
+<link rel="stylesheet"
+	href="<s:url value="/backend/css/main.css" namespace="/"/>" type="text/css">
 <title><tiles:insertAttribute name="title" />
 </title>
 </head>
 <body>
-
-	<div class="navbar navbar-inverse">
-		<tiles:insertAttribute name="header" />
-	</div>
-	<div class="container-fluid">
-		<div class="row-fluid">
-			<div class="span12">
-				<tiles:insertAttribute name="body" />
+	<div id="wrap">
+		<div class="navbar navbar-inverse">
+			<tiles:insertAttribute name="header" />
+		</div>
+		<div class="container-fluid">
+			<div class="row-fluid">
+				<div class="span12">
+					<tiles:insertAttribute name="body" />
+				</div>
 			</div>
 		</div>
+		<div class="push"></div>
 	</div>
-
 	<div class="footer">
 		<tiles:insertAttribute name="footer" />
 	</div>
+	<align></align>
 </body>
 </html>

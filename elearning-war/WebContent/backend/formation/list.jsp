@@ -4,13 +4,14 @@
 
 <div class="pull-right">
 	<ul>
-		<s:url var="createURL" action="create!popoulate"
+		<s:url var="createURL" action="create!input"
 			namespace="/admin/formation" />
 		<li class="btn"><s:a href="%{createURL}">Ajouter une nouvelle formation</s:a>
 		</li>
 	</ul>
 </div>
-<s:if test="teachers.length() > 0">
+<div class="clearfix"></div>
+<s:if test="formations.size() > 0">
 	<s:form action="batch" name="batch-actions">
 		<div class="span12">
 			<table class="table table-bordered">
@@ -19,6 +20,8 @@
 						<th class=""><input type="checkbox" id="listBatchCheckbox" />
 						</th>
 						<th class="">Nom</th>
+						<th class="">Date début</th>
+						<th class="">Date fin</th>
 						<th class="">Actions</th>
 					</tr>
 				</thead>
@@ -28,24 +31,30 @@
 							<td class=""><input type="checkbox" name="idx[]"
 								value="<s:property value="id" />" /></td>
 							<td><s:property value="name" /></td>
+							<td class="">
+								<s:property value="startDate" />
+							</td>
+							<td class="">
+								<s:property value="endDate" />
+							</td>
 							<td><s:url id="editURL" action="edit"
 									namespace="/admin/formation">
-									<s:param name="id" value="%{id}" />:)
+									<s:param name="id" value="%{id}" />
 								</s:url> 
 								<s:a href="%{editURL}">
 									<img
-										src="<s:url value="images/edit.png" namespace="/backend"/>" />
+										src="<s:url value="/backend/images/edit.png"/>" />
 								</s:a>
 								 <s:url id="deleteURL" action="delete"
 									namespace="/admin/formation">
 									<s:param name="id" value="%{id}" />
 								</s:url> 
 								<s:a href="%{deleteURL}">
-									<img src="<s:url value="images/delete.png" namespace="/backend"/>" />
+									<img src="<s:url value="/backend/images/delete.png" />" />
 								</s:a>
 								
-								<s:if test="schedule!=null">
-									<s:url var="newScheduleURL" action="addSchedule" namespace="/admin/formation">
+								<s:if test="schedule == null">
+									<s:url var="newScheduleURL" action="addSchedule!input" namespace="/admin/formation">
 										<s:param name="id" value="%{id}" />
 									</s:url> 
 									<s:a href="%{newScheduleURL}">
@@ -87,7 +96,6 @@
 		</div>
 	</s:form>
 </s:if>
-
 <s:else>
 	<p class="notice">no result</p>
 </s:else>

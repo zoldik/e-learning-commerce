@@ -33,13 +33,13 @@
 								<s:param name="id" value="%{id}" />
 							</s:url> 
 							<s:a href="%{editURL}">
-								<img src="<s:url value="images/edit.png" namespace="/backend"/>" />
+								<img src="<s:url value="/backend/images/edit.png" />" />
 							</s:a> 
 							<s:url id="deleteURL" action="delete" namespace="/admin/teacher">
 								<s:param name="id" value="%{id}" />
 							</s:url> 
 							<s:a href="%{deleteURL}">
-								<img src="<s:url value="images/delete.png" namespace="/backend"/>" />
+								<img src="<s:url value="/backend/images/delete.png" />" />
 							</s:a></td>
 					</tr>
 				</s:iterator>

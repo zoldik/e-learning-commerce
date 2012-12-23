@@ -2,10 +2,14 @@
 	pageEncoding="ISO-8859-1"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
+<dir >
+<
+</div>
 <table class="table table-bordered table-striped">
 	<thead>
-		<tr class="">
+		<tr class="" align="">
 			<th class=""><input type="checkbox" id="listBatchCheckbox" /></th>
+			<td bordercolor="#FFFFFF" bgcolor="#FFFFFF">&nbsp;</td>
 			<th class="">Lundi</th>
 			<th class="">Mardi</th>
 			<th class="">Mercredi</th>
@@ -15,7 +19,10 @@
 		</tr>
 	</thead>
 	<tbody>
-		<tr>
+			<td valign="" vwidth="44" bgcolor="#FFFFFF" bordercolor="#FFFFFF">&nbsp;
+			<p></p >
+			<form action=""></form>
+			</td>
 			<td width="78" height="136">8H00-9H30</td>
 			<td bordercolor="#FFFFFF" bgcolor="#FFFFFF">&nbsp;</td>
 			<td bgcolor="#FFFFFF"></td>

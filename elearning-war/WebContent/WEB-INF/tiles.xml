@@ -56,5 +56,10 @@
 		<put-attribute name="title" value="Nouvelle formation" />
 		<put-attribute name="body" value="/backend/formation/add.jsp" />
 	</definition>
+	
+	<definition name="admin.formation.schedule" extends="admin.dashbord">
+		<put-attribute name="title" value="Gestion emploi du temps" />
+		<put-attribute name="body" value="/backend/formation/manageSchedule.jsp" />
+	</definition>
 
 </tiles-definitions>
