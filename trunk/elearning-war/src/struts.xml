@@ -139,6 +139,12 @@
 			method="remove">
 			<result name="success" type="redirect">list</result>
 		</action>
+		
+		<action name="addSchedule" class="com.elearning.admin.actions.ScheduleAction">
+			<result name="success" type="redirect">list</result>
+			<result name="input" type="tiles">admin.formation.schedule</result>
+		</action>
+		
 	</package>
 
 </struts>
