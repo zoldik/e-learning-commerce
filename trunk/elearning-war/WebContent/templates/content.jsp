@@ -5,7 +5,7 @@
 			<s:url var="affiliateURL" action="index" namespace="/">
 
 			</s:url>
-			<div class="span2 inline">
+			<div class="span3 inline">
 				<s:a href="%{affiliateURL%}">
 					<div class="affiliate-element">
 						<s:property value="name" />

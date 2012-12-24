@@ -16,12 +16,11 @@
 	<s:set var="classContact">active</s:set>
 </s:elseif>
 
-<div class="navbar-inner">
+<div class="header-container">
 	<div class="container">
 		<a class="btn btn-navbar" data-toggle="collapse"
 			data-target=".nav-collapse"> <span class="i-bar"></span> <span
-			class="i-bar"></span> <span class="i-bar"></span> </a> <a class="brand"
-			href="#"><s:text name="elearning.project.title" />
+			class="i-bar"></span> <span class="i-bar"></span> 
 		</a>
 		<div class="nav-collapse">
 			<ul class="nav">
@@ -29,12 +28,11 @@
 				<li class="<s:property value="#classIndex"/>">
 					<s:a href="%{indexUrl}">Accueil</s:a>
 				</li>
-				<li class="divider-vertical"></li>
-				<s:url var="presenattionUrl" action="presentation" namespace="/pages"/>
+				<s:url var="presenationUrl" action="presentation" namespace="/pages"/>
 				<li>
-					<s:a href="%{presenattionUrl}"> Présentation </s:a>
+					<s:a href="%{presenationUrl}"> Présentation </s:a>
 				</li>
-				<li class="divider-vertical"></li>
+
 				<li class="dropdown">
 					<a href="#" class="dropdown-toggle" data-toggle="dropdown"> 
 						Filiale 
@@ -45,7 +43,7 @@
 					
 					
 				</li>
-				<li class="divider-vertical"></li>
+				
 				<s:url var="contactUrl" action="contact!input" namespace="/pages"/>
 				<li class='<s:property value="#classContact"/>'>
 					<s:a href="%{contactUrl}">Contact </s:a>
