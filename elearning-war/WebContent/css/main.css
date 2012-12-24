@@ -1,15 +1,15 @@
 @CHARSET "ISO-8859-1";
 
-body {
-	background: url('../images/droit.jpg') repeat fixed;
-}
-
 html,body {
 	height: 100%;
 }
 
-.container-fluid {
-	margin: 0 80px;
+body {
+	background: url('../images/charmita.png') repeat fixed;
+}
+
+.content {
+	margin: 0 100px;
 	height: 100%;
 }
 
@@ -20,17 +20,39 @@ html,body {
 }
 
 .banner {
-	background: url('../images/ban.jpg') no-repeat transparent;
-	padding: 20px 0;
+	background: url('../images/banniere.png') no-repeat transparent;
 	color: white;
+	height: 99px;
+	position: relative;
 }
 
 .affiliates-container {
 	padding: 20px 0;
 }
 
-.footer{
+.home-link {
+	display: block;
+    height: 70px;
+    left: 82px;
+    position: absolute;
+    top: 21px;
+    width: 500px;
+    z-index: 2;
+}
+
+.header-container{
+	background: url('../images/menu.png') repeat transparent;
+}
+
+.affiliate-element{
+	text-align: center;
+	height: 215px;
+	background: url('../images/boule.png') no-repeat;
+		
+}
+
+.footer {
 	position: absolute;
-bottom: 0;
-width: 100%;       
-	}
+	bottom: 0;
+	width: 100%;
+}

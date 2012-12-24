@@ -12,33 +12,33 @@
 <sb:head />
 <link rel="stylesheet"
 	href="<s:url value="/css/main.css" namespace="/"/>" type="text/css">
-<title><tiles:insertAttribute name="title" /></title>
+<title><tiles:insertAttribute name="title" />
+</title>
 </head>
 <body>
-	<div class="container-fluid">
-	<div class="row-fluid">
-		<div class="header">
-			<div class="banner">
-				<div class="container">
-					<h3>Centre Islamique Abdullah Ben Massoud</h3>
+	<div class="container-fluid content">
+		<div class="row-fluid">
+			<div class="header">
+				<div class="banner">
+					<s:url var="homeUrl" action="index" namespace="/"/>
+					<s:a href="%{homeUrl}" cssClass="home-link"></s:a>
+				</div>
+				
+				<div class="navbar">
+					<tiles:insertAttribute name="header" />
 				</div>
 			</div>
 
-			<div class="navbar navbar-inverse">
-				<tiles:insertAttribute name="header" />
-			</div>
-		</div>
 
-		
 			<tiles:insertAttribute name="menu" />
 
 			<tiles:insertAttribute name="body" />
-		
-		<div class="footer">
-			<tiles:insertAttribute name="footer" />
+
+			<div class="footer">
+				<tiles:insertAttribute name="footer" />
+			</div>
+
 		</div>
-		
-		</div>		
 	</div>
 
 	<script type="text/javascript">
