@@ -13,6 +13,8 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToOne;
+import javax.persistence.PrePersist;
+import javax.persistence.PreUpdate;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
@@ -128,5 +130,14 @@ public class Formation implements Serializable {
 
 	public void setTeachers(Collection<Teacher> teachers) {
 		this.teachers = teachers;
+	}
+	
+	@PrePersist
+	@PreUpdate
+	public void createOrUpdateDuration(){
+		int diffMilliSec = (int)(endDate.getTime() - startDate.getTime());
+		int diffSeconds = diffMilliSec / 1000;
+		Integer diffDays =  diffSeconds / (24 * 60 * 60);
+		this.setDuration(diffDays.toString());
 	}
 }
