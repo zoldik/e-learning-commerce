@@ -1,7 +1,6 @@
 package com.elearning.admin.actions;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -10,9 +9,7 @@ import javax.naming.NameNotFoundException;
 import javax.naming.NamingException;
 
 import org.apache.struts2.interceptor.RequestAware;
-import org.elearning.entities.Affiliate;
 import org.elearning.entities.Formation;
-import org.elearning.entities.User;
 import org.elearning.sessions.AffiliateSessionRemote;
 import org.elearning.sessions.FormationSessionRemote;
 
@@ -45,7 +42,7 @@ public class FormationAction extends ActionSupport implements
 	}
 
 	/**
-	 * To save or update user.
+	 * To save or update formation.
 	 * 
 	 * @return String
 	 */
@@ -55,18 +52,18 @@ public class FormationAction extends ActionSupport implements
 	}
 
 	/**
-	 * To save or update user.
+	 * To save or update formation.
 	 * 
 	 * @return String
 	 */
 	public String edit() {
-		this.formation = (Formation) formationService.find(this.request.get("id"));
+		formation = (Formation) formationService.find(this.request.get("id"));
 		formationService.edit(formation);
 		return SUCCESS;
 	}
 
 	/**
-	 * To list all users.
+	 * To list all formations.
 	 * 
 	 * @return String
 	 */
@@ -76,7 +73,7 @@ public class FormationAction extends ActionSupport implements
 	}
 
 	/**
-	 * To delete a user.
+	 * To delete a formation.
 	 * 
 	 * @return String
 	 */
@@ -84,13 +81,25 @@ public class FormationAction extends ActionSupport implements
 		formationService.remove(formationService.find(this.request.get("id")));
 		return SUCCESS;
 	}
-	
-	public String popoulate(){
-		return "populate";
-	}
 
 	@Override
 	public void setRequest(Map<String, Object> request) {
 		this.request = request;
-	}	
+	}
+
+	public Formation getFormation() {
+		return formation;
+	}
+
+	public void setFormation(Formation formation) {
+		this.formation = formation;
+	}
+
+	public List<Formation> getFormations() {
+		return formations;
+	}
+
+	public void setFormations(List<Formation> formations) {
+		this.formations = formations;
+	}
 }
