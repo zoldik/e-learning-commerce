@@ -12,6 +12,9 @@
 <sb:head />
 <link rel="stylesheet"
 	href="<s:url value="/backend/css/main.css" namespace="/"/>" type="text/css">
+
+<link rel="stylesheet"
+	href="<s:url value="/backend/css/schedule.css" namespace="/"/>" type="text/css">
 <title><tiles:insertAttribute name="title" />
 </title>
 </head>
