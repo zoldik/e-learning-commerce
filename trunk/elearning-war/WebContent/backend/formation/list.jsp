@@ -101,4 +101,4 @@
 </s:else>
 
 <script language="javascript" type="text/javascript"
-	src="<s:url value="js/list.js" namespace="/backend"/>"></script>
+	src="<s:url value="/backend/js/list.js" namespace="/"/>"></script>
