@@ -12,33 +12,31 @@
 <sb:head />
 <link rel="stylesheet"
 	href="<s:url value="/css/main.css" namespace="/"/>" type="text/css">
-<title><tiles:insertAttribute name="title" />
-</title>
+<title><tiles:insertAttribute name="title" /></title>
 </head>
 <body>
-	<div class="container-fluid content">
-		<div class="row-fluid">
-			<div class="header">
-				<div class="banner">
-					<s:url var="homeUrl" action="index" namespace="/"/>
-					<s:a href="%{homeUrl}" cssClass="home-link"></s:a>
+	<div id="wrap">
+			<div class="row-fluid">
+				<div class="header">
+					<div class="banner">
+						<s:url var="homeUrl" action="index" namespace="/" />
+						<s:a href="%{homeUrl}" cssClass="home-link"></s:a>
+					</div>
+
+					<div class="navbar">
+						<tiles:insertAttribute name="header" />
+					</div>
 				</div>
 				
-				<div class="navbar">
-					<tiles:insertAttribute name="header" />
-				</div>
+				<tiles:insertAttribute name="menu" />
+
+				<tiles:insertAttribute name="body" />
+				<div class="push"></div>
 			</div>
-
-
-			<tiles:insertAttribute name="menu" />
-
-			<tiles:insertAttribute name="body" />
-
-			<div class="footer">
-				<tiles:insertAttribute name="footer" />
-			</div>
-
-		</div>
+	</div>
+	
+	<div class="footer">
+		<tiles:insertAttribute name="footer" />
 	</div>
 
 	<script type="text/javascript">

@@ -8,19 +8,36 @@ body {
 	background: url('../images/charmita.png') repeat fixed;
 }
 
-.content {
+#wrap {
+	background-color: white;
+	min-height: 100%;
+	height: auto !important;
+	height: 100%;
+	margin: 0 100px -60px;
+}
+
+.push,.footer {
+	height: 60px;
+}
+
+.footer{
 	margin: 0 100px;
+}
+
+.content {
 	height: 100%;
 }
 
 .row-fluid {
-	background-color: white;
-	height: 100%;
 	position: relative;
 }
 
 .banner {
 	background: url('../images/banniere.png') no-repeat transparent;
+	background-size: 1058px 99px;
+	-o-background-size: 1058px 99px;
+	-moz-background-size: 1058px 99px;
+	-webkit-background-size: 1058px 99px; 
 	color: white;
 	height: 99px;
 	position: relative;
@@ -44,15 +61,16 @@ body {
 	background: url('../images/menu.png') repeat transparent;
 }
 
-.affiliate-element{
-	text-align: center;
-	height: 215px;
-	background: url('../images/boule.png') no-repeat;
-		
+.presentation{
+	width: 600px;
+	height: 200px;
+	margin: auto;
+	background: url('../images/bonde.png') no-repeat;
 }
 
-.footer {
-	position: absolute;
-	bottom: 0;
-	width: 100%;
+.affiliate-element{
+	background: url("../images/boule.png") no-repeat scroll 7px 0 transparent;
+    height: 132px;
+    padding: 66px 66px 0;
+    text-align: center;
 }

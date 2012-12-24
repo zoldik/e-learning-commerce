@@ -1,5 +1,6 @@
 <%@ taglib uri="/struts-tags" prefix="s"%>
-<div class="span12">
+<div class="row-fluid">
+	<div class="presentation"></div>
 	<div class="container affiliates-container">
 		<s:iterator value="affiliates">
 			<s:url var="affiliateURL" action="index" namespace="/">
