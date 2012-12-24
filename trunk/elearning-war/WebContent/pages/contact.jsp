@@ -8,10 +8,10 @@
 	<s:fielderror theme="bootstrap" />
 	<s:form action="contact" theme="bootstrap" cssClass="form-horizontal">
 		<s:textfield name="fullName" label="Nom complet" />
-		<s:textfield name="mailFrom" label="Ton mail" />
-		<s:textfield name="phone" label="Phone" />
-		<s:textfield name="subject" label="Subject" />
-		<s:textarea name="message" label="Write Message" />
+		<s:textfield name="mailFrom" label="Adresse email" />
+		<s:textfield name="phone" label="Num Téléphone" />
+		<s:textfield name="subject" label="Objet" />
+		<s:textarea name="message" label="Suggestion" />
 		<s:submit cssClass="btn btn-inverse pull-right" value="Envoyer" />
 	</s:form>
 </div>
