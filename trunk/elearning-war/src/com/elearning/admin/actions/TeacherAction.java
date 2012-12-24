@@ -11,6 +11,7 @@ import javax.naming.NamingException;
 import org.apache.struts2.interceptor.RequestAware;
 import org.elearning.entities.Teacher;
 import org.elearning.entities.User;
+import org.elearning.sessions.TeacherSessionRemote;
 import org.elearning.sessions.UserSessionRemote;
 
 import com.opensymphony.xwork2.ActionSupport;
@@ -27,7 +28,7 @@ public class TeacherAction extends ActionSupport implements
 	public TeacherAction() throws NamingException {
 		try {
 			InitialContext ctx = new InitialContext();
-			userService = (UserSessionRemote) ctx.lookup("UserSession/remote");
+			userService = (UserSessionRemote) ctx.lookup("TeacherSession/remote");
 		} catch (NameNotFoundException e) {
 			e.printStackTrace();
 		}
