@@ -9,8 +9,6 @@
 			<attribute name="owner.project.facets" value="java"/>
 		</attributes>
 	</classpathentry>
-	<classpathentry kind="lib" path="C:/Documents and Settings/Amine/workspace/elearning-war/WebContent/WEB-INF/lib/commons-beanutils-1.8.0.jar"/>
-	<classpathentry kind="lib" path="C:/Documents and Settings/Amine/workspace/elearning-war/WebContent/WEB-INF/lib/struts2-tiles-plugin-2.3.4.1.jar"/>
 	<classpathentry kind="con" path="org.eclipse.jdt.USER_LIBRARY/EJBPersistence"/>
 	<classpathentry kind="output" path="build/classes"/>
 </classpath>
