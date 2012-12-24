@@ -1,3 +1,9 @@
+@font-face {
+	font-family: Optima;
+	font-size: 32px;
+	src: url('../fonts/Optima_Bold.ttf');
+}
+
 @CHARSET "ISO-8859-1";
 
 html,body {
@@ -20,7 +26,7 @@ body {
 	height: 60px;
 }
 
-.footer{
+.footer {
 	margin: 0 100px;
 }
 
@@ -37,7 +43,7 @@ body {
 	background-size: 1058px 99px;
 	-o-background-size: 1058px 99px;
 	-moz-background-size: 1058px 99px;
-	-webkit-background-size: 1058px 99px; 
+	-webkit-background-size: 1058px 99px;
 	color: white;
 	height: 99px;
 	position: relative;
@@ -49,28 +55,49 @@ body {
 
 .home-link {
 	display: block;
-    height: 70px;
-    left: 82px;
-    position: absolute;
-    top: 21px;
-    width: 500px;
-    z-index: 2;
+	height: 70px;
+	left: 82px;
+	position: absolute;
+	top: 21px;
+	width: 500px;
+	z-index: 2;
 }
 
-.header-container{
+.header-container {
 	background: url('../images/menu.png') repeat transparent;
 }
 
-.presentation{
+.presentation {
+	position: relative;
+	width: 600px;
+	height: 200px;
+	margin: auto;
 	width: 600px;
 	height: 200px;
 	margin: auto;
 	background: url('../images/bonde.png') no-repeat;
 }
 
-.affiliate-element{
-	background: url("../images/boule.png") no-repeat scroll 7px 0 transparent;
-    height: 132px;
-    padding: 66px 66px 0;
-    text-align: center;
+.logo2 {
+	background: url('../images/logo2.png') no-repeat;
+	position: absolute;
+	height: 117px;
+	left: -35px;
+	position: absolute;
+	top: 35px;
+	width: 162px;
+	z-index: 2;
+	left: -35px;
+	top: 35px;
+	width: 162px;
+}
+
+.affiliate-element {
+	background: url("../images/boule.png") no-repeat scroll 7px 0
+		transparent;
+	font-family: Optima;
+	height: 132px;
+	padding: 66px 66px 0;
+	text-align: center;
+	height: 132px;
 }
