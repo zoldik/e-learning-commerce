@@ -79,7 +79,7 @@
 
 		<action name="list" class="com.elearning.admin.actions.TeacherAction"
 			method="list">
-			<result name="success" type="tiles">.list</result>
+			<result name="success" type="tiles">admin.teacher.list</result>
 		</action>
 
 		<!-- <action name="redirectForm" class="com.elearning.admin.actions.TeacherAction"> -->
@@ -89,13 +89,13 @@
 		<action name="create" class="com.elearning.admin.actions.TeacherAction"
 			method="save">
 			<result name="success" type="redirect">list</result>
-			<result name="input" type="tiles">.add</result>
+			<result name="input" type="tiles">admin.teacher.add</result>
 		</action>
 
 		<action name="edit" class="com.elearning.admin.actions.TeacherAction"
 			method="edit">
 			<result name="success" type="redirect">list</result>
-			<result name="success" type="tiles">.add</result>
+			<result name="success" type="tiles">admin.teacher.edit</result>
 		</action>
 
 		<action name="delete" class="com.elearning.admin.actions.TeacherAction"
