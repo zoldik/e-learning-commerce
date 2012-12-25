@@ -8,6 +8,7 @@ import javax.naming.InitialContext;
 import javax.naming.NameNotFoundException;
 import javax.naming.NamingException;
 
+import org.apache.struts2.interceptor.ParameterAware;
 import org.apache.struts2.interceptor.RequestAware;
 import org.elearning.entities.Schedule;
 import org.elearning.sessions.AffiliateSessionRemote;
@@ -17,9 +18,10 @@ import com.opensymphony.xwork2.ActionSupport;
 import com.opensymphony.xwork2.ModelDriven;
 
 public class ScheduleAction extends ActionSupport implements
-		ModelDriven<Schedule>, RequestAware {
+		ModelDriven<Schedule>, RequestAware, ParameterAware {
 
 	private Map<String, Object> request;
+	private Map<String, String[]> parameters;
 	private Schedule schedule = new Schedule();
 	private List<Schedule> schedules = new ArrayList<Schedule>();
 	private ScheduleSessionRemote scheduleService;
@@ -61,6 +63,12 @@ public class ScheduleAction extends ActionSupport implements
 //		scheduleService.edit(schedule);
 //		return SUCCESS;
 //	}
+	
+	public String execute(){
+		String[] test=parameters.get("classRoom");
+		System.out.println(test[0]);
+		return SUCCESS;
+	}
 
 	/**
 	 * To list all schedules.
@@ -101,5 +109,11 @@ public class ScheduleAction extends ActionSupport implements
 
 	public void setSchedules(List<Schedule> schedules) {
 		this.schedules = schedules;
+	}
+
+	@Override
+	public void setParameters(Map<String, String[]> parameters) {
+		 this.parameters = parameters;
+		
 	}
 }
