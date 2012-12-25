@@ -37,14 +37,18 @@
 		<put-attribute name="footer" value="/templates/footer.jsp" />
 	</definition>
 	
-	<definition name=".list" extends="admin.dashbord">
+	<definition name="admin.teacher.list" extends="admin.dashbord">
 		<put-attribute name="title" value="Liste des enseignants" />
 		<put-attribute name="body" value="/backend/list.jsp" />
 	</definition>
 	
-	<definition name=".add" extends="admin.dashbord">
+	<definition name="admin.teacher.add" extends="admin.dashbord">
 		<put-attribute name="title" value="Nouvel Enseignant" />
-		<put-attribute name="body" value="/backend/add.jsp" />
+		<put-attribute name="body" value="/backend/teacher/add.jsp" />
+	</definition>
+	
+	<definition name="admin.teacher.edit" extends="admin.teacher.add">
+		<put-attribute name="title" value="Modification ensignant" />
 	</definition>
 	
 	<definition name="admin.formation.list" extends="admin.dashbord">
