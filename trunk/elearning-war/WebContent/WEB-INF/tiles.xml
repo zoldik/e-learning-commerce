@@ -57,9 +57,27 @@
 		<put-attribute name="body" value="/backend/formation/add.jsp" />
 	</definition>
 	
+	<definition name="admin.formation.edit" extends="admin.formation.add">
+		<put-attribute name="title" value="Modification formation" />
+	</definition>
+	
 	<definition name="admin.formation.schedule" extends="admin.dashbord">
 		<put-attribute name="title" value="Gestion emploi du temps" />
 		<put-attribute name="body" value="/backend/formation/manageSchedule.jsp" />
+	</definition>
+	
+	<definition name="admin.classroom.list" extends="admin.dashbord">
+		<put-attribute name="title" value="Liste des salle" />
+		<put-attribute name="body" value="/backend/classroom/list.jsp" />
+	</definition>
+	
+	<definition name="admin.classroom.add" extends="admin.dashbord">
+		<put-attribute name="title" value="Nouvelle salle" />
+		<put-attribute name="body" value="/backend/classroom/add.jsp" />
+	</definition>
+	
+	<definition name="admin.classroom.edit" extends="admin.classroom.add">
+		<put-attribute name="title" value="Modification salle" />
 	</definition>
 
 </tiles-definitions>
