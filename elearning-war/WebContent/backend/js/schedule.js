@@ -6,6 +6,11 @@ function init() {
   } );
 }
 
+jQuery.subscribe('ondrop', function(event,data) {
+    console.log(data);
+    console.log(event);
+});
+
 jQuery(document).load(function(){
 	init();
 });

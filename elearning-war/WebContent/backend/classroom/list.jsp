@@ -5,13 +5,13 @@
 <div class="pull-right">
 	<ul>
 		<s:url var="createURL" action="create!input"
-			namespace="/admin/formation" />
-		<li class="btn"><s:a href="%{createURL}">Ajouter une nouvelle formation</s:a>
+			namespace="/admin/school-room" />
+		<li class="btn"><s:a href="%{createURL}">Ajouter une nouvelle salle</s:a>
 		</li>
 	</ul>
 </div>
 <div class="clearfix"></div>
-<s:if test="formations.size() > 0">
+<s:if test="classrooms.size() > 0">
 	<s:form action="batch" name="batch-actions">
 		<div class="span12">
 			<table class="table table-bordered">
@@ -20,25 +20,20 @@
 						<th class=""><input type="checkbox" id="listBatchCheckbox" />
 						</th>
 						<th class="">Nom</th>
-						<th class="">Date début</th>
-						<th class="">Date fin</th>
-						<th class="">Actions</th>
+						<th class="">Capacité</th>
 					</tr>
 				</thead>
 				<tbody>
-					<s:iterator value="formations" status="formationStatus">
+					<s:iterator value="classrooms" status="classroomStatus">
 						<tr>
 							<td class=""><input type="checkbox" name="idx[]"
 								value="<s:property value="id" />" /></td>
 							<td><s:property value="name" /></td>
 							<td class="">
-								<s:property value="startDate" />
-							</td>
-							<td class="">
-								<s:property value="endDate" />
+								<s:property value="capacity" />
 							</td>
 							<td><s:url id="editURL" action="edit"
-									namespace="/admin/formation">
+									namespace="/admin/school-room">
 									<s:param name="id" value="%{id}" />
 								</s:url> 
 								<s:a href="%{editURL}">
@@ -46,35 +41,18 @@
 										src="<s:url value="/backend/images/edit.png"/>" />
 								</s:a>
 								 <s:url id="deleteURL" action="delete"
-									namespace="/admin/formation">
+									namespace="/admin/school-room">
 									<s:param name="id" value="%{id}" />
 								</s:url> 
 								<s:a href="%{deleteURL}">
 									<img src="<s:url value="/backend/images/delete.png" />" />
 								</s:a>
 								
-								<s:if test="schedule == null">
-									<s:url var="newScheduleURL" action="addSchedule!input" namespace="/admin/formation">
-										<s:param name="id" value="%{id}" />
-									</s:url> 
-									<s:a href="%{newScheduleURL}">
-										Ajouter emploi du temps
-									</s:a>
-								</s:if>
-								<s:else>
-									<s:url var="editScheduleURL" action="editSchedule" namespace="/admin/formation">
-										<s:param name="id" value="%{schedule.id}" />
-									</s:url>
-									<s:a href="%{editScheduleURL}">
-										Editer emploi du temps
-									</s:a>
-								</s:else>
-								
 							</td>
 						</tr>
 					</s:iterator>
 					<tr>
-						<td colspan="5" class="pager">
+						<td colspan="3" class="pager">
 							<div class="pagination">
 								<ul>
 									<li><s:url var="firstPageURL" action="list" namespace="">
