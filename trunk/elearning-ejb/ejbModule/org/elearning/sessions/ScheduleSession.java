@@ -8,6 +8,8 @@ import javax.persistence.PersistenceContext;
 import javax.persistence.criteria.CriteriaQuery;
 
 import org.elearning.entities.Schedule;
+import org.elearning.entities.Schedule;
+import org.elearning.entities.Schedule;
 
 
 /**
@@ -23,6 +25,18 @@ public class ScheduleSession implements ScheduleSessionRemote {
      */
     public ScheduleSession() {
         // TODO Auto-generated constructor stub
+    }
+    
+    public Schedule find(Object id){
+    	return em.find(Schedule.class, id);
+    }
+    
+    public void edit(Schedule schedule) {
+        em.merge(schedule);
+    }
+
+    public void remove(Schedule schedule) {
+        em.remove(em.merge(schedule));
     }
     
     @SuppressWarnings("unchecked")
