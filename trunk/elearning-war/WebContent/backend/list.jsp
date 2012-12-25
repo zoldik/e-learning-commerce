@@ -43,20 +43,21 @@
 							</s:a></td>
 					</tr>
 				</s:iterator>
+			
+				<tr>
+					<td colspan="4" class="pager">
+						<div class="pagination">
+						<ul>
+							<li><s:url var="firstPageURL" action="list" namespace="">
+									<s:param name="page" value="1"></s:param>
+								</s:url> 
+								<s:a href="%{firstPageURL}" />
+							</li>
+						</ul>
+						</div>
+					</td>
+				</tr>
 			</tbody>
-			<tr>
-				<td colspan="" class="pager">
-					<div class="pagination">
-					<ul>
-						<li><s:url var="firstPageURL" action="list" namespace="">
-								<s:param name="page" value="1"></s:param>
-							</s:url> 
-							<s:a href="%{firstPageURL}" />
-						</li>
-					</ul>
-					</div>
-				</td>
-			</tr>
 		</table>
 	</div>
 	<div class="actions">

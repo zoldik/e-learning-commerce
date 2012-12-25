@@ -35,9 +35,21 @@
 						<li>
 							<s:a href="%{listTeachers}">Gestion des enseignants</s:a>
 						</li>
-						<s:url var="listFormation" action="list" namespace="/admin/formation"/>
+					</ul>
+				</li>
+				<li class="dropdown">
+					<a href="#" class="dropdown-toggle" data-toggle="dropdown"> 
+						Formations 
+						<b class="caret"></b> 
+					</a>
+					<ul class="dropdown-menu">
+						<s:url var="listFormation" action="list" namespace="/admin/formation"/> 
 						<li>
 							<s:a href="%{listFormation}">Gestion des formations</s:a>
+						</li>
+						<s:url var="listClassroom" action="list" namespace="/admin/school-room"/>
+						<li>
+							<s:a href="%{listClassroom}">Gestion des salles</s:a>
 						</li>
 					</ul>
 				</li>

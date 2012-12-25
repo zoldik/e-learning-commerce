@@ -6,17 +6,13 @@
 <s:actionmessage theme="bootstrap" />
 <s:fielderror theme="bootstrap" />
 <s:form action="create!save" theme="bootstrap"
-	namespace="/admin/formation" cssClass="form-horizontal">
-	<s:push value="formation">
+	namespace="/admin/school-room" cssClass="form-horizontal">
+	<s:push value="classroom">
 		<s:hidden name="id" />
 		<s:textfield name="name" key="Nom"
-			tooltip="Inqiduez le nom de la formation" />
-		<sj:datepicker name="startDate" id="startDate"
-			parentTheme="bootstrap" displayFormat="dd/mm/yy" label="Date début"
-			tooltip="Date début de formation" />
-		<sj:datepicker name="endDate" id="endDate"
-			parentTheme="bootstrap" displayFormat="dd/mm/yy" label="Date fin"
-			tooltip="Date fin de formation" />
+			tooltip="Inqiduez le nom de la salle" />
+		<s:textfield name="capacity" key="capacité" 
+			tooltip="Inqiduez la capactiy de la salle" />
 		<s:submit cssClass="btn btn-inverse pull-right"
 			key="form.register.submit" />
 	</s:push>
