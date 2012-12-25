@@ -1,6 +1,7 @@
 package com.elearning.admin.actions;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -10,9 +11,14 @@ import javax.naming.NamingException;
 
 import org.apache.struts2.interceptor.ParameterAware;
 import org.apache.struts2.interceptor.RequestAware;
+import org.elearning.entities.Classroom;
 import org.elearning.entities.Schedule;
+import org.elearning.entities.Teacher;
+import org.elearning.entities.User;
 import org.elearning.sessions.AffiliateSessionRemote;
+import org.elearning.sessions.ClassroomSessionRemote;
 import org.elearning.sessions.ScheduleSessionRemote;
+import org.elearning.sessions.UserSessionRemote;
 
 import com.opensymphony.xwork2.ActionSupport;
 import com.opensymphony.xwork2.ModelDriven;
@@ -22,16 +28,23 @@ public class ScheduleAction extends ActionSupport implements
 
 	private Map<String, Object> request;
 	private Map<String, String[]> parameters;
-	private Schedule schedule = new Schedule();
+	private Map<Integer,String> classroomSelect = new HashMap<Integer,String>();
+	private Map<Integer,String> teacherSelect = new HashMap<Integer,String>();
+	
 	private List<Schedule> schedules = new ArrayList<Schedule>();
+		
+	private Schedule schedule = new Schedule();
+	
 	private ScheduleSessionRemote scheduleService;
-	private AffiliateSessionRemote affiliateService;
+	private ClassroomSessionRemote classRoomService;
+	private UserSessionRemote userService;
 
 	public ScheduleAction() throws NamingException {
 		try {
 			InitialContext ctx = new InitialContext();
 			scheduleService = (ScheduleSessionRemote) ctx.lookup("ScheduleSession/remote");
-			affiliateService = (AffiliateSessionRemote) ctx.lookup("AffiliateSession/remote");
+			classRoomService = (ClassroomSessionRemote) ctx.lookup("ClassroomSession/remote");
+			userService = (UserSessionRemote) ctx.lookup("TeacherSession/remote");
 		} catch (NameNotFoundException e) {
 			e.printStackTrace();
 		}
@@ -43,31 +56,45 @@ public class ScheduleAction extends ActionSupport implements
 		return schedule;
 	}
 
-//	/**
-//	 * To save or update schedule.
-//	 * 
-//	 * @return String
-//	 */
-//	public String save() {
-//		scheduleService.edit(schedule);
-//		return SUCCESS;
-//	}
+	/**
+	 * To save or update schedule.
+	 * 
+	 * @return String
+	 */
+	public String save() {
+		scheduleService.edit(schedule);
+		return SUCCESS;
+	}
 
-//	/**
-//	 * To save or update schedule.
-//	 * 
-//	 * @return String
-//	 */
-//	public String edit() {
-//		schedule = (Schedule) scheduleService.find(this.request.get("id"));
-//		scheduleService.edit(schedule);
-//		return SUCCESS;
-//	}
+	/**
+	 * To save or update schedule.
+	 * 
+	 * @return String
+	 */
+	public String edit() {
+		schedule = (Schedule) scheduleService.find(this.request.get("id"));
+		scheduleService.edit(schedule);
+		return SUCCESS;
+	}
 	
 	public String execute(){
 		String[] test=parameters.get("classRoom");
 		System.out.println(test[0]);
 		return SUCCESS;
+	}
+	
+	public String input(){
+		List<Classroom> rooms=classRoomService.findAll();
+		for(Classroom room : rooms){
+			this.classroomSelect.put(room.getId(), room.getName());
+		}
+		
+		List<User> teachers=userService.findAll();
+		for(User teacher : teachers){
+			this.teacherSelect.put(teacher.getId(), teacher.getFirstName()+" "+teacher.getLastName());
+		}
+		
+		return INPUT;
 	}
 
 	/**
@@ -79,16 +106,6 @@ public class ScheduleAction extends ActionSupport implements
 		schedules = scheduleService.findAll();
 		return SUCCESS;
 	}
-
-//	/**
-//	 * To delete a schedule.
-//	 * 
-//	 * @return String
-//	 */
-//	public String remove() {
-//		scheduleService.remove(scheduleService.find(this.request.get("id")));
-//		return SUCCESS;
-//	}
 
 	@Override
 	public void setRequest(Map<String, Object> request) {
@@ -114,6 +131,22 @@ public class ScheduleAction extends ActionSupport implements
 	@Override
 	public void setParameters(Map<String, String[]> parameters) {
 		 this.parameters = parameters;
-		
 	}
+
+	public Map<Integer, String> getClassroomSelect() {
+		return classroomSelect;
+	}
+
+	public void setClassroomSelect(Map<Integer, String> classroomSelect) {
+		this.classroomSelect = classroomSelect;
+	}
+
+	public Map<Integer, String> getTeacherSelect() {
+		return teacherSelect;
+	}
+
+	public void setTeacherSelect(Map<Integer, String> teacherSelect) {
+		this.teacherSelect = teacherSelect;
+	}
+	
 }
