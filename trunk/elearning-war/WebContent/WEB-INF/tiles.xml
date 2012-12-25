@@ -39,7 +39,7 @@
 	
 	<definition name="admin.teacher.list" extends="admin.dashbord">
 		<put-attribute name="title" value="Liste des enseignants" />
-		<put-attribute name="body" value="/backend/list.jsp" />
+		<put-attribute name="body" value="/backend/teacher/list.jsp" />
 	</definition>
 	
 	<definition name="admin.teacher.add" extends="admin.dashbord">
