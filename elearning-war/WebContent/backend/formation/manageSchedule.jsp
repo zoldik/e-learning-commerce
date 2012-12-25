@@ -15,7 +15,6 @@
 				&& jQuery("#classRoomSelect").val() != ""
 				&& jQuery("#subjectSelect").val() != "") {
 			$(data).addClass('utessss');
-			console.log(jQuery("#seanceForm"));
 
 			jQuery.ajax({
 				url : "<s:property value='#addSeanceURL'/>",
@@ -23,30 +22,33 @@
 				data : jQuery("#seanceForm").serialize(),
 				success : function(dataServer) {
 					jQuery(data).html(dataServer);
+				},
+				complete : function(){
+					$("#classRoomSelect option[value='']").attr("selected",true);
+					$("#teacherSelect option[value='']").attr("selected",true) ;
+					jQuery("#subjectSelect option[value='']").attr("selected",true);
+					$(event.originalEvent.ui.draggable).draggable({ revert : true });
 				}
 			});
 		}
 	});
-	// 	jQuery(document).ready(function(){
-	// 		ondrop();
-	// 	});
 </script>
 
 <div class="span2">
-	<sj:div id="draggable" draggable="true" draggableHandle="#seance"
-		draggableRevert="invalid" cssClass="seance-drag"
+	<sj:div id="draggable" draggable="true" draggableHandle="#seance"	
+		draggableRevert="true" cssClass="seance-drag"
 		cssStyle="width: 186px; height: 100px; padding: 0.5em;">
 		<div class="seance-header" id="seance"></div>
 		<div class="seance-content">
 			<s:form id="seanceForm">
 				<s:select id="teacherSelect" name="teacher" cssClass="span13"
-					list="#{'1':'amine','2':'aymen'}" headerKey=""
+					list="teacherSelect" headerKey=""
 					headerValue="enseignant" />
 				<s:select id="classRoomSelect" name="classRoom" cssClass="span13"
-					list="#{'01':'A15','02':'A16','03':'A12','04':'A13'}" headerKey="0"
+					list="classroomSelect" headerKey=""
 					headerValue="salle" />
 				<s:select id="subjectSelect" name="subject" cssClass="span13"
-					list="#{'01':'math','02':'physique'}" headerKey="0"
+					list="#{'01':'math','02':'physique'}" headerKey=""
 					headerValue="matière" />
 			</s:form>
 		</div>
