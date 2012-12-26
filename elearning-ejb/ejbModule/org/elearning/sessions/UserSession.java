@@ -46,7 +46,7 @@ public class UserSession implements UserSessionLocal,UserSessionRemote {
     }
     
     @SuppressWarnings("unchecked")
-	public List<User> findChecked(String[] idx){
+	public List<User> findChecked(List<Integer> idx){
     	return em.createQuery("select object(o) from User as o where o.id in :param")
     	.setParameter("param", idx)
     	.getResultList();
