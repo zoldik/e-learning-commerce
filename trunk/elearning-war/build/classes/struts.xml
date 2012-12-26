@@ -1,0 +1,196 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE struts PUBLIC
+  "-//Apache Software Foundation//DTD Struts Configuration 2.0//EN"
+  "http://struts.apache.org/dtds/struts-2.0.dtd">
+
+<struts>
+	<constant name="struts.devMode" value="true" />
+	<constant name="struts.custom.i18n.resources" value="global" />
+
+	<package name="default" namespace="/" extends="struts-default">
+		<result-types>
+			<result-type name="tiles"
+				class="org.apache.struts2.views.tiles.TilesResult" />
+		</result-types>
+
+		<default-action-ref name="index" />
+		<action name="index" class="com.elearning.front.actions.AffiliateAction"
+			method="list">
+			<result type="tiles">base</result>
+		</action>
+
+	</package>
+
+	<package name="pages" namespace="/pages" extends="struts-default">
+		<result-types>
+			<result-type name="tiles"
+				class="org.apache.struts2.views.tiles.TilesResult" />
+		</result-types>
+
+		<action name="registerStep1" class="com.elearning.front.actions.RegisterStepAction">
+			<result name="input" type="tiles">base.register-step1</result>
+			<result name="registerStudent" type="tiles">.register</result>
+		</action>
+
+		<action name="login" class="com.elearning.front.actions.LoginAction"
+			method="login">
+			<result name="success">index.jsp</result>
+			<result name="error">login.jsp</result>
+			<result name="input">login.jsp</result>
+		</action>
+
+		<action name="translate" class="com.elearning.front.actions.Locale">
+			<result name="success">index.jsp</result>
+		</action>
+
+		<action name="contact" class="com.elearning.front.actions.ContactAction">
+			<result name="input" type="tiles">.contact</result>
+			<result name="success" type="redirect">contact</result>
+		</action>
+
+		<action name="listAffiliate" class="com.elearning.front.actions.AffiliateAction"
+			method="list">
+			<result name="success">/pages/afilialeList.jsp</result>
+		</action>
+
+	</package>
+
+	<package name="admin" namespace="/admin" extends="struts-default">
+
+		<result-types>
+			<result-type name="tiles"
+				class="org.apache.struts2.views.tiles.TilesResult" />
+		</result-types>
+		<default-action-ref name="dashboard" />
+
+		<action name="dashboard" class="com.elearning.admin.actions.TeacherAction">
+			<result name="success" type="tiles">admin.dashbord</result>
+		</action>
+
+	</package>
+
+	<package name="adminTeacher" namespace="/admin/teacher"
+		extends="struts-default">
+
+		<result-types>
+			<result-type name="tiles"
+				class="org.apache.struts2.views.tiles.TilesResult" />
+		</result-types>
+		<default-action-ref name="list" />
+		<action name="list" class="com.elearning.admin.actions.TeacherAction"
+			method="list">
+			<result name="success" type="tiles">admin.teacher.list</result>
+		</action>
+
+		<!-- <action name="redirectForm" class="com.elearning.admin.actions.TeacherAction"> -->
+		<!-- <result name="input" type="tiles">.add</result> -->
+		<!-- </action> -->
+
+		<action name="create" class="com.elearning.admin.actions.TeacherAction"
+			method="save">
+			<result name="success" type="redirect">list</result>
+			<result name="input" type="tiles">admin.teacher.add</result>
+		</action>
+
+		<action name="edit" class="com.elearning.admin.actions.TeacherAction"
+			method="edit">
+			<result name="success" type="redirect">list</result>
+			<result name="success" type="tiles">admin.teacher.edit</result>
+		</action>
+
+		<action name="delete" class="com.elearning.admin.actions.TeacherAction"
+			method="remove">
+			<result name="success" type="redirect">list</result>
+		</action>
+
+		<action name="batch" class="com.elearning.admin.actions.TeacherAction"
+			method="batch">
+			<result name="success" type="redirect">list</result>
+		</action>
+
+	</package>
+
+	<package name="adminFormation" namespace="/admin/formation"
+		extends="struts-default">
+
+		<result-types>
+			<result-type name="tiles"
+				class="org.apache.struts2.views.tiles.TilesResult" />
+		</result-types>
+		<default-action-ref name="list" />
+		<action name="list" class="com.elearning.admin.actions.FormationAction"
+			method="list">
+			<result name="success" type="tiles">admin.formation.list</result>
+		</action>
+
+		<action name="create" class="com.elearning.admin.actions.FormationAction"
+			method="save">
+			<result name="success" type="redirect">list</result>
+			<result name="input" type="tiles">admin.formation.add</result>
+		</action>
+
+		<action name="edit" class="com.elearning.admin.actions.FormationAction"
+			method="edit">
+			<result name="success" type="redirect">list</result>
+			<result name="success" type="tiles">admin.formation.edit</result>
+		</action>
+
+		<action name="delete" class="com.elearning.admin.actions.FormationAction"
+			method="remove">
+			<result name="success" type="redirect">list</result>
+		</action>
+		
+		<action name="batch" class="com.elearning.admin.actions.FormationAction"
+			method="batch">
+			<result name="success" type="redirect">list</result>
+		</action>
+
+		<action name="addSchedule" class="com.elearning.admin.actions.ScheduleAction">
+			<result name="input" type="tiles">admin.formation.schedule</result>
+		</action>
+
+		<action name="manageSchedule" class="com.elearning.admin.actions.ScheduleAction">
+			<result name="success">/backend/formation/success.jsp</result>
+		</action>
+
+	</package>
+
+	<package name="adminClassroom" namespace="/admin/school-room"
+		extends="struts-default">
+
+		<result-types>
+			<result-type name="tiles"
+				class="org.apache.struts2.views.tiles.TilesResult" />
+		</result-types>
+		<default-action-ref name="list" />
+		<action name="list" class="com.elearning.admin.actions.ClassroomAction"
+			method="list">
+			<result name="success" type="tiles">admin.classroom.list</result>
+		</action>
+
+		<action name="create" class="com.elearning.admin.actions.ClassroomAction"
+			method="save">
+			<result name="success" type="redirect">list</result>
+			<result name="input" type="tiles">admin.classroom.add</result>
+		</action>
+
+		<action name="edit" class="com.elearning.admin.actions.ClassroomAction"
+			method="edit">
+			<result name="success" type="redirect">list</result>
+			<result name="success" type="tiles">admin.classroom.edit</result>
+		</action>
+
+		<action name="delete" class="com.elearning.admin.actions.ClassroomAction"
+			method="remove">
+			<result name="success" type="redirect">list</result>
+		</action>
+		
+		<action name="batch" class="com.elearning.admin.actions.ClassroomAction"
+			method="batch">
+			<result name="success" type="redirect">list</result>
+		</action>
+		
+	</package>
+
+
+</struts>
