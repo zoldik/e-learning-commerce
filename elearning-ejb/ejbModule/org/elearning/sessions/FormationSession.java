@@ -8,6 +8,7 @@ import javax.persistence.PersistenceContext;
 import javax.persistence.criteria.CriteriaQuery;
 
 import org.elearning.entities.Formation;
+import org.elearning.entities.User;
 
 /**
  * Session Bean implementation class FormationSession
@@ -46,10 +47,10 @@ public class FormationSession implements FormationSessionRemote {
     }
     
     @SuppressWarnings("unchecked")
-	public List<Formation> findChecked(String[] idx){
-    	return em.createQuery("select object(o) from Formation as o where o.id in :param")
-    	.setParameter("param", idx)
-    	.getResultList();
-    }
+	public List<Formation> findChecked(List<Integer> idx) {
+		return em
+				.createQuery("select object(f) from Formation f where f.id in (:arrayId)")
+		.setParameter("arrayId", idx).getResultList();
+	}
 
 }

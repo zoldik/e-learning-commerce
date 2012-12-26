@@ -8,6 +8,7 @@ import javax.persistence.PersistenceContext;
 import javax.persistence.criteria.CriteriaQuery;
 
 import org.elearning.entities.Classroom;
+import org.elearning.entities.Formation;
 
 /**
  * Session Bean implementation class ClassroomSession
@@ -46,10 +47,10 @@ public class ClassroomSession implements ClassroomSessionRemote {
     }
     
     @SuppressWarnings("unchecked")
-	public List<Classroom> findChecked(String[] idx){
-    	return em.createQuery("select object(o) from Classroom as o where o.id in :param")
-    	.setParameter("param", idx)
-    	.getResultList();
-    }
+	public List<Classroom> findChecked(List<Integer> idx) {
+		return em
+				.createQuery("select object(c) from Classroom c where c.id in (:arrayId)")
+		.setParameter("arrayId", idx).getResultList();
+	}
 
 }
