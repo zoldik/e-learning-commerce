@@ -8,6 +8,7 @@ import javax.naming.InitialContext;
 import javax.naming.NameNotFoundException;
 import javax.naming.NamingException;
 
+import org.apache.struts2.interceptor.ParameterAware;
 import org.apache.struts2.interceptor.RequestAware;
 import org.elearning.entities.Teacher;
 import org.elearning.entities.User;
@@ -18,9 +19,10 @@ import com.opensymphony.xwork2.ActionSupport;
 import com.opensymphony.xwork2.ModelDriven;
 
 public class TeacherAction extends ActionSupport implements
-		ModelDriven<Teacher>, RequestAware {
+		ModelDriven<Teacher>, RequestAware, ParameterAware {
 
 	private Map<String, Object> request;
+	private Map<String, String[]> parameters;
 	private Teacher teacher = new Teacher();
 	private List<User> teachers = new ArrayList<User>();
 	private UserSessionRemote userService;
@@ -28,7 +30,8 @@ public class TeacherAction extends ActionSupport implements
 	public TeacherAction() throws NamingException {
 		try {
 			InitialContext ctx = new InitialContext();
-			userService = (UserSessionRemote) ctx.lookup("TeacherSession/remote");
+			userService = (UserSessionRemote) ctx
+					.lookup("TeacherSession/remote");
 		} catch (NameNotFoundException e) {
 			e.printStackTrace();
 		}
@@ -82,8 +85,29 @@ public class TeacherAction extends ActionSupport implements
 	}
 
 	public String batch() {
-		Object t=request.get("request");
-		teachers = userService.findChecked((String[]) request.get("name"));
+		String[] checkedAll = parameters.get("all_elements");
+		String[] batchAction = parameters.get("action");
+		if (checkedAll[0].equals("true")) {
+			teachers = userService.findAll();
+		} else {
+			String[] chekedTeachers = parameters.get("idx[]");
+
+			List<Integer> results = new ArrayList<Integer>();
+			for (int i = 0; i < chekedTeachers.length; i++) {
+				try {
+					results.add(Integer.parseInt(chekedTeachers[i]));
+				} catch (NumberFormatException nfe) {
+				}
+				;
+			}
+			teachers = userService.findChecked(results);
+		}
+
+		if (batchAction[0].equals("supprimer")) {
+			for (User teacher : teachers) {
+				userService.remove(teacher);
+			}
+		}
 		return SUCCESS;
 	}
 
@@ -106,5 +130,11 @@ public class TeacherAction extends ActionSupport implements
 
 	public void setTeachers(List<User> teachers) {
 		this.teachers = teachers;
+	}
+
+	@Override
+	public void setParameters(Map<String, String[]> parameters) {
+		this.parameters = parameters;
+
 	}
 }
