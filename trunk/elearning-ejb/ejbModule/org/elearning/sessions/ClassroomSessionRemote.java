@@ -19,6 +19,6 @@ public interface ClassroomSessionRemote extends Serializable{
     
     public List<Classroom> findAll();
     
-    public List<Classroom> findChecked(String[] idx);
+    public List<Classroom> findChecked(List<Integer> idx);
 
 }

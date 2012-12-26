@@ -19,6 +19,6 @@ public interface FormationSessionRemote extends Serializable{
     
     public List<Formation> findAll();
     
-    public List<Formation> findChecked(String[] idx);
+    public List<Formation> findChecked(List<Integer> idx);
 
 }
