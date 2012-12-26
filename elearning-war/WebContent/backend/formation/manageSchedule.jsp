@@ -15,13 +15,17 @@
 				&& jQuery("#classRoomSelect").val() != ""
 				&& jQuery("#subjectSelect").val() != "") {
 			$(data).addClass('utessss');
-
+			var col=$(data).parent().prevAll().length;
+			console.log(col);
+			var headerObj = $(data).parents('table').find('th').eq(col);
+			var dataToSend = $('#seanceForm').serializeArray();
+			dataToSend.push({name : 'day', value: jQuery(headerObj).html()});
 			jQuery.ajax({
 				url : "<s:property value='#addSeanceURL'/>",
 				type : "post",
-				data : jQuery("#seanceForm").serialize(),
-				success : function(dataServer) {
-					jQuery(data).html(dataServer);
+				data : dataToSend,
+				success : function(serverData) {
+					jQuery(data).html(serverData);
 				},
 				complete : function(){
 					$("#classRoomSelect option[value='']").attr("selected",true);
@@ -59,7 +63,7 @@
 		<thead>
 			<tr>
 				<th class=""></th>
-				<td bordercolor="#FFFFFF" bgcolor="#FFFFFF">&nbsp;</td>
+				<th bordercolor="#FFFFFF" bgcolor="#FFFFFF">&nbsp;</th>
 				<th class="">Lundi</th>
 				<th class="">Mardi</th>
 				<th class="">Mercredi</th>
