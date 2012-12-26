@@ -44,6 +44,8 @@ public class ScheduleAction extends ActionSupport implements
 			InitialContext ctx = new InitialContext();
 			scheduleService = (ScheduleSessionRemote) ctx.lookup("ScheduleSession/remote");
 			classRoomService = (ClassroomSessionRemote) ctx.lookup("ClassroomSession/remote");
+//			dayRoomService = (ClassroomSessionRemote) ctx.lookup("DaySession/remote");
+//			Service = (ClassroomSessionRemote) ctx.lookup("ClassroomSession/remote");
 			userService = (UserSessionRemote) ctx.lookup("TeacherSession/remote");
 		} catch (NameNotFoundException e) {
 			e.printStackTrace();
@@ -78,8 +80,11 @@ public class ScheduleAction extends ActionSupport implements
 	}
 	
 	public String execute(){
-		String[] test=parameters.get("classRoom");
-		System.out.println(test[0]);
+		String[] dayParameter = parameters.get("day");
+		String[] teacherParameter = parameters.get("teacher");
+		String[] classRoomParameter = parameters.get("classRoom");
+		String[] subjectParameter = parameters.get("subject");
+//		Day day =
 		return SUCCESS;
 	}
 	
