@@ -8,8 +8,10 @@ import javax.naming.InitialContext;
 import javax.naming.NameNotFoundException;
 import javax.naming.NamingException;
 
+import org.apache.struts2.interceptor.ParameterAware;
 import org.apache.struts2.interceptor.RequestAware;
 import org.elearning.entities.Formation;
+import org.elearning.entities.User;
 import org.elearning.sessions.AffiliateSessionRemote;
 import org.elearning.sessions.FormationSessionRemote;
 
@@ -17,9 +19,10 @@ import com.opensymphony.xwork2.ActionSupport;
 import com.opensymphony.xwork2.ModelDriven;
 
 public class FormationAction extends ActionSupport implements
-		ModelDriven<Formation>, RequestAware {
+		ModelDriven<Formation>, RequestAware, ParameterAware {
 
 	private Map<String, Object> request;
+	private Map<String, String[]> parameters;
 	private Formation formation = new Formation();
 	private List<Formation> formations = new ArrayList<Formation>();
 	private FormationSessionRemote formationService;
@@ -81,6 +84,33 @@ public class FormationAction extends ActionSupport implements
 		formationService.remove(formationService.find(this.request.get("id")));
 		return SUCCESS;
 	}
+	
+	public String batch() {
+		String[] checkedAll = parameters.get("all_elements");
+		String[] batchAction = parameters.get("action");
+		if (checkedAll[0].equals("true")) {
+			formations = formationService.findAll();
+		} else {
+			String[] checkedFormations = parameters.get("idx[]");
+
+			List<Integer> results = new ArrayList<Integer>();
+			for (int i = 0; i < checkedFormations.length; i++) {
+				try {
+					results.add(Integer.parseInt(checkedFormations[i]));
+				} catch (NumberFormatException nfe) {
+				}
+				;
+			}
+			formations = formationService.findChecked(results);
+		}
+
+		if (batchAction[0].equals("supprimer")) {
+			for (Formation formation : formations) {
+				formationService.remove(formation);
+			}
+		}
+		return SUCCESS;
+	}
 
 	@Override
 	public void setRequest(Map<String, Object> request) {
@@ -101,5 +131,11 @@ public class FormationAction extends ActionSupport implements
 
 	public void setFormations(List<Formation> formations) {
 		this.formations = formations;
+	}
+
+	@Override
+	public void setParameters(Map<String, String[]> parameters) {
+		this.parameters=parameters;
+		
 	}
 }
