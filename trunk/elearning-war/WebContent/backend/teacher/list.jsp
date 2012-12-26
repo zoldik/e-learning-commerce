@@ -61,7 +61,7 @@
 		</table>
 	</div>
 	<div class="actions">
-		<s:select name="action" list="{'Supprimer'}" headerKey=""
+		<s:select name="action" list="#{ 'supprimer' : 'Supprimer'}" headerKey=""
 			headerValue="Selectionner une action"/>
 		<s:checkbox name="all_elements" label="tous les éléments" />
 		<s:submit cssClass="btn primary" value="ok" />
