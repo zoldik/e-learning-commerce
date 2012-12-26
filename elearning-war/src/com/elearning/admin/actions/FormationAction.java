@@ -104,7 +104,7 @@ public class FormationAction extends ActionSupport implements
 			formations = formationService.findChecked(results);
 		}
 
-		if (batchAction[0].equals("supprimer")) {
+		if (batchAction[0].equals("Supprimer")) {
 			for (Formation formation : formations) {
 				formationService.remove(formation);
 			}

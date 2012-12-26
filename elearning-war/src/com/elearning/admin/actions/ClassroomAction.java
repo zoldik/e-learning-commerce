@@ -103,7 +103,7 @@ private Map<String,String[]> parameters;
 			classrooms = classRoomervice.findChecked(results);
 		}
 
-		if (batchAction[0].equals("supprimer")) {
+		if (batchAction[0].equals("Supprimer")) {
 			for (Classroom classroom : classrooms) {
 				classRoomervice.remove(classroom);
 			}
