@@ -20,6 +20,6 @@ public interface UserSessionRemote extends Serializable{
     
     public List<User> findAll();
     
-    public List<User> findChecked(String[] idx);
+    public List<User> findChecked(List<Integer> results);
 
 }
