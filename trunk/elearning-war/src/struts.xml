@@ -76,7 +76,7 @@
 			<result-type name="tiles"
 				class="org.apache.struts2.views.tiles.TilesResult" />
 		</result-types>
-
+		<default-action-ref name="list" />
 		<action name="list" class="com.elearning.admin.actions.TeacherAction"
 			method="list">
 			<result name="success" type="tiles">admin.teacher.list</result>
@@ -117,7 +117,7 @@
 			<result-type name="tiles"
 				class="org.apache.struts2.views.tiles.TilesResult" />
 		</result-types>
-
+		<default-action-ref name="list" />
 		<action name="list" class="com.elearning.admin.actions.FormationAction"
 			method="list">
 			<result name="success" type="tiles">admin.formation.list</result>
@@ -139,6 +139,11 @@
 			method="remove">
 			<result name="success" type="redirect">list</result>
 		</action>
+		
+		<action name="batch" class="com.elearning.admin.actions.FormationAction"
+			method="batch">
+			<result name="success" type="redirect">list</result>
+		</action>
 
 		<action name="addSchedule" class="com.elearning.admin.actions.ScheduleAction">
 			<result name="input" type="tiles">admin.formation.schedule</result>
@@ -157,7 +162,7 @@
 			<result-type name="tiles"
 				class="org.apache.struts2.views.tiles.TilesResult" />
 		</result-types>
-
+		<default-action-ref name="list" />
 		<action name="list" class="com.elearning.admin.actions.ClassroomAction"
 			method="list">
 			<result name="success" type="tiles">admin.classroom.list</result>
@@ -179,6 +184,12 @@
 			method="remove">
 			<result name="success" type="redirect">list</result>
 		</action>
+		
+		<action name="batch" class="com.elearning.admin.actions.ClassroomAction"
+			method="batch">
+			<result name="success" type="redirect">list</result>
+		</action>
+		
 	</package>
 
 
