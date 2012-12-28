@@ -71,7 +71,7 @@
 	</definition>
 	
 	<definition name="admin.classroom.list" extends="admin.dashbord">
-		<put-attribute name="title" value="Liste des salle" />
+		<put-attribute name="title" value="Liste des salles" />
 		<put-attribute name="body" value="/backend/classroom/list.jsp" />
 	</definition>
 	
@@ -82,6 +82,20 @@
 	
 	<definition name="admin.classroom.edit" extends="admin.classroom.add">
 		<put-attribute name="title" value="Modification salle" />
+	</definition>
+	
+	<definition name="admin.library.list" extends="admin.dashbord">
+		<put-attribute name="title" value="Liste des bibliothèques" />
+		<put-attribute name="body" value="/backend/library/list.jsp" />
+	</definition>
+	
+	<definition name="admin.library.add" extends="admin.dashbord">
+		<put-attribute name="title" value="Nouvelle bibliothèque" />
+		<put-attribute name="body" value="/backend/library/add.jsp" />
+	</definition>
+	
+	<definition name="admin.library.edit" extends="admin.library.add">
+		<put-attribute name="title" value="Modification bibliothèque" />
 	</definition>
 
 </tiles-definitions>
