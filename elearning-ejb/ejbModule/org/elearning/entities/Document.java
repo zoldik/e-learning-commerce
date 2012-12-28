@@ -5,7 +5,7 @@ import java.lang.String;
 import javax.persistence.*;
 
 @Entity
-public class Library implements Serializable {
+public class Document implements Serializable {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
@@ -13,14 +13,16 @@ public class Library implements Serializable {
 	private String name;
 	private String path;
 	
-	@OneToOne(targetEntity = Formation.class, mappedBy="library",cascade = CascadeType.MERGE)
+	@ManyToOne(targetEntity = Formation.class)
+	@JoinColumn(name="formation_id",referencedColumnName="id")
 	private Formation formation;
+	
 	
 	@ManyToOne(targetEntity=Category.class)
 	@JoinColumn(name="category_id",referencedColumnName="id")
 	private Category category;
 
-	public Library() {
+	public Document() {
 		super();
 	}
 

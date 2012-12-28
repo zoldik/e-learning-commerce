@@ -12,6 +12,7 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.PrePersist;
 import javax.persistence.PreUpdate;
@@ -30,8 +31,8 @@ public class Formation implements Serializable {
 	@JoinColumn(name="affiliate_id",referencedColumnName="id")
 	private Affiliate affiliate;
 	
-	@OneToOne(targetEntity=Library.class)
-	private Library library;
+	@OneToMany(targetEntity=Document.class)
+	private Collection<Document> documents;
 	
 	@OneToOne(targetEntity=Schedule.class)
 	private Schedule schedule;
@@ -98,13 +99,12 @@ public class Formation implements Serializable {
 		this.endDate = endDate;
 	}
 
-	public void setLibrary(Library library) {
-		this.library = library;
+	public Collection<Document> getDocuments() {
+		return documents;
 	}
 
-	@OneToOne
-	public Library getLibrary() {
-		return library;
+	public void setDocuments(Collection<Document> documents) {
+		this.documents = documents;
 	}
 
 	@OneToOne

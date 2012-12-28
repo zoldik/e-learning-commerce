@@ -16,8 +16,8 @@ public class Category implements Serializable {
 	private String name;
 	private String extension;
 	
-	@OneToMany(targetEntity = Library.class, mappedBy = "category")
-	private Collection<Library> libraries;
+	@OneToMany(targetEntity = Document.class, mappedBy = "category")
+	private Collection<Document> documents;
 
 	public Category() {
 		super();
@@ -47,11 +47,11 @@ public class Category implements Serializable {
 		this.extension = extension;
 	}
 
-	public Collection<Library> getLibraries() {
-		return libraries;
+	public Collection<Document> getDocuments() {
+		return documents;
 	}
 
-	public void setLibraries(Collection<Library> libraries) {
-		this.libraries = libraries;
+	public void setDocuments(Collection<Document> documents) {
+		this.documents = documents;
 	}
 }
