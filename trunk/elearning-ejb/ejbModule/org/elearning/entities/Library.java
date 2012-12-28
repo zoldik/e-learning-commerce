@@ -13,7 +13,7 @@ public class Library implements Serializable {
 	private String name;
 	private String path;
 	
-	@OneToOne(targetEntity = Formation.class, mappedBy="library")
+	@OneToOne(targetEntity = Formation.class, mappedBy="library",cascade = CascadeType.MERGE)
 	private Formation formation;
 	
 	@ManyToOne(targetEntity=Category.class)
