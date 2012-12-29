@@ -2,6 +2,7 @@ package com.elearning.admin.actions;
 
 import java.io.File;
 import java.io.IOException;
+import java.security.cert.Extension;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -16,24 +17,24 @@ import org.apache.struts2.interceptor.ParameterAware;
 import org.apache.struts2.interceptor.RequestAware;
 import org.elearning.entities.Category;
 import org.elearning.entities.Formation;
-import org.elearning.entities.Library;
+import org.elearning.entities.Document;
 import org.elearning.sessions.CategorySessionRemote;
 import org.elearning.sessions.FormationSessionRemote;
-import org.elearning.sessions.LibrarySessionRemote;
+import org.elearning.sessions.DocumentSessionRemote;
 
 import com.opensymphony.xwork2.ActionSupport;
 import com.opensymphony.xwork2.ModelDriven;
 
-public class LibraryAction extends ActionSupport implements
-		ModelDriven<Library>, RequestAware, ParameterAware {
+public class DocumentAction extends ActionSupport implements
+		ModelDriven<Document>, RequestAware, ParameterAware {
 
 	private Map<String, Object> request;
 	private Map<String, String[]> parameters;
-	private Library library = new Library();
-	private List<Library> libraries = new ArrayList<Library>();
+	private Document document = new Document();
+	private List<Document> documents = new ArrayList<Document>();
 	private Map<Integer, String> categorySelect = new HashMap<Integer, String>();
 	private Map<Integer, String> formationSelect = new HashMap<Integer, String>();
-	private LibrarySessionRemote libraryService;
+	private DocumentSessionRemote documentService;
 	private FormationSessionRemote formationService;
 	private CategorySessionRemote categoryService;
 
@@ -41,11 +42,11 @@ public class LibraryAction extends ActionSupport implements
 	private String contentType;
 	private String filename;
 
-	public LibraryAction() throws NamingException {
+	public DocumentAction() throws NamingException {
 		try {
 			InitialContext ctx = new InitialContext();
-			libraryService = (LibrarySessionRemote) ctx
-					.lookup("LibrarySession/remote");
+			documentService = (DocumentSessionRemote) ctx
+					.lookup("DocumentSession/remote");
 			formationService = (FormationSessionRemote) ctx
 					.lookup("FormationSession/remote");
 			categoryService = (CategorySessionRemote) ctx
@@ -57,57 +58,75 @@ public class LibraryAction extends ActionSupport implements
 	}
 
 	@Override
-	public Library getModel() {
+	public Document getModel() {
 		// TODO Auto-generated method stub
-		return library;
+		return document;
 	}
 
 	/**
-	 * To save or update library.
+	 * To save or update document.
 	 * 
 	 * @return String
 	 */
 	public String save() {
-	File destDir = new File("../test");
-	try {
-		FileUtils.copyFileToDirectory(file, destDir, true);
-		} catch (IOException e) {
-		// TODO Auto-generated catch block
-		e.printStackTrace();
-	}
-		library.setPath(file.getAbsolutePath());
-		libraryService.edit(library);
+		int mid= this.filename.lastIndexOf(".");
+		String extension=this.filename.substring(mid+1,this.filename.length());
+		Category category = this.detectCategoryForFile(extension);
+		String path= "C:\\Library";
+		this.uploadFile(path);
+		document.setCategory(category);
+		document.setPath(path+"\\"+this.filename);
+		documentService.edit(document);
 		return SUCCESS;
+	}
+	
+	private Category detectCategoryForFile(String extension){
+		List<Category> categories = categoryService.findAll();
+		for(Category category : categories){
+			if(category.getExtension().contains(extension)){
+				return category;
+			}
+		}
+		return null;
+	}
+	
+	private void uploadFile(String path){
+		try {
+			File destDir = new File(path,this.filename);
+			FileUtils.copyFile(file, destDir, true);
+			} catch (IOException e) {
+			e.printStackTrace();
+		}
 	}
 
 	/**
-	 * To save or update library.
+	 * To save or update document.
 	 * 
 	 * @return String
 	 */
 	public String edit() {
-		library = (Library) libraryService.find(this.request.get("id"));
-		libraryService.edit(library);
+		document = (Document) documentService.find(this.request.get("id"));
+		documentService.edit(document);
 		return SUCCESS;
 	}
 
 	/**
-	 * To list all libraries.
+	 * To list all documents.
 	 * 
 	 * @return String
 	 */
 	public String list() {
-		libraries = libraryService.findAll();
+		documents = documentService.findAll();
 		return SUCCESS;
 	}
 
 	/**
-	 * To delete a library.
+	 * To delete a document.
 	 * 
 	 * @return String
 	 */
 	public String remove() {
-		libraryService.remove(libraryService.find(this.request.get("id")));
+		documentService.remove(documentService.find(this.request.get("id")));
 		return SUCCESS;
 	}
 
@@ -128,7 +147,7 @@ public class LibraryAction extends ActionSupport implements
 		String[] checkedAll = parameters.get("all_elements");
 		String[] batchAction = parameters.get("action");
 		if (checkedAll[0].equals("true")) {
-			libraries = libraryService.findAll();
+			documents = documentService.findAll();
 		} else {
 			String[] checkedLibraries = parameters.get("idx[]");
 
@@ -140,12 +159,12 @@ public class LibraryAction extends ActionSupport implements
 				}
 				;
 			}
-			libraries = libraryService.findChecked(results);
+			documents = documentService.findChecked(results);
 		}
 
 		if (batchAction[0].equals("Supprimer")) {
-			for (Library library : libraries) {
-				libraryService.remove(library);
+			for (Document document : documents) {
+				documentService.remove(document);
 			}
 		}
 		return SUCCESS;
@@ -156,20 +175,20 @@ public class LibraryAction extends ActionSupport implements
 		this.request = request;
 	}
 
-	public Library getLibrary() {
-		return library;
+	public Document getDocument() {
+		return document;
 	}
 
-	public void setLibrary(Library library) {
-		this.library = library;
+	public void setDocument(Document document) {
+		this.document = document;
 	}
 
-	public List<Library> getLibrarys() {
-		return libraries;
+	public List<Document> getDocuments() {
+		return documents;
 	}
 
-	public void setLibrarys(List<Library> libraries) {
-		this.libraries = libraries;
+	public void setDocuments(List<Document> documents) {
+		this.documents = documents;
 	}
 
 	public void setParameters(Map<String, String[]> parameters) {
