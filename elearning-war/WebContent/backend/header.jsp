@@ -51,9 +51,9 @@
 						<li>
 							<s:a href="%{listClassroom}">Gestion des salles</s:a>
 						</li>
-						<s:url var="listLibrary" action="list" namespace="/admin/library"/>
+						<s:url var="listDocument" action="list" namespace="/admin/document"/>
 						<li>
-							<s:a href="%{listLibrary}">Gestion des bibliothèques</s:a>
+							<s:a href="%{listDocument}">Gestion de la bibliothèque</s:a>
 						</li>
 					</ul>
 				</li>
