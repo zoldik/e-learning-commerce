@@ -84,18 +84,18 @@
 		<put-attribute name="title" value="Modification salle" />
 	</definition>
 	
-	<definition name="admin.library.list" extends="admin.dashbord">
-		<put-attribute name="title" value="Liste des bibliothèques" />
-		<put-attribute name="body" value="/backend/library/list.jsp" />
+	<definition name="admin.document.list" extends="admin.dashbord">
+		<put-attribute name="title" value="Liste des documents" />
+		<put-attribute name="body" value="/backend/document/list.jsp" />
 	</definition>
 	
-	<definition name="admin.library.add" extends="admin.dashbord">
-		<put-attribute name="title" value="Nouvelle bibliothèque" />
-		<put-attribute name="body" value="/backend/library/add.jsp" />
+	<definition name="admin.document.add" extends="admin.dashbord">
+		<put-attribute name="title" value="Nouveau document" />
+		<put-attribute name="body" value="/backend/document/add.jsp" />
 	</definition>
 	
-	<definition name="admin.library.edit" extends="admin.library.add">
-		<put-attribute name="title" value="Modification bibliothèque" />
+	<definition name="admin.document.edit" extends="admin.document.add">
+		<put-attribute name="title" value="Modification document" />
 	</definition>
 
 </tiles-definitions>
