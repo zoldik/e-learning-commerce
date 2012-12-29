@@ -15,13 +15,13 @@
 		<class>org.elearning.entities.Formation</class>
 		<class>org.elearning.entities.External</class>
 		<class>org.elearning.entities.Domain</class>
+		<class>org.elearning.entities.Document</class>
 		<class>org.elearning.entities.Client</class>
 		<class>org.elearning.entities.Classroom</class>
 		<class>org.elearning.entities.Category</class>
 		<class>org.elearning.entities.CV</class>
 		<class>org.elearning.entities.Affiliate</class>
 		<class>org.elearning.entities.Administrator</class>
-		<class>org.elearning.entities.Document</class>
 		<validation-mode>AUTO</validation-mode>
 		<properties>
          <property name="hibernate.dialect" value="org.hibernate.dialect.MySQL5InnoDBDialect"/>
