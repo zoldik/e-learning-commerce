@@ -6,6 +6,7 @@
 <struts>
 	<constant name="struts.devMode" value="true" />
 	<constant name="struts.custom.i18n.resources" value="global" />
+	<constant name="struts.multipart.maxSize" value="10000000" />
 
 	<package name="default" namespace="/" extends="struts-default">
 		<result-types>
@@ -192,7 +193,7 @@
 		
 	</package>
 	
-	<package name="adminLibraray" namespace="/admin/library"
+	<package name="adminDocument" namespace="/admin/document"
 		extends="struts-default">
 
 		<result-types>
@@ -200,32 +201,30 @@
 				class="org.apache.struts2.views.tiles.TilesResult" />
 		</result-types>
 		<default-action-ref name="list" />
-		<action name="list" class="com.elearning.admin.actions.LibraryAction"
+		<action name="list" class="com.elearning.admin.actions.DocumentAction"
 			method="list">
-			<result name="success" type="tiles">admin.library.list</result>
+			<result name="success" type="tiles">admin.document.list</result>
 		</action>
 
-		<action name="create" class="com.elearning.admin.actions.LibraryAction"
+		<action name="create" class="com.elearning.admin.actions.DocumentAction"
 			method="save">
-			<interceptor-ref name="fileUpload">
-        		<param name="allowedTypes">image/jpeg,image/gif,text/txt</param>
-    		</interceptor-ref> 
+
 			<result name="success" type="redirect">list</result>
-			<result name="input" type="tiles">admin.library.add</result>
+			<result name="input" type="tiles">admin.document.add</result>
 		</action>
 
-		<action name="edit" class="com.elearning.admin.actions.LibraryAction"
+		<action name="edit" class="com.elearning.admin.actions.DocumentAction"
 			method="edit">
 			<result name="success" type="redirect">list</result>
-			<result name="success" type="tiles">admin.library.edit</result>
+			<result name="success" type="tiles">admin.document.edit</result>
 		</action>
 
-		<action name="delete" class="com.elearning.admin.actions.LibraryAction"
+		<action name="delete" class="com.elearning.admin.actions.DocumentAction"
 			method="remove">
 			<result name="success" type="redirect">list</result>
 		</action>
 		
-		<action name="batch" class="com.elearning.admin.actions.LibraryAction"
+		<action name="batch" class="com.elearning.admin.actions.DocumentAction"
 			method="batch">
 			<result name="success" type="redirect">list</result>
 		</action>
