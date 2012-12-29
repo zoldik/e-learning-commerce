@@ -1,8 +1,13 @@
 package org.elearning.entities;
 
 import java.io.Serializable;
+import java.util.Collection;
+import java.util.List;
 
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Inheritance;
 import javax.persistence.InheritanceType;
@@ -17,30 +22,37 @@ import javax.persistence.Table;
 public class Role implements Serializable {
 
 	@Id
+	@GeneratedValue(strategy=GenerationType.AUTO)
+	private int id;
+	
+	@ManyToMany(targetEntity=User.class,fetch=FetchType.LAZY)
+	@JoinTable(name="user_role",joinColumns=@JoinColumn(name="role_id")
+			,inverseJoinColumns=@JoinColumn(name="user_id"))
+	private Collection<User> users;
+	
 	private String name;
-	
-//	@ManyToMany(targetEntity=Group.class)
-//	@JoinTable(name="group_roles",joinColumns=@JoinColumn(name="group_id",))
-//	@JoinColumn(name="affiliate_id",referencedColumnName="id")
-//	private Group group;
 
-//	public void setType(String type) {
-//		this.type = type;
-//	}
-//
-//	public String getType() {
-//		return type;
-//	}
-//
-//	public void setGroup(Group group) {
-//		this.group = group;
-//	}
-//
-//	@ManyToOne
-//	public Group getGroup() {
-//		return group;
-//	}
-	
-	
+	public int getId() {
+		return id;
+	}
 
+	public void setId(int id) {
+		this.id = id;
+	}
+
+	public String getName() {
+		return name;
+	}
+
+	public void setName(String name) {
+		this.name = name;
+	}
+
+	public Collection<User> getUsers() {
+		return users;
+	}
+
+	public void setUsers(Collection<User> users) {
+		this.users = users;
+	}
 }

@@ -31,10 +31,10 @@ public class Formation implements Serializable {
 	@JoinColumn(name="affiliate_id",referencedColumnName="id")
 	private Affiliate affiliate;
 	
-	@OneToMany(targetEntity=Document.class)
+	@OneToMany(targetEntity=Document.class, mappedBy="formation")
 	private Collection<Document> documents;
 	
-	@OneToOne(targetEntity=Schedule.class)
+	@OneToOne(targetEntity=Schedule.class, mappedBy="formation")
 	private Schedule schedule;
 	
 	@ManyToMany(targetEntity=Student.class, mappedBy="formations")

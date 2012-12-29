@@ -2,7 +2,9 @@ package org.elearning.entities;
 
 import java.io.Serializable;
 import java.lang.String;
+import java.util.Collection;
 import java.util.Date;
+import java.util.List;
 
 import javax.persistence.*;
 
@@ -41,6 +43,9 @@ public class User implements Serializable {
 	@ManyToOne(targetEntity=Group.class)
 	@JoinColumn(name="group_id", referencedColumnName="id")
 	protected Group group;
+	
+	@ManyToMany(targetEntity=Role.class,mappedBy="users")
+	protected Collection<Role> roles;
 	
 	@Temporal(TemporalType.DATE)
 	@Column(name="created_at")
@@ -143,6 +148,15 @@ public class User implements Serializable {
 		return adress;
 	}
 	
+	public Collection<Role> getRoles() {
+		return roles;
+	}
+
+
+	public void setRoles(Collection<Role> roles) {
+		this.roles = roles;
+	}
+
 	public Date getUpdatedAt() {
 		return updatedAt;
 	}
