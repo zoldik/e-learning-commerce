@@ -31,8 +31,9 @@ public class DateConverter extends StrutsTypeConverter{
 	public String convertToString(Map arg0, Object arg1) {
 		// TODO Auto-generated method stub
 		if(arg1 instanceof Date){
+			DateFormat dateFormat = new SimpleDateFormat("dd/MM/yy");
 			Date date= (Date)arg1;
-			return date.toString();
+			return dateFormat.format(date);
 		}
 		return null;
 	}
