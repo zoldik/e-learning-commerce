@@ -6,7 +6,7 @@ import javax.persistence.*;
 
 @Entity
 @DiscriminatorValue("customer")
-public class Client extends User implements Serializable {
+public class Client extends User implements Serializable,UserInterface {
 
 	private String Organization;
 	private String Domain;

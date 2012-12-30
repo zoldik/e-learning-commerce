@@ -9,5 +9,5 @@ import org.elearning.entities.Teacher;
 import org.elearning.entities.Teacher;
 
 @Remote
-public interface TeacherSessionRemote extends UserSessionRemote{
+public interface AdministratorSessionRemote extends UserSessionRemote{
 }

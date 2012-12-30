@@ -11,5 +11,7 @@ import org.elearning.entities.Affiliate;
 public interface AffiliateSessionRemote extends Serializable{
 	
     public List<Affiliate> findAll();
+    
+    public Affiliate find(Object id);
    
 }

@@ -7,7 +7,7 @@ import javax.persistence.*;
 
 @Entity
 @DiscriminatorValue("teacher")
-public class Teacher extends User implements Serializable {
+public class Teacher extends User implements Serializable,UserInterface {
 
 	@ManyToMany
 	@JoinTable(name="teacher_formation",joinColumns=@JoinColumn(name="teacher_id"),inverseJoinColumns=@JoinColumn(name="formation_id"))

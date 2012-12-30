@@ -5,6 +5,7 @@ import java.lang.String;
 import java.util.Collection;
 import java.util.Date;
 import java.util.List;
+import org.jboss.security.Util;
 
 import javax.persistence.*;
 
@@ -12,7 +13,7 @@ import javax.persistence.*;
 @Inheritance(strategy=InheritanceType.JOINED)
 @DiscriminatorColumn(name="type", discriminatorType=DiscriminatorType.STRING)
 @DiscriminatorValue("user")
-public class User implements Serializable {
+public class User implements Serializable,UserInterface{
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
@@ -40,11 +41,14 @@ public class User implements Serializable {
 	@Column(name = "fax")
 	protected String fax;
 	
+	@Column(name="enabled")
+	protected Boolean enabled;
+	
 	@ManyToOne(targetEntity=Group.class)
 	@JoinColumn(name="group_id", referencedColumnName="id")
 	protected Group group;
 	
-	@ManyToMany(targetEntity=Role.class,mappedBy="users")
+	@ManyToMany(targetEntity=Role.class,mappedBy="users",fetch=FetchType.EAGER)
 	protected Collection<Role> roles;
 	
 	@Temporal(TemporalType.DATE)
@@ -54,6 +58,10 @@ public class User implements Serializable {
 	@Temporal(TemporalType.DATE)
 	@Column(name="updated_at")
 	protected Date updatedAt;
+	
+	@Temporal(TemporalType.DATE)
+	@Column(name="last_login")
+	protected Date lastLogin;
 
 	public User() {
 		super();
@@ -148,6 +156,16 @@ public class User implements Serializable {
 		return adress;
 	}
 	
+	public Boolean getEnabled() {
+		return enabled;
+	}
+
+
+	public void setEnabled(Boolean enabled) {
+		this.enabled = enabled;
+	}
+
+
 	public Collection<Role> getRoles() {
 		return roles;
 	}
@@ -176,16 +194,27 @@ public class User implements Serializable {
 		this.createdAt = createdAt;
 	}
 
+	public Date getLastLogin() {
+		return lastLogin;
+	}
+
+
+	public void setLastLogin(Date lastLogin) {
+		this.lastLogin = lastLogin;
+	}
+
 
 	@PreUpdate
 	public void onUpdate(){
 		this.updatedAt=new Date();
+		this.setPassword(Util.createPasswordHash("MD5", Util.BASE64_ENCODING, null, null, this.password));
 	}
 	
 	@PrePersist
 	public void onCreate(){
 		this.createdAt=new Date();
 		this.updatedAt=new Date();
+		this.setPassword(Util.createPasswordHash("MD5", Util.BASE64_ENCODING, null, null, this.password));
 	}
 	
 	public void clearModel(){
@@ -195,5 +224,4 @@ public class User implements Serializable {
 		this.password=null;
 		this.password=null;
 	}
-
 }
