@@ -56,7 +56,7 @@
 				</tbody>
 				<tfoot>	
 					<tr>
-						<td colspan="3" class="pager">
+						<td colspan="6" class="pager">
 							<div class="pagination">
 								<ul>
 									<li><s:url var="firstPageURL" action="list" namespace="">

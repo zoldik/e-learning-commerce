@@ -51,6 +51,8 @@
 							</td>
 						</tr>
 					</s:iterator>
+				</tbody>
+				<tfoot>
 					<tr>
 						<td colspan="3" class="pager">
 							<div class="pagination">
@@ -63,7 +65,7 @@
 							</div>
 						</td>
 					</tr>
-				</tbody>
+				</tfoot>
 			</table>
 		</div>
 		<div class="actions">
