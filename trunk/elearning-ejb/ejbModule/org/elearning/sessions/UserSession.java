@@ -5,6 +5,7 @@ import java.util.List;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
+import javax.persistence.Query;
 import javax.persistence.criteria.CriteriaQuery;
 
 import org.elearning.entities.User;
@@ -58,12 +59,16 @@ public class UserSession implements UserSessionLocal, UserSessionRemote {
 
 	public Object login(String usernameOrEmail, String password) {
 		String hashedPassword = Util.createPasswordHash("MD5", Util.BASE64_ENCODING, null, null, password);
-		Object user = (Object) em
-				.createQuery(
-						"select u from User u where u.email=:p1 or u.username=:p1 and u.password=:pwd")
-				.setParameter("p1", usernameOrEmail)
+		Query query = em.createQuery(
+		"select u from User u where u.email=:p1 or u.username=:p1 and u.password=:pwd");
+		Object user = (Object) query.setParameter("p1", usernameOrEmail)
 				.setParameter("pwd", hashedPassword)
 				.getSingleResult();
+		if(! (user instanceof UserInterface)){
+			user = (Object) query.setParameter("p1", usernameOrEmail)
+			.setParameter("pwd", password)
+			.getSingleResult();
+		}
 		return user;
 	}
 
