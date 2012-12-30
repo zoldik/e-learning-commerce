@@ -7,6 +7,7 @@ import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.persistence.criteria.CriteriaQuery;
 
+import org.elearning.entities.Affiliate;
 import org.elearning.entities.Formation;
 import org.elearning.entities.User;
 
@@ -43,8 +44,14 @@ public class FormationSession implements FormationSessionRemote {
     
     @SuppressWarnings("unchecked")
 	public List<Formation> findAll(){
-    	return em.createQuery("select object(o) from Formation as o").getResultList();
+    	return em.createQuery("select object(f) from Formation f").getResultList();
     }
+    
+    @SuppressWarnings("unchecked")
+	public List<Formation> findByAffiliate(Affiliate affiliate) {
+		return (List<Formation>)em.createQuery("select object(f) from Formation f where f.affiliate =:affiliate ")
+		.setParameter("affiliate", affiliate).getResultList();
+	}
     
     @SuppressWarnings("unchecked")
 	public List<Formation> findChecked(List<Integer> idx) {
