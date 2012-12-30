@@ -15,11 +15,12 @@ import org.elearning.entities.User;
 import org.elearning.sessions.AffiliateSessionRemote;
 import org.elearning.sessions.FormationSessionRemote;
 
+import com.elearning.front.actions.LoginRequired;
 import com.opensymphony.xwork2.ActionSupport;
 import com.opensymphony.xwork2.ModelDriven;
 
 public class FormationAction extends ActionSupport implements
-		ModelDriven<Formation>, RequestAware, ParameterAware {
+		ModelDriven<Formation>, RequestAware, ParameterAware, LoginRequired{
 
 	private Map<String, Object> request;
 	private Map<String, String[]> parameters;

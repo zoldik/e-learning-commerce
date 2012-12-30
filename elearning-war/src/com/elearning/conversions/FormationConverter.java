@@ -1,9 +1,5 @@
 package com.elearning.conversions;
 
-import java.text.DateFormat;
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
-import java.util.Date;
 import java.util.Map;
 
 import javax.naming.InitialContext;
@@ -34,8 +30,7 @@ public class FormationConverter extends StrutsTypeConverter{
 
 	@Override
 	public String convertToString(Map arg0, Object arg1) {
-		// TODO Auto-generated method stub
-		if(arg1 instanceof Date){
+		if(arg1 instanceof Formation){
 			Formation formation= (Formation)arg1;
 			return String.valueOf(formation.getId());
 		}

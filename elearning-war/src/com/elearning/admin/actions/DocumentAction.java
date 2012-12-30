@@ -15,6 +15,7 @@ import javax.naming.NamingException;
 import org.apache.commons.io.FileUtils;
 import org.apache.struts2.interceptor.ParameterAware;
 import org.apache.struts2.interceptor.RequestAware;
+import org.elearning.entities.Administrator;
 import org.elearning.entities.Category;
 import org.elearning.entities.Formation;
 import org.elearning.entities.Document;
@@ -22,11 +23,12 @@ import org.elearning.sessions.CategorySessionRemote;
 import org.elearning.sessions.FormationSessionRemote;
 import org.elearning.sessions.DocumentSessionRemote;
 
+import com.elearning.front.actions.LoginRequired;
 import com.opensymphony.xwork2.ActionSupport;
 import com.opensymphony.xwork2.ModelDriven;
 
 public class DocumentAction extends ActionSupport implements
-		ModelDriven<Document>, RequestAware, ParameterAware {
+		ModelDriven<Document>, RequestAware, ParameterAware, LoginRequired {
 
 	private Map<String, Object> request;
 	private Map<String, String[]> parameters;
@@ -131,6 +133,9 @@ public class DocumentAction extends ActionSupport implements
 	}
 
 	public String input() {
+		if((Integer)this.request.get("id") > 0 ){
+			document = (Document) documentService.find(this.request.get("id"));
+		}
 		List<Formation> formations = formationService.findAll();
 		for (Formation formation : formations) {
 			this.formationSelect.put(formation.getId(), formation.getName());

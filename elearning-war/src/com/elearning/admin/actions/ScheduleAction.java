@@ -20,11 +20,12 @@ import org.elearning.sessions.ClassroomSessionRemote;
 import org.elearning.sessions.ScheduleSessionRemote;
 import org.elearning.sessions.UserSessionRemote;
 
+import com.elearning.front.actions.LoginRequired;
 import com.opensymphony.xwork2.ActionSupport;
 import com.opensymphony.xwork2.ModelDriven;
 
 public class ScheduleAction extends ActionSupport implements
-		ModelDriven<Schedule>, RequestAware, ParameterAware {
+		ModelDriven<Schedule>, RequestAware, ParameterAware,LoginRequired {
 
 	private Map<String, Object> request;
 	private Map<String, String[]> parameters;
@@ -94,7 +95,7 @@ public class ScheduleAction extends ActionSupport implements
 			this.classroomSelect.put(room.getId(), room.getName());
 		}
 		
-		List<User> teachers=userService.findAll();
+		List<? extends User> teachers=userService.findAll();
 		for(User teacher : teachers){
 			this.teacherSelect.put(teacher.getId(), teacher.getFirstName()+" "+teacher.getLastName());
 		}

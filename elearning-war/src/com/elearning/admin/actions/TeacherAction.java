@@ -15,16 +15,17 @@ import org.elearning.entities.User;
 import org.elearning.sessions.TeacherSessionRemote;
 import org.elearning.sessions.UserSessionRemote;
 
+import com.elearning.front.actions.LoginRequired;
 import com.opensymphony.xwork2.ActionSupport;
 import com.opensymphony.xwork2.ModelDriven;
 
 public class TeacherAction extends ActionSupport implements
-		ModelDriven<Teacher>, RequestAware, ParameterAware {
+		ModelDriven<Teacher>, RequestAware, ParameterAware, LoginRequired {
 
 	private Map<String, Object> request;
 	private Map<String, String[]> parameters;
 	private Teacher teacher = new Teacher();
-	private List<User> teachers = new ArrayList<User>();
+	private List<? extends User> teachers = new ArrayList<Teacher>();
 	private UserSessionRemote userService;
 
 	public TeacherAction() throws NamingException {
@@ -49,6 +50,7 @@ public class TeacherAction extends ActionSupport implements
 	 * @return String
 	 */
 	public String save() {
+		teacher.setEnabled(true);
 		userService.edit(teacher);
 		return SUCCESS;
 	}
@@ -124,11 +126,11 @@ public class TeacherAction extends ActionSupport implements
 		this.teacher = teacher;
 	}
 
-	public List<User> getTeachers() {
+	public List<? extends User> getTeachers() {
 		return teachers;
 	}
 
-	public void setTeachers(List<User> teachers) {
+	public void setTeachers(List<? extends User> teachers) {
 		this.teachers = teachers;
 	}
 

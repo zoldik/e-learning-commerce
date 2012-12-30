@@ -16,22 +16,23 @@ import org.elearning.entities.Formation;
 import org.elearning.sessions.AffiliateSessionRemote;
 import org.elearning.sessions.ClassroomSessionRemote;
 
+import com.elearning.front.actions.LoginRequired;
 import com.opensymphony.xwork2.ActionSupport;
 import com.opensymphony.xwork2.ModelDriven;
 
 public class ClassroomAction extends ActionSupport implements
-		ModelDriven<Classroom>, RequestAware, ParameterAware{
+		ModelDriven<Classroom>, RequestAware, ParameterAware, LoginRequired{
 
 	private Map<String,Object> request;
-private Map<String,String[]> parameters;
+	private Map<String,String[]> parameters;
 	private Classroom classroom = new Classroom();
 	private List<Classroom> classrooms = new ArrayList<Classroom>();
-	private ClassroomSessionRemote classRoomervice;
+	private ClassroomSessionRemote classRoomService;
 
 	public ClassroomAction() throws NamingException {
 		try {
 			InitialContext ctx = new InitialContext();
-			classRoomervice = (ClassroomSessionRemote) ctx.lookup("ClassroomSession/remote");
+			classRoomService = (ClassroomSessionRemote) ctx.lookup("ClassroomSession/remote");
 		} catch (NameNotFoundException e) {
 			e.printStackTrace();
 		}
@@ -49,7 +50,7 @@ private Map<String,String[]> parameters;
 	 * @return String
 	 */
 	public String save() {
-		classRoomervice.edit(classroom);
+		classRoomService.edit(classroom);
 		return SUCCESS;
 	}
 
@@ -59,8 +60,8 @@ private Map<String,String[]> parameters;
 	 * @return String
 	 */
 	public String edit() {
-		classroom = (Classroom) classRoomervice.find(this.request.get("id"));
-		classRoomervice.edit(classroom);
+		classroom = (Classroom) classRoomService.find(this.request.get("id"));
+		classRoomService.edit(classroom);
 		return SUCCESS;
 	}
 
@@ -70,7 +71,7 @@ private Map<String,String[]> parameters;
 	 * @return String
 	 */
 	public String list() {
-		classrooms = classRoomervice.findAll();
+		classrooms = classRoomService.findAll();
 		return SUCCESS;
 	}
 
@@ -80,7 +81,7 @@ private Map<String,String[]> parameters;
 	 * @return String
 	 */
 	public String remove() {
-		classRoomervice.remove(classRoomervice.find(this.request.get("id")));
+		classRoomService.remove(classRoomService.find(this.request.get("id")));
 		return SUCCESS;
 	}
 	
@@ -88,7 +89,7 @@ private Map<String,String[]> parameters;
 		String[] checkedAll = parameters.get("all_elements");
 		String[] batchAction = parameters.get("action");
 		if (checkedAll[0].equals("true")) {
-			classrooms = classRoomervice.findAll();
+			classrooms = classRoomService.findAll();
 		} else {
 			String[] checkClassrooms = parameters.get("idx[]");
 
@@ -100,12 +101,12 @@ private Map<String,String[]> parameters;
 				}
 				;
 			}
-			classrooms = classRoomervice.findChecked(results);
+			classrooms = classRoomService.findChecked(results);
 		}
 
 		if (batchAction[0].equals("Supprimer")) {
 			for (Classroom classroom : classrooms) {
-				classRoomervice.remove(classroom);
+				classRoomService.remove(classroom);
 			}
 		}
 		return SUCCESS;
