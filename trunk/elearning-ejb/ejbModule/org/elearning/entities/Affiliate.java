@@ -22,6 +22,9 @@ public class Affiliate implements Serializable {
 
 	@OneToMany(targetEntity = Formation.class, mappedBy = "affiliate")
 	private Collection<Formation> formations;
+	
+	@OneToMany(targetEntity=Administrator.class, mappedBy = "affiliate")
+	private Collection<Administrator> administredBy;
 
 	public int getId() {
 		return id;
@@ -47,4 +50,11 @@ public class Affiliate implements Serializable {
 		this.formations = formations;
 	}
 
+	public Collection<Administrator> getAdministredBy() {
+		return administredBy;
+	}
+
+	public void setAdministredBy(Collection<Administrator> administredBy) {
+		this.administredBy = administredBy;
+	}
 }

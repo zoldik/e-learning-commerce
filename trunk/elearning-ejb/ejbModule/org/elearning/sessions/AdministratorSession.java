@@ -8,39 +8,32 @@ import javax.persistence.PersistenceContext;
 import javax.persistence.Query;
 import javax.persistence.criteria.CriteriaQuery;
 
-import org.elearning.entities.Teacher;
+import org.elearning.entities.Administrator;
 import org.elearning.entities.User;
-import org.elearning.entities.UserInterface;
 
 /**
- * Session Bean implementation class TeacherSession
+ * Session Bean implementation class AdministratorSession
  */
 @Stateless
-public class TeacherSession extends UserSession implements TeacherSessionRemote {
+public class AdministratorSession extends UserSession implements AdministratorSessionRemote {
 	@PersistenceContext
 	EntityManager em;
 
-	/**
-	 * Default constructor.
-	 */
-	public TeacherSession() {
-		// TODO Auto-generated constructor stub
-	}
-
-	public Teacher find(Object id) {
-		return em.find(Teacher.class, id);
+	public User find(Object id) {
+		return em.find(Administrator.class, id);
 	}
 
 	@SuppressWarnings("unchecked")
 	public List<User> findAll() {
-		return em.createQuery("select object(o) from Teacher as o")
+		return em.createQuery("select object(o) from Administrator as o")
 				.getResultList();
 	}
 
 	@SuppressWarnings("unchecked")
 	public List<User> findChecked(List<Integer> idx) {
 		return em
-				.createQuery("select t from Teacher as t where t.id in (:arrayId)")
+				.createQuery("select t from Administrator as t where t.id in (:arrayId)")
 		.setParameter("arrayId", idx).getResultList();
 	}
+
 }

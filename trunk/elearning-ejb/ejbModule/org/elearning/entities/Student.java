@@ -13,7 +13,7 @@ import com.sun.xml.bind.v2.schemagen.xmlschema.List;
 
 @Entity
 @DiscriminatorValue("student")
-public class Student extends User implements Serializable {
+public class Student extends User implements Serializable,UserInterface {
 
 	@Temporal(TemporalType.DATE)
 	@Column(name = "date_of_birth")

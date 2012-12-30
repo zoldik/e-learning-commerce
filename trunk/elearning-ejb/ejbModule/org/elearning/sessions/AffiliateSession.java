@@ -25,6 +25,10 @@ public class AffiliateSession implements AffiliateSessionRemote {
         // TODO Auto-generated constructor stub
     }
     
+    public Affiliate find(Object id){
+    	return (Affiliate) em.find(Affiliate.class, id);
+    }
+    
     @SuppressWarnings("unchecked")
 	public List<Affiliate> findAll(){
     	return em.createQuery("select object(o) from Affiliate as o").getResultList();

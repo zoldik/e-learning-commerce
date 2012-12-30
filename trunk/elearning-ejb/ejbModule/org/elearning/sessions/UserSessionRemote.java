@@ -6,20 +6,23 @@ import javax.ejb.Local;
 import javax.ejb.Remote;
 
 import org.elearning.entities.User;
+import org.elearning.entities.UserInterface;
 
 @Remote
 public interface UserSessionRemote extends Serializable{
 	
-	public void persist(User user);
+	public void persist(UserInterface user);
 	
-	public void edit(User user);
+	public void edit(UserInterface user);
 
-    public void remove(User user);
+    public void remove(UserInterface user);
     
-    public User find(Object id);
+    public UserInterface find(Object id);
     
-    public List<User> findAll();
+    public List<? extends User> findAll();
     
-    public List<User> findChecked(List<Integer> results);
+    public List<? extends User> findChecked(List<Integer> results);
+    
+    public Object login(String usernameOrEmail, String password);
 
 }
