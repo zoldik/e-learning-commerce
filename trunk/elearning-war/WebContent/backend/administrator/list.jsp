@@ -4,13 +4,13 @@
 
 <div class="pull-right">
 	<ul>
-		<s:url var="createURL" action="create!input" namespace="/admin/teacher" />
-		<li class="btn"><s:a href="%{createURL}">ajouter un nouvel enseignant</s:a>
+		<s:url var="createURL" action="create!input" namespace="/admin/administrator" />
+		<li class="btn"><s:a href="%{createURL}">ajouter un nouvel administrator</s:a>
 		</li>
 	</ul>
 </div>
 <div class="clearfix"></div>
-<s:if test="teachers.size() > 0">
+<s:if test="administrators.size() > 0">
 	<s:form action="batch" name="batch-actions">
 		<div class="span12">	
 		<table class="table table-bordered">
@@ -19,24 +19,26 @@
 					<th class=""><input type="checkbox" id="listBatchCheckbox" />
 					</th>
 					<th class="">Nom d'utilisateur</th>
+					<th class="">Filiale à administrer</th>
 					<th class="">Actif</th>
 					<th class="">Actions</th>
 				</tr>
 			</thead>
 			<tbody>
-				<s:iterator value="teachers" status="techerStatus">
+				<s:iterator value="administrators" status="administratorStatus">
 					<tr>
 						<td class=""><input type="checkbox" name="idx[]" value="<s:property value="id" />" /></td>
 						<td><s:property value="username" /></td>
-						<td><s:property value="enable" /></td>
+						<td><s:property value="affiliate.name" /></td>
+						<td><s:property value="enabled" /></td>
 						<td>
-							<s:url id="editURL" action="edit" namespace="/admin/teacher">
+							<s:url id="editURL" action="create" method="input" namespace="/admin/administrator">
 								<s:param name="id" value="%{id}" />
 							</s:url> 
 							<s:a href="%{editURL}">
 								<img src="<s:url value="/backend/images/edit.png" />" />
 							</s:a> 
-							<s:url id="deleteURL" action="delete" namespace="/admin/teacher">
+							<s:url id="deleteURL" action="delete" namespace="/admin/administrator">
 								<s:param name="id" value="%{id}" />
 							</s:url> 
 							<s:a href="%{deleteURL}">
