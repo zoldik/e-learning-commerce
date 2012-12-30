@@ -48,7 +48,7 @@
 				</s:iterator>
 			
 				<tr>
-					<td colspan="4" class="pager">
+					<td colspan="5" class="pager">
 						<div class="pagination">
 						<ul>
 							<li><s:url var="firstPageURL" action="list" namespace="">

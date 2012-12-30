@@ -20,6 +20,7 @@
 						<th class=""><input type="checkbox" id="listBatchCheckbox" />
 						</th>
 						<th class="">Nom</th>
+						<th class="">Affiliate</th>
 						<th class="">Date début</th>
 						<th class="">Date fin</th>
 						<th class="">Actions</th>
@@ -31,6 +32,7 @@
 							<td class=""><input type="checkbox" name="idx[]"
 								value="<s:property value="id" />" /></td>
 							<td><s:property value="name" /></td>
+							<td><s:property value="affiliate.name" /></td>
 							<td class="">
 								<s:property value="startDate" />
 							</td>
@@ -74,7 +76,7 @@
 						</tr>
 					</s:iterator>
 					<tr>
-						<td colspan="5" class="pager">
+						<td colspan="6" class="pager">
 							<div class="pagination">
 								<ul>
 									<li><s:url var="firstPageURL" action="list" namespace="">
