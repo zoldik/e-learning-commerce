@@ -18,6 +18,7 @@ import javax.persistence.PrePersist;
 import javax.persistence.PreUpdate;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
+import javax.persistence.CascadeType;
 
 @Entity
 public class Formation implements Serializable {
@@ -31,10 +32,10 @@ public class Formation implements Serializable {
 	@JoinColumn(name="affiliate_id",referencedColumnName="id")
 	private Affiliate affiliate;
 	
-	@OneToMany(targetEntity=Document.class, mappedBy="formation")
+	@OneToMany(targetEntity=Document.class, mappedBy="formation",cascade=CascadeType.REMOVE)
 	private Collection<Document> documents;
 	
-	@OneToOne(targetEntity=Schedule.class, mappedBy="formation")
+	@OneToOne(targetEntity=Schedule.class, mappedBy="formation",cascade=CascadeType.REMOVE)
 	private Schedule schedule;
 	
 	@ManyToMany(targetEntity=Student.class, mappedBy="formations")

@@ -4,6 +4,7 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Collection;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -20,10 +21,10 @@ public class Affiliate implements Serializable {
 	private int id;
 	private String name;
 
-	@OneToMany(targetEntity = Formation.class, mappedBy = "affiliate")
+	@OneToMany(targetEntity = Formation.class, mappedBy = "affiliate",cascade=CascadeType.REMOVE)
 	private Collection<Formation> formations;
 	
-	@OneToMany(targetEntity=Administrator.class, mappedBy = "affiliate")
+	@OneToMany(targetEntity=Administrator.class, mappedBy = "affiliate",cascade=CascadeType.REMOVE)
 	private Collection<Administrator> administredBy;
 
 	public int getId() {
