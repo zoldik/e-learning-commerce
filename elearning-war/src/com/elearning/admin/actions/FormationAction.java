@@ -10,17 +10,19 @@ import javax.naming.NamingException;
 
 import org.apache.struts2.interceptor.ParameterAware;
 import org.apache.struts2.interceptor.RequestAware;
+import org.elearning.entities.Administrator;
 import org.elearning.entities.Formation;
 import org.elearning.entities.User;
 import org.elearning.sessions.AffiliateSessionRemote;
 import org.elearning.sessions.FormationSessionRemote;
 
 import com.elearning.front.actions.LoginRequired;
+import com.opensymphony.xwork2.ActionContext;
 import com.opensymphony.xwork2.ActionSupport;
 import com.opensymphony.xwork2.ModelDriven;
 
 public class FormationAction extends ActionSupport implements
-		ModelDriven<Formation>, RequestAware, ParameterAware, LoginRequired{
+		ModelDriven<Formation>, RequestAware, ParameterAware, LoginRequired {
 
 	private Map<String, Object> request;
 	private Map<String, String[]> parameters;
@@ -32,8 +34,10 @@ public class FormationAction extends ActionSupport implements
 	public FormationAction() throws NamingException {
 		try {
 			InitialContext ctx = new InitialContext();
-			formationService = (FormationSessionRemote) ctx.lookup("FormationSession/remote");
-			affiliateService = (AffiliateSessionRemote) ctx.lookup("AffiliateSession/remote");
+			formationService = (FormationSessionRemote) ctx
+					.lookup("FormationSession/remote");
+			affiliateService = (AffiliateSessionRemote) ctx
+					.lookup("AffiliateSession/remote");
 		} catch (NameNotFoundException e) {
 			e.printStackTrace();
 		}
@@ -51,6 +55,11 @@ public class FormationAction extends ActionSupport implements
 	 * @return String
 	 */
 	public String save() {
+		Map<String, Object> session = ActionContext.getContext().getSession();
+		User user = (User) session.get("user");
+		if (user instanceof Administrator) {
+			formation.setAffiliate(((Administrator) user).getAffiliate());
+		}
 		formationService.edit(formation);
 		return SUCCESS;
 	}
@@ -72,7 +81,15 @@ public class FormationAction extends ActionSupport implements
 	 * @return String
 	 */
 	public String list() {
-		formations = formationService.findAll();
+		Map<String, Object> session = ActionContext.getContext().getSession();
+		User user = (User) session.get("user");
+		if (user instanceof Administrator) {
+			formations = formationService
+					.findByAffiliate(((Administrator) user).getAffiliate());
+		} else {
+			formations = formationService.findAll();
+		}
+
 		return SUCCESS;
 	}
 
@@ -85,12 +102,20 @@ public class FormationAction extends ActionSupport implements
 		formationService.remove(formationService.find(this.request.get("id")));
 		return SUCCESS;
 	}
-	
+
 	public String batch() {
 		String[] checkedAll = parameters.get("all_elements");
 		String[] batchAction = parameters.get("action");
 		if (checkedAll[0].equals("true")) {
-			formations = formationService.findAll();
+			Map<String, Object> session = ActionContext.getContext()
+					.getSession();
+			User user = (User) session.get("user");
+			if (user instanceof Administrator) {
+				formations = formationService
+						.findByAffiliate(((Administrator) user).getAffiliate());
+			} else {
+				formations = formationService.findAll();
+			}
 		} else {
 			String[] checkedFormations = parameters.get("idx[]");
 
@@ -136,7 +161,7 @@ public class FormationAction extends ActionSupport implements
 
 	@Override
 	public void setParameters(Map<String, String[]> parameters) {
-		this.parameters=parameters;
-		
+		this.parameters = parameters;
+
 	}
 }

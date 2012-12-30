@@ -2,7 +2,6 @@ package com.elearning.admin.actions;
 
 import java.io.File;
 import java.io.IOException;
-import java.security.cert.Extension;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -19,11 +18,13 @@ import org.elearning.entities.Administrator;
 import org.elearning.entities.Category;
 import org.elearning.entities.Formation;
 import org.elearning.entities.Document;
+import org.elearning.entities.User;
 import org.elearning.sessions.CategorySessionRemote;
 import org.elearning.sessions.FormationSessionRemote;
 import org.elearning.sessions.DocumentSessionRemote;
 
 import com.elearning.front.actions.LoginRequired;
+import com.opensymphony.xwork2.ActionContext;
 import com.opensymphony.xwork2.ActionSupport;
 import com.opensymphony.xwork2.ModelDriven;
 
@@ -133,10 +134,18 @@ public class DocumentAction extends ActionSupport implements
 	}
 
 	public String input() {
+		Map<String,Object> session=ActionContext.getContext().getSession();
+		User user = (User)session.get("user");
+		List<Formation> formations = new ArrayList<Formation>();
 		if((Integer)this.request.get("id") > 0 ){
 			document = (Document) documentService.find(this.request.get("id"));
 		}
-		List<Formation> formations = formationService.findAll();
+		if(user instanceof Administrator){
+			formationService.findByAffiliate(((Administrator)user).getAffiliate());
+		}
+		else{
+			formationService.findAll();
+		}
 		for (Formation formation : formations) {
 			this.formationSelect.put(formation.getId(), formation.getName());
 		}
