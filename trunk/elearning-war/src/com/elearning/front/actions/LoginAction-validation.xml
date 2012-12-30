@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE validators PUBLIC "-//OpenSymphony Group//XWork Validator 1.0.2// 
+EN" "http://localhost:8080/elearning-war/pages/xwork-validator-1.0.2.dtd">
+
+<validators>
+	<field name="username">
+        <field-validator type="requiredstring">
+        	<message>Le nom d'utilisateur est requis</message>
+        </field-validator>
+    </field>
+    <field name="password">
+        <field-validator type="requiredstring">
+        	<message key="Le mot de passe est requis" />
+        </field-validator>
+    </field>
+</validators>
