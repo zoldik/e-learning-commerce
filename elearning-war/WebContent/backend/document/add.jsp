@@ -11,10 +11,10 @@
 		<s:hidden name="id" />
 		<s:textfield name="name" key="Nom"
 			tooltip="Inqiduez le nom du document" />
-		<s:select list="formationSelect" key="formation" 
-			tooltip="Inqiduez la formation associée" />			
-	</s:push>
+		<s:select list="formationSelect" name="formation" value="formation.id" label="formation" 
+		tooltip="Inqiduez la formation associée" />
 		<s:file name="upload" label="fichier"/>
 		<s:submit cssClass="btn btn-inverse"
 			key="form.register.submit" />
+	</s:push>
 </s:form>

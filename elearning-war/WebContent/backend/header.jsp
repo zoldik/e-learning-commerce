@@ -35,6 +35,12 @@
 						<li>
 							<s:a href="%{listTeachers}">Gestion des enseignants</s:a>
 						</li>
+						<s:if test="#session.roles.contains('admin')">
+							<s:url var="listAdministrators" action="list" namespace="/admin/administrator"/> 
+							<li>
+								<s:a href="%{listAdministrators}">Gestion des administrateurs de filiales</s:a>
+							</li>
+						</s:if>
 					</ul>
 				</li>
 				<li class="dropdown">
@@ -56,6 +62,14 @@
 							<s:a href="%{listDocument}">Gestion de la bibliothèque</s:a>
 						</li>
 					</ul>
+				</li>
+			</ul>
+			<ul class="nav pull-right">
+				<s:url id="logoutURL" action="logout" namespace="/pages"/>
+				<li>
+				    <s:a href="%{logoutURL}">
+						<s:text name="déconnexion" />
+					</s:a>
 				</li>
 			</ul>
 		</div>

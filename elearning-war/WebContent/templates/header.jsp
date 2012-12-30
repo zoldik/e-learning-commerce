@@ -40,8 +40,6 @@
 					</a>
 					
 					<s:action name="listAffiliate" namespace="/pages" executeResult="true"/>
-					
-					
 				</li>
 				
 				<s:url var="contactUrl" action="contact!input" namespace="/pages"/>
@@ -49,22 +47,32 @@
 					<s:a href="%{contactUrl}">Contact </s:a>
 				</li>
 			</ul>
-			<ul class="nav pull-right">
 			
-				<s:url id="registerURL" action="registerStep1!input" namespace="/pages"/>
-				 
-			    <li  class="<s:property value="#classRegister"/>">
-				    <s:a href="%{registerURL}">
-						<s:text name="link.navigate.register" />
-					</s:a>
-				</li>
-				
-				<li class="dropdown">
-					<a href="#" class="dropdown-toggle" data-toggle="dropdown"> 
-						<s:text name="link.navigate.login" /> 
-						<b class="caret"></b> 
-					</a>
-				</li>
+			<ul class="nav pull-right">
+				<s:if test="!(#session.user)">
+					<s:url id="registerURL" action="registerStep1!input" namespace="/pages"/>
+					 
+				    <li  class="<s:property value="#classRegister"/>">
+					    <s:a href="%{registerURL}">
+							<s:text name="link.navigate.register" />
+						</s:a>
+					</li>
+					
+					<li class="dropdown">
+						<a href="#" class="dropdown-toggle" data-toggle="dropdown"> 
+							<s:text name="link.navigate.login" /> 
+							<b class="caret"></b> 
+						</a>
+					</li>
+				</s:if>
+				<s:else>
+					<s:url id="logoutURL" action="logout" namespace="/pages"/>
+					<li>
+					    <s:a href="%{logoutURL}">
+							<s:text name="déconnexion" />
+						</s:a>
+					</li>
+				</s:else>
 				
 			</ul>
 		</div>
