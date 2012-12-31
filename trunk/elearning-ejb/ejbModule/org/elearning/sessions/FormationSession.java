@@ -44,7 +44,12 @@ public class FormationSession implements FormationSessionRemote {
     
     @SuppressWarnings("unchecked")
 	public List<Formation> findAll(){
-    	return em.createQuery("select object(f) from Formation f").getResultList();
+    	List<Formation> formations = (List<Formation>)em.createQuery("select object(f) from Formation f").getResultList();
+    	for(Formation formation : formations){
+			formation.getDocuments().size();
+			formation.getTeachers().size();
+		}
+    	return formations;
     }
     
     @SuppressWarnings("unchecked")
@@ -53,6 +58,7 @@ public class FormationSession implements FormationSessionRemote {
 		.setParameter("affiliate", affiliate).getResultList();
 		for(Formation formation : formations){
 			formation.getDocuments().size();
+			formation.getTeachers().size();
 		}
 		return formations;
 	}

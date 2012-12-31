@@ -28,7 +28,9 @@ public class TeacherSession extends UserSession implements TeacherSessionRemote 
 	}
 
 	public Teacher find(Object id) {
-		return em.find(Teacher.class, id);
+		Teacher teacher = em.find(Teacher.class, id);
+		teacher.getFormations().size();
+		return teacher;
 	}
 
 	@SuppressWarnings("unchecked")
