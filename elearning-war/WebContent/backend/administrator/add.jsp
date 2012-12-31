@@ -16,7 +16,8 @@
 			tooltip="Indiquer le mot de passe" />
 		<s:select list="affiliateSelect" name="affiliate" label="La filiale à administer" value="affiliate.id" 
 		tooltip="Indiquer la filiale que cet administrateur doit administrer"/>
+		<s:checkbox name="enabled" label="Actif"/>
+	</s:push>
 		<s:submit cssClass="btn btn-inverse pull-right"
 			key="form.register.submit" />
-	</s:push>
 </s:form>

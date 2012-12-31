@@ -63,6 +63,21 @@
 							<s:text name="link.navigate.login" /> 
 							<b class="caret"></b> 
 						</a>
+						<ul class="dropdown-menu login-container">
+							<li><s:fielderror theme="bootstrap" /></li>
+							<li><s:actionmessage theme="bootstrap" /></li>
+							<s:form action="login" method="post" namespace="/pages" theme="bootstrap" cssClass="form-vertical">
+							<li>
+								<s:textfield name="username" placeholder="nom d'utilisateur ou e-mail" />
+							</li>
+							<li>
+								<s:password name="password" placeholder="mot de passe"/>
+							</li>
+							<li>
+								<s:submit cssClass="btn btn-inverse" label="se connecter"/>
+							</li>
+							</s:form>
+						</ul>
 					</li>
 				</s:if>
 				<s:else>

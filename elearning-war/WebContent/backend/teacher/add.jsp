@@ -19,6 +19,7 @@
 		<s:textfield name="adress" key="adress.label" />
 		<s:select list="formationSelect" multiple="true" name="formations" value="formations" label="formatios"
 		tooltip="Entrez les formations associées"/>
+		<s:checkbox name="enabled" label="Actif"/>
 <%-- 		<s:optiontransferselect --%>
 <!--                         tooltip="Entrez les formations associées" -->
 <!--                         label="Formatios" -->
