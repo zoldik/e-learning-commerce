@@ -67,6 +67,10 @@ body {
 	background: url('../images/menu.png') repeat transparent;
 }
 
+.login-container{
+	padding: 20px;
+}
+
 .presentation {
 	position: relative;
 	width: 600px;

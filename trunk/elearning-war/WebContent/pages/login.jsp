@@ -8,5 +8,5 @@
 <s:form action="login" method="post" namespace="/pages">
 	<s:textfield name="username" key="Nom d'utilisateur ou e-mail"/>
 	<s:password name="password" key="password.label"/>
-	<s:submit key="form.connexion.submit"/>
+	<s:submit cssClass="btn" key="form.connexion.submit"/>
 </s:form>

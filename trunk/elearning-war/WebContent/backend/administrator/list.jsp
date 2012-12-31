@@ -5,7 +5,7 @@
 <div class="pull-right">
 	<ul>
 		<s:url var="createURL" action="create!input" namespace="/admin/administrator" />
-		<li class="btn"><s:a href="%{createURL}">ajouter un nouvel administrator</s:a>
+		<li class="btn"><s:a href="%{createURL}">ajouter un nouvel administrateur</s:a>
 		</li>
 	</ul>
 </div>
