@@ -41,7 +41,9 @@ public class UserSession implements UserSessionLocal, UserSessionRemote {
 	}
 
 	public UserInterface find(Object id) {
-		return em.find(User.class, id);
+		User user = em.find(User.class, id);
+		user.getRoles().size();
+		return user;
 	}
 
 	@SuppressWarnings("unchecked")
@@ -81,6 +83,7 @@ public class UserSession implements UserSessionLocal, UserSessionRemote {
 		if(user instanceof UserInterface){
 			((User)user).setLastLogin(new Date());
 			this.edit(user);
+			((User)user).getRoles().size();
 		}
 		return user;
 	}
