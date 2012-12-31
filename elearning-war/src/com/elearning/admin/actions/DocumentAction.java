@@ -3,6 +3,7 @@ package com.elearning.admin.actions;
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -14,11 +15,14 @@ import javax.naming.NamingException;
 import org.apache.commons.io.FileUtils;
 import org.apache.struts2.interceptor.ParameterAware;
 import org.apache.struts2.interceptor.RequestAware;
+import org.apache.struts2.interceptor.validation.SkipValidation;
 import org.elearning.entities.Administrator;
 import org.elearning.entities.Category;
 import org.elearning.entities.Formation;
 import org.elearning.entities.Document;
+import org.elearning.entities.Role;
 import org.elearning.entities.User;
+import org.elearning.entities.UserInterface;
 import org.elearning.sessions.CategorySessionRemote;
 import org.elearning.sessions.FormationSessionRemote;
 import org.elearning.sessions.DocumentSessionRemote;
@@ -35,7 +39,6 @@ public class DocumentAction extends ActionSupport implements
 	private Map<String, String[]> parameters;
 	private Document document = new Document();
 	private List<Document> documents = new ArrayList<Document>();
-	private Map<Integer, String> categorySelect = new HashMap<Integer, String>();
 	private Map<Integer, String> formationSelect = new HashMap<Integer, String>();
 	private DocumentSessionRemote documentService;
 	private FormationSessionRemote formationService;
@@ -72,45 +75,35 @@ public class DocumentAction extends ActionSupport implements
 	 * @return String
 	 */
 	public String save() {
-		int mid= this.filename.lastIndexOf(".");
-		String extension=this.filename.substring(mid+1,this.filename.length());
+		int mid = this.filename.lastIndexOf(".");
+		String extension = this.filename.substring(mid + 1,
+				this.filename.length());
 		Category category = this.detectCategoryForFile(extension);
-		String path= "C:\\Library";
+		String path = "C:\\Library";
 		this.uploadFile(path);
 		document.setCategory(category);
-		document.setPath(path+"\\"+this.filename);
+		document.setPath(path + "\\" + this.filename);
 		documentService.edit(document);
 		return SUCCESS;
 	}
-	
-	private Category detectCategoryForFile(String extension){
+
+	private Category detectCategoryForFile(String extension) {
 		List<Category> categories = categoryService.findAll();
-		for(Category category : categories){
-			if(category.getExtension().contains(extension)){
+		for (Category category : categories) {
+			if (category.getExtension().contains(extension)) {
 				return category;
 			}
 		}
 		return null;
 	}
-	
-	private void uploadFile(String path){
+
+	private void uploadFile(String path) {
 		try {
-			File destDir = new File(path,this.filename);
+			File destDir = new File(path, this.filename);
 			FileUtils.copyFile(file, destDir, true);
-			} catch (IOException e) {
+		} catch (IOException e) {
 			e.printStackTrace();
 		}
-	}
-
-	/**
-	 * To save or update document.
-	 * 
-	 * @return String
-	 */
-	public String edit() {
-		document = (Document) documentService.find(this.request.get("id"));
-		documentService.edit(document);
-		return SUCCESS;
 	}
 
 	/**
@@ -119,8 +112,29 @@ public class DocumentAction extends ActionSupport implements
 	 * @return String
 	 */
 	public String list() {
-		documents = documentService.findAll();
+		Map<String, Object> session = ActionContext.getContext().getSession();
+		User user = (User) session.get("user");
+		if (user instanceof Administrator) {
+			Collection<Formation> formations = formationService
+					.findByAffiliate(((Administrator) user).getAffiliate());
+			for (Formation formation : formations) {
+				Collection<Document> doc = formation.getDocuments();
+				documents.addAll(formation.getDocuments());
+			}
+		} else {
+			documents = documentService.findAll();
+		}
+
 		return SUCCESS;
+	}
+
+	@SkipValidation
+	public String edit() {
+		Integer id = (Integer) this.request.get("id");
+		if (id > 0) {
+			document = (Document) documentService.find(id);
+		}
+		return this.input();
 	}
 
 	/**
@@ -134,26 +148,28 @@ public class DocumentAction extends ActionSupport implements
 	}
 
 	public String input() {
-		Map<String,Object> session=ActionContext.getContext().getSession();
-		User user = (User)session.get("user");
+		Map<String, Object> session = ActionContext.getContext().getSession();
+		User user = (User) session.get("user");
 		List<Formation> formations = new ArrayList<Formation>();
-		if((Integer)this.request.get("id") > 0 ){
-			document = (Document) documentService.find(this.request.get("id"));
-		}
-		if(user instanceof Administrator){
-			formationService.findByAffiliate(((Administrator)user).getAffiliate());
-		}
-		else{
-			formationService.findAll();
+		if (user instanceof UserInterface) {
+			if (user instanceof Administrator) {
+				formations = formationService
+						.findByAffiliate(((Administrator) user).getAffiliate());
+			} else {
+				List<Role> roles = (List<Role>) user.getRoles();
+				for (Role role : roles) {
+					if (role.getName().equals("admin")) {
+						formations = formationService.findAll();
+						break;
+					}
+				}
+
+			}
 		}
 		for (Formation formation : formations) {
 			this.formationSelect.put(formation.getId(), formation.getName());
 		}
 
-		List<Category> categories = categoryService.findAll();
-		for (Category category : categories) {
-			this.categorySelect.put(category.getId(), category.getName());
-		}
 		return INPUT;
 	}
 
@@ -207,14 +223,6 @@ public class DocumentAction extends ActionSupport implements
 
 	public void setParameters(Map<String, String[]> parameters) {
 		this.parameters = parameters;
-	}
-
-	public Map<Integer, String> getCategorySelect() {
-		return categorySelect;
-	}
-
-	public void setCategorySelect(Map<Integer, String> categorySelect) {
-		this.categorySelect = categorySelect;
 	}
 
 	public Map<Integer, String> getFormationSelect() {

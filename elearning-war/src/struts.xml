@@ -7,28 +7,35 @@
 	<constant name="struts.devMode" value="true" />
 	<constant name="struts.custom.i18n.resources" value="global" />
 	<constant name="struts.multipart.maxSize" value="10000000" />
-	
+
 	<package name="default" namespace="/" extends="struts-default">
-		
+
 		<result-types>
 			<result-type name="tiles"
 				class="org.apache.struts2.views.tiles.TilesResult" />
 		</result-types>
 		
 		<interceptors>
-			<interceptor name="login" class="com.elearning.interceptors.LoginInterceptor"/>
+			<interceptor name="login"
+				class="com.elearning.interceptors.LoginInterceptor" />
+			<interceptor-stack name="myStack">
+				<interceptor-ref name="login"/>
+                <interceptor-ref name="defaultStack"/>
+            </interceptor-stack>
 		</interceptors>
+		
+		<default-interceptor-ref name="myStack"/>
 
 		<default-action-ref name="index" />
-		
+
 		<global-results>
-		<result name="loginRedirect" type="redirectAction">
-             <param name="actionName">login</param>
-             <param name="method">input</param>
-             <param name="namespace">/pages</param>
-         </result>	
+			<result name="loginRedirect" type="redirectAction">
+				<param name="actionName">login</param>
+				<param name="method">input</param>
+				<param name="namespace">/pages</param>
+			</result>
 		</global-results>
-		
+
 		<action name="index" class="com.elearning.front.actions.AffiliateAction"
 			method="list">
 			<result type="tiles">base</result>
@@ -40,22 +47,23 @@
 			<result-type name="tiles"
 				class="org.apache.struts2.views.tiles.TilesResult" />
 		</result-types>
-		
+
 		<action name="login" class="com.elearning.front.actions.LoginAction">
 			<result name="input" type="tiles">front.login</result>
 			<result name="error" type="tiles">front.login</result>
 			<result name="success" type="redirectAction">
 				<param name="actionName">index</param>
-             	<param name="namespace">/</param>
+				<param name="namespace">/</param>
 			</result>
 		</action>
-		
-		<action name="logout" class="com.elearning.front.actions.LoginAction" method="logout">
+
+		<action name="logout" class="com.elearning.front.actions.LoginAction"
+			method="logout">
 			<result name="logout" type="redirectAction">
 				<param name="actionName">index</param>
-             	<param name="namespace">/</param>
+				<param name="namespace">/</param>
 			</result>
-		</action>  
+		</action>
 
 		<action name="registerStep1" class="com.elearning.front.actions.RegisterStepAction">
 			<result name="input" type="tiles">base.register-step1</result>
@@ -79,11 +87,10 @@
 	</package>
 
 	<package name="admin" namespace="/admin" extends="default">
-		
+
 		<default-action-ref name="dashboard" />
 
 		<action name="dashboard" class="com.elearning.admin.actions.TeacherAction">
-			 <interceptor-ref name="login"/>
 			<result name="success" type="tiles">admin.dashbord</result>
 		</action>
 
@@ -91,7 +98,6 @@
 
 	<package name="adminTeacher" namespace="/admin/teacher"
 		extends="admin">
-
 
 		<default-action-ref name="list" />
 		<action name="list" class="com.elearning.admin.actions.TeacherAction"
@@ -111,17 +117,18 @@
 
 		<action name="edit" class="com.elearning.admin.actions.TeacherAction"
 			method="edit">
-			<result name="success" type="redirect">list</result>
-			<result name="success" type="tiles">admin.teacher.edit</result>
+			<result name="input" type="tiles">admin.teacher.edit</result>
 		</action>
 
 		<action name="delete" class="com.elearning.admin.actions.TeacherAction"
 			method="remove">
+			
 			<result name="success" type="redirect">list</result>
 		</action>
 
 		<action name="batch" class="com.elearning.admin.actions.TeacherAction"
 			method="batch">
+			
 			<result name="success" type="redirect">list</result>
 		</action>
 
@@ -133,6 +140,7 @@
 		<default-action-ref name="list" />
 		<action name="list" class="com.elearning.admin.actions.FormationAction"
 			method="list">
+			
 			<result name="success" type="tiles">admin.formation.list</result>
 		</action>
 
@@ -144,15 +152,14 @@
 
 		<action name="edit" class="com.elearning.admin.actions.FormationAction"
 			method="edit">
-			<result name="success" type="redirect">list</result>
-			<result name="success" type="tiles">admin.formation.edit</result>
+			<result name="input" type="tiles">admin.formation.edit</result>
 		</action>
 
 		<action name="delete" class="com.elearning.admin.actions.FormationAction"
 			method="remove">
 			<result name="success" type="redirect">list</result>
 		</action>
-		
+
 		<action name="batch" class="com.elearning.admin.actions.FormationAction"
 			method="batch">
 			<result name="success" type="redirect">list</result>
@@ -185,22 +192,21 @@
 
 		<action name="edit" class="com.elearning.admin.actions.ClassroomAction"
 			method="edit">
-			<result name="success" type="redirect">list</result>
-			<result name="success" type="tiles">admin.classroom.edit</result>
+			<result name="input" type="tiles">admin.classroom.edit</result>
 		</action>
 
 		<action name="delete" class="com.elearning.admin.actions.ClassroomAction"
 			method="remove">
 			<result name="success" type="redirect">list</result>
 		</action>
-		
+
 		<action name="batch" class="com.elearning.admin.actions.ClassroomAction"
 			method="batch">
 			<result name="success" type="redirect">list</result>
 		</action>
-		
+
 	</package>
-	
+
 	<package name="adminDocument" namespace="/admin/document"
 		extends="admin">
 
@@ -212,29 +218,27 @@
 
 		<action name="create" class="com.elearning.admin.actions.DocumentAction"
 			method="save">
-
 			<result name="success" type="redirect">list</result>
 			<result name="input" type="tiles">admin.document.add</result>
 		</action>
 
 		<action name="edit" class="com.elearning.admin.actions.DocumentAction"
 			method="edit">
-			<result name="success" type="redirect">list</result>
-			<result name="success" type="tiles">admin.document.edit</result>
+			<result name="input" type="tiles">admin.document.edit</result>
 		</action>
 
 		<action name="delete" class="com.elearning.admin.actions.DocumentAction"
 			method="remove">
 			<result name="success" type="redirect">list</result>
 		</action>
-		
+
 		<action name="batch" class="com.elearning.admin.actions.DocumentAction"
 			method="batch">
 			<result name="success" type="redirect">list</result>
 		</action>
-		
+
 	</package>
-	
+
 	<package name="adminAdministrator" namespace="/admin/administrator"
 		extends="admin">
 
@@ -246,27 +250,25 @@
 
 		<action name="create" class="com.elearning.admin.actions.AdministratorAction"
 			method="save">
-
 			<result name="success" type="redirect">list</result>
 			<result name="input" type="tiles">admin.administrator.add</result>
 		</action>
 
 		<action name="edit" class="com.elearning.admin.actions.AdministratorAction"
 			method="edit">
-			<result name="success" type="redirect">list</result>
-			<result name="success" type="tiles">admin.administrator.edit</result>
+			<result name="input" type="tiles">admin.administrator.edit</result>
 		</action>
 
 		<action name="delete" class="com.elearning.admin.actions.AdministratorAction"
 			method="remove">
 			<result name="success" type="redirect">list</result>
 		</action>
-		
+
 		<action name="batch" class="com.elearning.admin.actions.DocumentAction"
 			method="batch">
 			<result name="success" type="redirect">list</result>
 		</action>
-		
+
 	</package>
 
 

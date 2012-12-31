@@ -10,10 +10,8 @@ import javax.naming.NamingException;
 
 import org.apache.struts2.interceptor.ParameterAware;
 import org.apache.struts2.interceptor.RequestAware;
+import org.apache.struts2.interceptor.validation.SkipValidation;
 import org.elearning.entities.Classroom;
-import org.elearning.entities.Classroom;
-import org.elearning.entities.Formation;
-import org.elearning.sessions.AffiliateSessionRemote;
 import org.elearning.sessions.ClassroomSessionRemote;
 
 import com.elearning.front.actions.LoginRequired;
@@ -21,10 +19,10 @@ import com.opensymphony.xwork2.ActionSupport;
 import com.opensymphony.xwork2.ModelDriven;
 
 public class ClassroomAction extends ActionSupport implements
-		ModelDriven<Classroom>, RequestAware, ParameterAware, LoginRequired{
+		ModelDriven<Classroom>, RequestAware, ParameterAware, LoginRequired {
 
-	private Map<String,Object> request;
-	private Map<String,String[]> parameters;
+	private Map<String, Object> request;
+	private Map<String, String[]> parameters;
 	private Classroom classroom = new Classroom();
 	private List<Classroom> classrooms = new ArrayList<Classroom>();
 	private ClassroomSessionRemote classRoomService;
@@ -32,7 +30,8 @@ public class ClassroomAction extends ActionSupport implements
 	public ClassroomAction() throws NamingException {
 		try {
 			InitialContext ctx = new InitialContext();
-			classRoomService = (ClassroomSessionRemote) ctx.lookup("ClassroomSession/remote");
+			classRoomService = (ClassroomSessionRemote) ctx
+					.lookup("ClassroomSession/remote");
 		} catch (NameNotFoundException e) {
 			e.printStackTrace();
 		}
@@ -54,15 +53,12 @@ public class ClassroomAction extends ActionSupport implements
 		return SUCCESS;
 	}
 
-	/**
-	 * To save or update classroom.
-	 * 
-	 * @return String
-	 */
 	public String edit() {
-		classroom = (Classroom) classRoomService.find(this.request.get("id"));
-		classRoomService.edit(classroom);
-		return SUCCESS;
+		Integer id = (Integer) this.request.get("id");
+		if (id > 0) {
+			classroom = (Classroom) classRoomService.find(id);
+		}
+		return this.input();
 	}
 
 	/**
@@ -84,7 +80,7 @@ public class ClassroomAction extends ActionSupport implements
 		classRoomService.remove(classRoomService.find(this.request.get("id")));
 		return SUCCESS;
 	}
-	
+
 	public String batch() {
 		String[] checkedAll = parameters.get("all_elements");
 		String[] batchAction = parameters.get("action");
@@ -112,6 +108,10 @@ public class ClassroomAction extends ActionSupport implements
 		return SUCCESS;
 	}
 
+	public String input() {
+		return INPUT;
+	}
+
 	@Override
 	public void setRequest(Map<String, Object> request) {
 		this.request = request;
@@ -136,5 +136,5 @@ public class ClassroomAction extends ActionSupport implements
 	public void setParameters(Map<String, String[]> parameters) {
 		this.parameters = parameters;
 	}
-	
+
 }

@@ -1,6 +1,7 @@
 package com.elearning.admin.actions;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -10,8 +11,11 @@ import javax.naming.NamingException;
 
 import org.apache.struts2.interceptor.ParameterAware;
 import org.apache.struts2.interceptor.RequestAware;
+import org.apache.struts2.interceptor.validation.SkipValidation;
 import org.elearning.entities.Administrator;
+import org.elearning.entities.Affiliate;
 import org.elearning.entities.Formation;
+import org.elearning.entities.Teacher;
 import org.elearning.entities.User;
 import org.elearning.sessions.AffiliateSessionRemote;
 import org.elearning.sessions.FormationSessionRemote;
@@ -26,6 +30,7 @@ public class FormationAction extends ActionSupport implements
 
 	private Map<String, Object> request;
 	private Map<String, String[]> parameters;
+	private Map<Integer,String> affiliateSelect=new HashMap<Integer,String>();
 	private Formation formation = new Formation();
 	private List<Formation> formations = new ArrayList<Formation>();
 	private FormationSessionRemote formationService;
@@ -64,15 +69,13 @@ public class FormationAction extends ActionSupport implements
 		return SUCCESS;
 	}
 
-	/**
-	 * To save or update formation.
-	 * 
-	 * @return String
-	 */
-	public String edit() {
-		formation = (Formation) formationService.find(this.request.get("id"));
-		formationService.edit(formation);
-		return SUCCESS;
+	@SkipValidation
+	public String edit() throws Exception {
+		Integer id = (Integer) this.request.get("id");
+		if (id > 0) {
+			formation = (Formation) formationService.find(id);
+		}
+		return input();
 	}
 
 	/**
@@ -89,7 +92,6 @@ public class FormationAction extends ActionSupport implements
 		} else {
 			formations = formationService.findAll();
 		}
-
 		return SUCCESS;
 	}
 
@@ -137,6 +139,14 @@ public class FormationAction extends ActionSupport implements
 		}
 		return SUCCESS;
 	}
+	
+	public String input(){
+		List<Affiliate> affiliates = affiliateService.findAll();
+		for(Affiliate affiliate : affiliates){
+			affiliateSelect.put(affiliate.getId(), affiliate.getName());
+		}
+		return INPUT;
+	}
 
 	@Override
 	public void setRequest(Map<String, Object> request) {
@@ -162,6 +172,13 @@ public class FormationAction extends ActionSupport implements
 	@Override
 	public void setParameters(Map<String, String[]> parameters) {
 		this.parameters = parameters;
+	}
 
+	public Map<Integer, String> getAffiliateSelect() {
+		return affiliateSelect;
+	}
+
+	public void setAffiliateSelect(Map<Integer, String> affiliateSelect) {
+		this.affiliateSelect = affiliateSelect;
 	}
 }
