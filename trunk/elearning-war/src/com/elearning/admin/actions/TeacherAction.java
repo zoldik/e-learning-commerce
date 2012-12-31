@@ -1,7 +1,7 @@
 package com.elearning.admin.actions;
 
 import java.util.ArrayList;
-import java.util.Collection;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -13,9 +13,11 @@ import org.apache.struts2.interceptor.ParameterAware;
 import org.apache.struts2.interceptor.RequestAware;
 import org.elearning.entities.Administrator;
 import org.elearning.entities.Formation;
+import org.elearning.entities.Role;
 import org.elearning.entities.Teacher;
 import org.elearning.entities.User;
-import org.elearning.sessions.TeacherSessionRemote;
+import org.elearning.entities.UserInterface;
+import org.elearning.sessions.FormationSessionRemote;
 import org.elearning.sessions.UserSessionRemote;
 
 import com.elearning.front.actions.LoginRequired;
@@ -28,15 +30,19 @@ public class TeacherAction extends ActionSupport implements
 
 	private Map<String, Object> request;
 	private Map<String, String[]> parameters;
+	private Map<Integer, String> formationSelect = new HashMap<Integer,String>();
 	private Teacher teacher = new Teacher();
-	private List<? extends User> teachers = new ArrayList<Teacher>();
+	private List<Teacher> teachers = new ArrayList<Teacher>();
 	private UserSessionRemote userService;
+	private FormationSessionRemote formationService;
 
 	public TeacherAction() throws NamingException {
 		try {
 			InitialContext ctx = new InitialContext();
 			userService = (UserSessionRemote) ctx
 					.lookup("TeacherSession/remote");
+			formationService = (FormationSessionRemote) ctx
+			.lookup("FormationSession/remote");
 		} catch (NameNotFoundException e) {
 			e.printStackTrace();
 		}
@@ -64,16 +70,19 @@ public class TeacherAction extends ActionSupport implements
 	 * 
 	 * @return String
 	 */
+	@SuppressWarnings("unchecked")
 	public String list() {
-//		Map<String, Object> session = ActionContext.getContext().getSession();
-//		User user = (User) session.get("user");
-//		if (user instanceof Administrator) {
-//			Collection<Formation> formations = ((Administrator) user).getAffiliate().getFormations();
-//				teachers.addAll((Collection<? super Teacher>)formation.getTeachers());
-//		} else {
-//			teachers = userService.findAll();
-//		}
-		teachers = userService.findAll();
+		Map<String, Object> session = ActionContext.getContext().getSession();
+		User user = (User) session.get("user");
+		if (user instanceof Administrator) {
+			List<Formation> formations = formationService.findByAffiliate(((Administrator) user).getAffiliate());
+			for(Formation formation : formations){
+				List<Teacher> teacherList = (List<Teacher>) formation.getTeachers();
+				teachers.addAll(teacherList);
+			}
+		} else {
+			teachers = (List<Teacher>) userService.findAll();
+		}
 		return SUCCESS;
 	}
 
@@ -99,7 +108,7 @@ public class TeacherAction extends ActionSupport implements
 		String[] checkedAll = parameters.get("all_elements");
 		String[] batchAction = parameters.get("action");
 		if (checkedAll[0].equals("true")) {
-			teachers = userService.findAll();
+			teachers = (List<Teacher>) userService.findAll();
 		} else {
 			String[] chekedTeachers = parameters.get("idx[]");
 
@@ -111,7 +120,7 @@ public class TeacherAction extends ActionSupport implements
 				}
 				;
 			}
-			teachers = userService.findChecked(results);
+			teachers = (List<Teacher>) userService.findChecked(results);
 		}
 
 		if (batchAction[0].equals("supprimer")) {
@@ -123,6 +132,26 @@ public class TeacherAction extends ActionSupport implements
 	}
 
 	public String input() {
+		Map<String, Object> session = ActionContext.getContext().getSession();
+		User user = (User) session.get("user");
+		List<Formation> formations = new ArrayList<Formation>();
+		if (user instanceof UserInterface) {
+			if (user instanceof Administrator) {
+				formations = formationService
+						.findByAffiliate(((Administrator) user).getAffiliate());
+			} else {
+				List<Role> roles = (List<Role>) user.getRoles();
+				for (Role role : roles) {
+					if (role.getName().equals("admin")) {
+						formations = formationService.findAll();
+						break;
+					}
+				}
+			}
+		}
+		for (Formation formation : formations) {
+			this.formationSelect.put(formation.getId(), formation.getName());
+		}
 		return INPUT;
 	}
 
@@ -143,13 +172,20 @@ public class TeacherAction extends ActionSupport implements
 		return teachers;
 	}
 
-	public void setTeachers(List<? extends User> teachers) {
+	public void setTeachers(List<Teacher> teachers) {
 		this.teachers = teachers;
 	}
 
 	@Override
 	public void setParameters(Map<String, String[]> parameters) {
 		this.parameters = parameters;
+	}
 
+	public Map<Integer, String> getFormationSelect() {
+		return formationSelect;
+	}
+
+	public void setFormationSelect(Map<Integer, String> formationSelect) {
+		this.formationSelect = formationSelect;
 	}
 }
