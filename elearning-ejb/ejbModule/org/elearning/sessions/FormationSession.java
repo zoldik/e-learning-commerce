@@ -49,15 +49,23 @@ public class FormationSession implements FormationSessionRemote {
     
     @SuppressWarnings("unchecked")
 	public List<Formation> findByAffiliate(Affiliate affiliate) {
-		return (List<Formation>)em.createQuery("select object(f) from Formation f where f.affiliate =:affiliate ")
+    	List<Formation> formations = (List<Formation>)em.createQuery("select object(f) from Formation f where f.affiliate =:affiliate ")
 		.setParameter("affiliate", affiliate).getResultList();
+		for(Formation formation : formations){
+			formation.getDocuments().size();
+		}
+		return formations;
 	}
     
     @SuppressWarnings("unchecked")
 	public List<Formation> findChecked(List<Integer> idx) {
-		return em
+		List<Formation> formations = em
 				.createQuery("select object(f) from Formation f where f.id in (:arrayId)")
 		.setParameter("arrayId", idx).getResultList();
+		for(Formation formation : formations){
+			formation.getDocuments().size();
+		}
+		return formations;
 	}
 
 }
