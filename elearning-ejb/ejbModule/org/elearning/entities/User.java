@@ -212,14 +212,12 @@ public class User implements Serializable,UserInterface{
 	@PreUpdate
 	public void onUpdate(){
 		this.updatedAt=new Date();
-		this.setPassword(Util.createPasswordHash("MD5", Util.BASE64_ENCODING, null, null, this.password));
 	}
 	
 	@PrePersist
 	public void onCreate(){
 		this.createdAt=new Date();
 		this.updatedAt=new Date();
-		this.setPassword(Util.createPasswordHash("MD5", Util.BASE64_ENCODING, null, null, this.password));
 	}
 	
 	public void clearModel(){
