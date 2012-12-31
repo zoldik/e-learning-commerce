@@ -1,5 +1,6 @@
 package org.elearning.sessions;
 
+import java.util.Date;
 import java.util.List;
 
 import javax.ejb.Stateless;
@@ -57,14 +58,14 @@ public class UserSession implements UserSessionLocal, UserSessionRemote {
 				.setParameter("param", idx).getResultList();
 	}
 
-	public Object login(String usernameOrEmail, String password) {
+	public UserInterface login(String usernameOrEmail, String password) {
 		String hashedPassword = Util.createPasswordHash("MD5",
 				Util.BASE64_ENCODING, null, null, password);
 		Query query = em
 				.createQuery("select u from User u where (u.email=:p1 or u.username=:p1) and u.password=:pwd");
-		Object user = null;
+		UserInterface user = null;
 		try {
-			user = query.setParameter("p1", usernameOrEmail)
+			user = (UserInterface) query.setParameter("p1", usernameOrEmail)
 					.setParameter("pwd", hashedPassword).getSingleResult();
 		} catch (NoResultException exception) {
 		}
@@ -72,11 +73,15 @@ public class UserSession implements UserSessionLocal, UserSessionRemote {
 
 		if (!(user instanceof UserInterface)) {
 			try {
-				user = query.setParameter("p1", usernameOrEmail)
+				user = (UserInterface) query.setParameter("p1", usernameOrEmail)
 						.setParameter("pwd", password).getSingleResult();
 			} catch (NoResultException exception) {
 			}
 			;
+		}
+		if(user instanceof UserInterface){
+			((User)user).setLastLogin(new Date());
+			this.edit(user);
 		}
 		return user;
 	}
