@@ -122,13 +122,16 @@
 
 		<action name="delete" class="com.elearning.admin.actions.TeacherAction"
 			method="remove">
-			
+			<result name="success" type="redirect">list</result>
+		</action>
+		
+		<action name="activate" class="com.elearning.admin.actions.TeacherAction"
+			method="activate">
 			<result name="success" type="redirect">list</result>
 		</action>
 
 		<action name="batch" class="com.elearning.admin.actions.TeacherAction"
 			method="batch">
-			
 			<result name="success" type="redirect">list</result>
 		</action>
 
@@ -263,8 +266,13 @@
 			method="remove">
 			<result name="success" type="redirect">list</result>
 		</action>
+		
+		<action name="activate" class="com.elearning.admin.actions.AdministratorAction"
+			method="activate">
+			<result name="success" type="redirect">list</result>
+		</action>
 
-		<action name="batch" class="com.elearning.admin.actions.DocumentAction"
+		<action name="batch" class="com.elearning.admin.actions.AdministratorAction"
 			method="batch">
 			<result name="success" type="redirect">list</result>
 		</action>

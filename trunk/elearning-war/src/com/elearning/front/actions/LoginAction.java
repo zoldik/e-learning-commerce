@@ -51,14 +51,18 @@ public class LoginAction extends ActionSupport implements SessionAware {
 	public String execute() {
 		User user = (User) userService.login(this.username, this.password);
 		if(user instanceof UserInterface){
-			session.put("user", user);
-			int i=0;
-			List<String> roles = new ArrayList<String>();
-			for( Role role : user.getRoles()){
-				roles.add(role.getName());  
+			if(user.getEnabled()){
+				session.put("user", user);
+				int i=0;
+				List<String> roles = new ArrayList<String>();
+				for( Role role : user.getRoles()){
+					roles.add(role.getName());  
+				}
+				session.put("roles", roles );
+				return SUCCESS;
 			}
-			session.put("roles", roles );
-			return SUCCESS;
+			addActionError("votre compte est désactivé");
+			return ERROR;
 		}
 		addActionError("vérifiez votre mot de passe ou bien votre login");
 		return ERROR;

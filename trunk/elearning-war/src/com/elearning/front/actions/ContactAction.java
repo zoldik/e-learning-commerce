@@ -36,7 +36,8 @@ public class ContactAction extends ActionSupport implements
         if (from!=null && message!=null && subject!=null) {
                 // Sending e-mail
                 sendMail(recipients, subject, message, from);
-                
+                this.contactModel=null;
+                addActionMessage("Votre demande de contact a été effectuée avec succès");
                 return INPUT;
         } else {
                 return INPUT;

@@ -19,6 +19,7 @@ import org.elearning.entities.User;
 import org.elearning.entities.UserInterface;
 import org.elearning.sessions.FormationSessionRemote;
 import org.elearning.sessions.UserSessionRemote;
+import org.jboss.security.Util;
 
 import com.elearning.front.actions.LoginRequired;
 import com.opensymphony.xwork2.ActionContext;
@@ -55,18 +56,19 @@ public class TeacherAction extends ActionSupport implements
 	}
 
 	/**
-	 * To save or update user.
+	 * To save or update teacher.
 	 * 
 	 * @return String
 	 */
 	public String save() {
-		teacher.setEnabled(true);
+		teacher.setPassword(Util.createPasswordHash("MD5",
+				Util.BASE64_ENCODING, null, null, teacher.getPassword()));
 		userService.edit(teacher);
 		return SUCCESS;
 	}
 
 	/**
-	 * To list all users.
+	 * To list all teachers.
 	 * 
 	 * @return String
 	 */
@@ -95,7 +97,7 @@ public class TeacherAction extends ActionSupport implements
 	}
 
 	/**
-	 * To delete a user.
+	 * To delete a teacher.
 	 * 
 	 * @return String
 	 */
@@ -128,6 +130,21 @@ public class TeacherAction extends ActionSupport implements
 				userService.remove(teacher);
 			}
 		}
+		return SUCCESS;
+	}
+	
+	public String activate(){
+		Integer id = (Integer) this.request.get("id");
+		if (id > 0) {
+			teacher = (Teacher) userService.find(id);
+		}
+		if(teacher.getEnabled()){
+			teacher.setEnabled(false);
+		}
+		else{
+			teacher.setEnabled(true);
+		}
+		userService.edit(teacher);
 		return SUCCESS;
 	}
 
