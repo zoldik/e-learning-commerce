@@ -5,6 +5,9 @@ import java.lang.String;
 import java.util.Collection;
 import java.util.Date;
 import java.util.List;
+
+import org.hibernate.annotations.LazyCollection;
+import org.hibernate.annotations.LazyCollectionOption;
 import org.jboss.security.Util;
 
 import javax.persistence.*;
@@ -48,7 +51,8 @@ public class User implements Serializable,UserInterface{
 	@JoinColumn(name="group_id", referencedColumnName="id")
 	protected Group group;
 	
-	@ManyToMany(targetEntity=Role.class,mappedBy="users",fetch=FetchType.EAGER)
+	@ManyToMany(targetEntity=Role.class,mappedBy="users")
+	@LazyCollection(LazyCollectionOption.FALSE)
 	protected Collection<Role> roles;
 	
 	@Temporal(TemporalType.DATE)
@@ -167,6 +171,7 @@ public class User implements Serializable,UserInterface{
 
 
 	public Collection<Role> getRoles() {
+		this.roles.size();
 		return roles;
 	}
 
