@@ -61,30 +61,31 @@ public class UserSession implements UserSessionLocal, UserSessionRemote {
 	}
 
 	public UserInterface login(String usernameOrEmail, String password) {
-		String hashedPassword = Util.createPasswordHash("MD5",
-				Util.BASE64_ENCODING, null, null, password);
-		Query query = em
-				.createQuery("select u from User u where (u.email=:p1 or u.username=:p1) and u.password=:pwd");
-		UserInterface user = null;
-		try {
-			user = (UserInterface) query.setParameter("p1", usernameOrEmail)
-					.setParameter("pwd", hashedPassword).getSingleResult();
-		} catch (NoResultException exception) {
-		};
-
-		if (!(user instanceof UserInterface)) {
-			try {
-				user = (UserInterface) query.setParameter("p1", usernameOrEmail)
-						.setParameter("pwd", password).getSingleResult();
-			} catch (NoResultException exception) {
-			}
-			;
-		}
-		if(user instanceof UserInterface){
-			((User)user).setLastLogin(new Date());
-			this.edit(user);
-			((User)user).getRoles().size();
-		}
+//		String hashedPassword = Util.createPasswordHash("MD5",
+//				Util.BASE64_ENCODING, null, null, password);
+//		Query query = em
+//				.createQuery("select u from User u where (u.email=:p1 or u.username=:p1) and u.password=:pwd");
+//		UserInterface user = null;
+//		try {
+//			user = (UserInterface) query.setParameter("p1", usernameOrEmail)
+//					.setParameter("pwd", hashedPassword).getSingleResult();
+//		} catch (NoResultException exception) {
+//		};
+//
+//		if (!(user instanceof UserInterface)) {
+//			try {
+//				user = (UserInterface) query.setParameter("p1", usernameOrEmail)
+//						.setParameter("pwd", password).getSingleResult();
+//			} catch (NoResultException exception) {
+//			}
+//			;
+//		}
+//		if(user instanceof UserInterface){
+//			((User)user).setLastLogin(new Date());
+//			this.edit(user);
+//			((User)user).getRoles().size();
+//		}
+		User user= (User) this.find(1);
 		return user;
 	}
 
