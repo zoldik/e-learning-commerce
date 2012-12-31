@@ -65,7 +65,6 @@ public class DocumentAction extends ActionSupport implements
 
 	@Override
 	public Document getModel() {
-		// TODO Auto-generated method stub
 		return document;
 	}
 
@@ -163,7 +162,6 @@ public class DocumentAction extends ActionSupport implements
 						break;
 					}
 				}
-
 			}
 		}
 		for (Formation formation : formations) {
