@@ -14,11 +14,10 @@ import org.apache.struts2.interceptor.RequestAware;
 import org.apache.struts2.interceptor.validation.SkipValidation;
 import org.elearning.entities.Administrator;
 import org.elearning.entities.Affiliate;
-import org.elearning.entities.Category;
-import org.elearning.entities.Formation;
 import org.elearning.entities.User;
 import org.elearning.sessions.AdministratorSessionRemote;
 import org.elearning.sessions.AffiliateSessionRemote;
+import org.jboss.security.Util;
 
 import com.elearning.front.actions.LoginRequired;
 import com.opensymphony.xwork2.ActionSupport;
@@ -60,7 +59,8 @@ public class AdministratorAction extends ActionSupport implements
 	 * @return String
 	 */
 	public String save() {
-		administrator.setEnabled(true);
+		administrator.setPassword(Util.createPasswordHash("MD5",
+				Util.BASE64_ENCODING, null, null, administrator.getPassword()));
 		administratorService.edit(administrator);
 		return SUCCESS;
 	}
@@ -121,14 +121,27 @@ public class AdministratorAction extends ActionSupport implements
 		}
 		return SUCCESS;
 	}
+	
+	public String activate(){
+		Integer id = (Integer) this.request.get("id");
+		if (id > 0) {
+			administrator = (Administrator) administratorService.find(id);
+		}
+		if(administrator.getEnabled()){
+			administrator.setEnabled(false);
+		}
+		else{
+			administrator.setEnabled(true);
+		}
+		administratorService.edit(administrator);
+		return SUCCESS;
+	}
 
 	public String input() {
-
 		List<Affiliate> affiliates = affiliateService.findAll();
 		for (Affiliate affiliate : affiliates) {
 			this.affiliateSelect.put(affiliate.getId(), affiliate.getName());
 		}
-
 		return INPUT;
 	}
 
