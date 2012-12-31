@@ -20,9 +20,10 @@
 			<span class="i-bar"></span> 
 			<span class="i-bar"></span> 
 		</a> 
-		<a class="brand" href="#">
+		<s:url var="adminIndex" action="dashboard" namespace="/admin"/>
+		<s:a cssClass="brand" href="%{adminIndex}">
 			<s:text name="elearning.project.admin.title" />
-		</a>
+		</s:a>
 		<div class="nav-collapse">
 			<ul class="nav">
 				<li class="dropdown">
@@ -65,6 +66,9 @@
 				</li>
 			</ul>
 			<ul class="nav pull-right">
+				<li>
+					Bienvenu <s:property value="#session.user"/>
+				</li>
 				<s:url id="logoutURL" action="logout" namespace="/pages"/>
 				<li>
 				    <s:a href="%{logoutURL}">

@@ -10,6 +10,7 @@
 		</li>
 	</ul>
 </div>
+<<s:property value="#session.user.username"/>
 <div class="clearfix"></div>
 <s:if test="documents.size() > 0">
 	<s:form action="batch" name="batch-actions">
@@ -35,7 +36,7 @@
 							<td><s:property value="formation.name" /></td>
 							<td><s:property value="formation.affiliate.name" /></td>
 							<td><s:property value="category.name" /></td>
-							<td><s:url id="editURL" action="create" method="input"
+							<td><s:url id="editURL" action="edit"
 									namespace="/admin/document">
 									<s:param name="id" value="%{id}" />
 								</s:url> 
