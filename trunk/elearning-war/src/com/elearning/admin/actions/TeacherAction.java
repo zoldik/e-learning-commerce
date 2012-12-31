@@ -1,6 +1,7 @@
 package com.elearning.admin.actions;
 
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.List;
 import java.util.Map;
 
@@ -10,12 +11,15 @@ import javax.naming.NamingException;
 
 import org.apache.struts2.interceptor.ParameterAware;
 import org.apache.struts2.interceptor.RequestAware;
+import org.elearning.entities.Administrator;
+import org.elearning.entities.Formation;
 import org.elearning.entities.Teacher;
 import org.elearning.entities.User;
 import org.elearning.sessions.TeacherSessionRemote;
 import org.elearning.sessions.UserSessionRemote;
 
 import com.elearning.front.actions.LoginRequired;
+import com.opensymphony.xwork2.ActionContext;
 import com.opensymphony.xwork2.ActionSupport;
 import com.opensymphony.xwork2.ModelDriven;
 
@@ -56,24 +60,29 @@ public class TeacherAction extends ActionSupport implements
 	}
 
 	/**
-	 * To save or update user.
-	 * 
-	 * @return String
-	 */
-	public String edit() {
-		this.teacher = (Teacher) userService.find(this.request.get("id"));
-		userService.edit(teacher);
-		return SUCCESS;
-	}
-
-	/**
 	 * To list all users.
 	 * 
 	 * @return String
 	 */
 	public String list() {
+//		Map<String, Object> session = ActionContext.getContext().getSession();
+//		User user = (User) session.get("user");
+//		if (user instanceof Administrator) {
+//			Collection<Formation> formations = ((Administrator) user).getAffiliate().getFormations();
+//				teachers.addAll((Collection<? super Teacher>)formation.getTeachers());
+//		} else {
+//			teachers = userService.findAll();
+//		}
 		teachers = userService.findAll();
 		return SUCCESS;
+	}
+
+	public String edit() {
+		Integer id = (Integer) this.request.get("id");
+		if (id > 0) {
+			this.teacher = (Teacher) userService.find(id);
+		}
+		return this.input();
 	}
 
 	/**
@@ -111,6 +120,10 @@ public class TeacherAction extends ActionSupport implements
 			}
 		}
 		return SUCCESS;
+	}
+
+	public String input() {
+		return INPUT;
 	}
 
 	@Override

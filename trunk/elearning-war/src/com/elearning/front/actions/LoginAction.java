@@ -56,8 +56,8 @@ public class LoginAction extends ActionSupport implements SessionAware {
 			List<String> roles = new ArrayList<String>();
 			for( Role role : user.getRoles()){
 				roles.add(role.getName());  
-				session.put("roles", roles );
 			}
+			session.put("roles", roles );
 			return SUCCESS;
 		}
 		addActionError("vérifiez votre mot de passe ou bien votre login");
