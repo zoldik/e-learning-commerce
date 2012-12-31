@@ -30,7 +30,13 @@
 						<td class=""><input type="checkbox" name="idx[]" value="<s:property value="id" />" /></td>
 						<td><s:property value="username" /></td>
 						<td><s:property value="affiliate.name" /></td>
-						<td><s:property value="enabled" /></td>
+						<td><s:if test="enabled==true">
+								<img src="<s:url value="/backend/images/accept.png" />" />
+							</s:if>
+							<s:else>
+								<img src="<s:url value="/backend/images/exclamation.png" />" />
+							</s:else>
+						</td>
 						<td>
 							<s:url id="editURL" action="edit" namespace="/admin/administrator">
 								<s:param name="id" value="%{id}" />

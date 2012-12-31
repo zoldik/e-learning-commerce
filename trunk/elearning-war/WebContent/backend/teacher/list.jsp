@@ -28,7 +28,13 @@
 					<tr>
 						<td class=""><input type="checkbox" name="idx[]" value="<s:property value="id" />" /></td>
 						<td><s:property value="username" /></td>
-						<td><s:property value="enable" /></td>
+						<td>
+							<s:if test="enabled==true">
+								<img src="<s:url value="/backend/images/accept.png" />" />
+							</s:if>
+							<s:else>
+								<img src="<s:url value="/backend/images/exclamation.png" />" />
+							</s:else>
 						<td>
 							<s:url id="editURL" action="edit" namespace="/admin/teacher">
 								<s:param name="id" value="%{id}" />
