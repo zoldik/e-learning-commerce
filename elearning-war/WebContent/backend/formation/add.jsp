@@ -17,6 +17,10 @@
 		<sj:datepicker name="endDate" id="endDate"
 			parentTheme="bootstrap" displayFormat="dd/mm/yy" label="Date fin"
 			tooltip="Date fin de formation" />
+		<s:if test="#session.roles.contains('admin')">
+			<s:select list="affiliateSelect" name="affiliate" value="affiliate.id"
+			label="filiate" tooltip="Indiquez la filiale"/>
+		</s:if>
 		<s:submit cssClass="btn btn-inverse pull-right"
 			key="form.register.submit" />
 	</s:push>

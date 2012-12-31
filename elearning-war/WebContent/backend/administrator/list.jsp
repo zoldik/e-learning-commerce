@@ -32,7 +32,7 @@
 						<td><s:property value="affiliate.name" /></td>
 						<td><s:property value="enabled" /></td>
 						<td>
-							<s:url id="editURL" action="create" method="input" namespace="/admin/administrator">
+							<s:url id="editURL" action="edit" namespace="/admin/administrator">
 								<s:param name="id" value="%{id}" />
 							</s:url> 
 							<s:a href="%{editURL}">
