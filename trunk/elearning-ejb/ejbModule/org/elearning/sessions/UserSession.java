@@ -68,8 +68,7 @@ public class UserSession implements UserSessionLocal, UserSessionRemote {
 			user = (UserInterface) query.setParameter("p1", usernameOrEmail)
 					.setParameter("pwd", hashedPassword).getSingleResult();
 		} catch (NoResultException exception) {
-		}
-		;
+		};
 
 		if (!(user instanceof UserInterface)) {
 			try {

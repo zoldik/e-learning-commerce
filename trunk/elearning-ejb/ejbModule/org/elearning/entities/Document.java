@@ -2,6 +2,8 @@ package org.elearning.entities;
 
 import java.io.Serializable;
 import java.lang.String;
+import java.util.Date;
+
 import javax.persistence.*;
 
 @Entity
@@ -21,6 +23,10 @@ public class Document implements Serializable {
 	@ManyToOne(targetEntity=Category.class)
 	@JoinColumn(name="category_id",referencedColumnName="id")
 	private Category category;
+	
+	@Temporal(TemporalType.DATE)
+	@Column(name="created_at")
+	protected Date createdAt;
 
 	public Document() {
 		super();
@@ -65,6 +71,19 @@ public class Document implements Serializable {
 
 	public Category getCategory() {
 		return category;
+	}
+	
+	public Date getCreatedAt() {
+		return createdAt;
+	}
+
+	public void setCreatedAt(Date createdAt) {
+		this.createdAt = createdAt;
+	}
+
+	@PrePersist
+	public void onCreate(){
+		this.createdAt=new Date();
 	}
 
 }
