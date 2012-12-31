@@ -29,12 +29,19 @@
 						<td class=""><input type="checkbox" name="idx[]" value="<s:property value="id" />" /></td>
 						<td><s:property value="username" /></td>
 						<td>
-							<s:if test="enabled==true">
-								<img src="<s:url value="/backend/images/accept.png" />" />
-							</s:if>
-							<s:else>
-								<img src="<s:url value="/backend/images/exclamation.png" />" />
-							</s:else>
+							<s:url id="activateURL" action="activate" namespace="/admin/teacher">
+									<s:param name="id" value="%{id}" />
+							</s:url> 
+							<s:a href="%{activateURL}">
+								<s:if test="enabled==true">	
+									<img src="<s:url value="/backend/images/accept.png" />" />
+								</s:if>
+								<s:else>
+								<s:a href="%{activateURL}">
+									<img src="<s:url value="/backend/images/exclamation.png" />" />
+								</s:a>
+								</s:else>
+							</s:a>
 						<td>
 							<s:url id="editURL" action="edit" namespace="/admin/teacher">
 								<s:param name="id" value="%{id}" />
