@@ -7,6 +7,7 @@ import java.util.Collection;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Random;
 
 import javax.naming.InitialContext;
 import javax.naming.NameNotFoundException;
@@ -79,9 +80,11 @@ public class DocumentAction extends ActionSupport implements
 				this.filename.length());
 		Category category = this.detectCategoryForFile(extension);
 		String path = "C:\\Library";
-		this.uploadFile(path);
+		Random randomGenerator = new Random();
+		String fileName= String.valueOf(randomGenerator.nextInt(10000000))+"."+extension;
+		this.uploadFile(path,fileName);
 		document.setCategory(category);
-		document.setPath(path + "\\" + this.filename);
+		document.setPath(path + "\\" + fileName);
 		documentService.edit(document);
 		return SUCCESS;
 	}
@@ -96,9 +99,9 @@ public class DocumentAction extends ActionSupport implements
 		return null;
 	}
 
-	private void uploadFile(String path) {
+	private void uploadFile(String path, String fileName) {
 		try {
-			File destDir = new File(path, this.filename);
+			File destDir = new File(path, fileName);
 			FileUtils.copyFile(file, destDir, true);
 		} catch (IOException e) {
 			e.printStackTrace();
@@ -110,6 +113,7 @@ public class DocumentAction extends ActionSupport implements
 	 * 
 	 * @return String
 	 */
+	@SkipValidation
 	public String list() {
 		Map<String, Object> session = ActionContext.getContext().getSession();
 		User user = (User) session.get("user");
@@ -141,11 +145,19 @@ public class DocumentAction extends ActionSupport implements
 	 * 
 	 * @return String
 	 */
+	@SkipValidation
 	public String remove() {
-		documentService.remove(documentService.find(this.request.get("id")));
+		Document document = documentService.find(this.request.get("id"));
+		documentService.remove(document);
+		File file = new File(document.getPath());
+		if(!file.exists()){
+			addActionError("Le fichier n'existe pas");
+		}
+		file.delete();
 		return SUCCESS;
 	}
 
+	@SkipValidation
 	public String input() {
 		Map<String, Object> session = ActionContext.getContext().getSession();
 		User user = (User) session.get("user");
@@ -171,6 +183,7 @@ public class DocumentAction extends ActionSupport implements
 		return INPUT;
 	}
 
+	@SkipValidation
 	public String batch() {
 		String[] checkedAll = parameters.get("all_elements");
 		String[] batchAction = parameters.get("action");

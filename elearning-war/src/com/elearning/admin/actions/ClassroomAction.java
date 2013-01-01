@@ -53,6 +53,7 @@ public class ClassroomAction extends ActionSupport implements
 		return SUCCESS;
 	}
 
+	@SkipValidation
 	public String edit() {
 		Integer id = (Integer) this.request.get("id");
 		if (id > 0) {
@@ -66,6 +67,7 @@ public class ClassroomAction extends ActionSupport implements
 	 * 
 	 * @return String
 	 */
+	@SkipValidation
 	public String list() {
 		classrooms = classRoomService.findAll();
 		return SUCCESS;
@@ -76,11 +78,13 @@ public class ClassroomAction extends ActionSupport implements
 	 * 
 	 * @return String
 	 */
+	@SkipValidation
 	public String remove() {
 		classRoomService.remove(classRoomService.find(this.request.get("id")));
 		return SUCCESS;
 	}
 
+	@SkipValidation
 	public String batch() {
 		String[] checkedAll = parameters.get("all_elements");
 		String[] batchAction = parameters.get("action");

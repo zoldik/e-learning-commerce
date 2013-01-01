@@ -67,6 +67,7 @@ public class MaterialAction extends ActionSupport implements
 		return SUCCESS;
 	}
 
+	@SkipValidation
 	public String edit() {
 		Integer id = (Integer) this.request.get("id");
 		if (id > 0) {
@@ -80,6 +81,7 @@ public class MaterialAction extends ActionSupport implements
 	 * 
 	 * @return String
 	 */
+	@SkipValidation
 	public String list() {
 		Map<String, Object> session = ActionContext.getContext().getSession();
 		User user = (User) session.get("user");
@@ -101,6 +103,7 @@ public class MaterialAction extends ActionSupport implements
 	 * 
 	 * @return String
 	 */
+	@SkipValidation
 	public String remove() {
 		subjectService.remove(subjectService.find(this.request.get("id")));
 		return SUCCESS;

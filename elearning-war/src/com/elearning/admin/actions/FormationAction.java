@@ -83,6 +83,7 @@ public class FormationAction extends ActionSupport implements
 	 * 
 	 * @return String
 	 */
+	@SkipValidation
 	public String list() {
 		Map<String, Object> session = ActionContext.getContext().getSession();
 		User user = (User) session.get("user");
@@ -100,11 +101,13 @@ public class FormationAction extends ActionSupport implements
 	 * 
 	 * @return String
 	 */
+	@SkipValidation
 	public String remove() {
 		formationService.remove(formationService.find(this.request.get("id")));
 		return SUCCESS;
 	}
 
+	@SkipValidation
 	public String batch() {
 		String[] checkedAll = parameters.get("all_elements");
 		String[] batchAction = parameters.get("action");
