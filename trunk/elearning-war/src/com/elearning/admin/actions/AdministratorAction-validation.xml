@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE validators PUBLIC "-//OpenSymphony Group//XWork Validator 1.0.2// 
+EN" "http://localhost:8080/elearning-war/pages/xwork-validator-1.0.2.dtd">
+
+<validators>
+	<field name="username">
+		<field-validator type="requiredstring">
+			<message key="Le nom d'utilisateur est obligatoire" />
+		</field-validator>
+	</field>
+
+	<field name="email">
+		<field-validator type="requiredstring">
+			<message key="L'email est obligatoire" />
+		</field-validator>
+		<field-validator type="email" short-circuit="true">
+			<message key="email.error" />
+		</field-validator>
+	</field>
+</validators>
