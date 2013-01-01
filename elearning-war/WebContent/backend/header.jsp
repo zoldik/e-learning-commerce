@@ -62,6 +62,10 @@
 						<li>
 							<s:a href="%{listDocument}">Gestion de la bibliothèque</s:a>
 						</li>
+						<s:url var="listSubject" action="list" namespace="/admin/subject"/>
+						<li>
+							<s:a href="%{listSubject}">Gestion des matières</s:a>
+						</li>
 					</ul>
 				</li>
 			</ul>

@@ -5,14 +5,14 @@
 <s:actionerror theme="bootstrap" />
 <s:actionmessage theme="bootstrap" />
 <s:fielderror theme="bootstrap" />
-<s:form action="create" method="save" theme="bootstrap"
-	namespace="/admin/school-room" cssClass="form-horizontal">
-	<s:push value="classroom">
+<s:form action="create!save" theme="bootstrap"
+	namespace="/admin/subject" cssClass="form-horizontal" enctype="multipart/form-data">
+	<s:push value="subject">
 		<s:hidden name="id" />
 		<s:textfield name="name" key="Nom"
-			tooltip="Inqiduez le nom de la salle" />
-		<s:textfield name="capacity" key="capacité" 
-			tooltip="Inqiduez la capactiy de la salle" />
+			tooltip="Inqiduez le nom de la matière" />
+		<s:select list="formationSelect" name="formation" value="formation.id" label="formation" 
+		tooltip="Inqiduez la formation associée" />
 	</s:push>
 		<s:submit cssClass="btn btn-inverse"
 			key="form.register.submit" />

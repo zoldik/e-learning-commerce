@@ -104,6 +104,20 @@
 		<put-attribute name="title" value="Modification document" />
 	</definition>
 	
+	<definition name="admin.subject.list" extends="admin.dashbord">
+		<put-attribute name="title" value="Liste des matières" />
+		<put-attribute name="body" value="/backend/subject/list.jsp" />
+	</definition>
+	
+	<definition name="admin.subject.add" extends="admin.dashbord">
+		<put-attribute name="title" value="Nouvelle matière" />
+		<put-attribute name="body" value="/backend/subject/add.jsp" />
+	</definition>
+	
+	<definition name="admin.subject.edit" extends="admin.subject.add">
+		<put-attribute name="title" value="Modification matière" />
+	</definition>
+	
 	<definition name="admin.administrator.list" extends="admin.dashbord">
 		<put-attribute name="title" value="Liste des administrateurs" />
 		<put-attribute name="body" value="/backend/administrator/list.jsp" />

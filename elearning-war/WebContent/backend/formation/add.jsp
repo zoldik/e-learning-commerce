@@ -21,7 +21,7 @@
 			<s:select list="affiliateSelect" name="affiliate" value="affiliate.id"
 			label="filiate" tooltip="Indiquez la filiale"/>
 		</s:if>
-		<s:submit cssClass="btn btn-inverse pull-right"
+		<s:submit cssClass="btn btn-inverse"
 			key="form.register.submit" />
 	</s:push>
 </s:form>

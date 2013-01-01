@@ -38,6 +38,6 @@
 <!--                         doubleEmptyOption="true" -->
 <!--                         doubleMultiple="true"/> -->
 	</s:push>
-		<s:submit cssClass="btn btn-inverse pull-right"
+		<s:submit cssClass="btn btn-inverse"
 			key="form.register.submit" />
 </s:form>

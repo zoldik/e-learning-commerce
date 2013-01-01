@@ -74,7 +74,7 @@
 								<s:password name="password" placeholder="mot de passe"/>
 							</li>
 							<li>
-								<s:submit cssClass="btn btn-inverse" label="se connecter"/>
+								<s:submit cssClass="btn btn-inverse pull-right" label="se connecter"/>
 							</li>
 							</s:form>
 						</ul>

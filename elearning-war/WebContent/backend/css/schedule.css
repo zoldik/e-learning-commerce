@@ -3,3 +3,22 @@
 	background-color: blue;
 	margin-bottom: 15px;
 }
+
+.session-drag{
+	border: 1px dotted black;
+    height: 156px;
+    padding: 10px;
+    width: 186px;
+    background-color: #C0C0C0;
+}
+
+.session-drop{
+	width: 100px;
+	height: 138px;
+	color: #FFFFFF;
+	font-weight: bold;
+}
+
+.dropped{
+	background-color: #AEA7FF;
+}
