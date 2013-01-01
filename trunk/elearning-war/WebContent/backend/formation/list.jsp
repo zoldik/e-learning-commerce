@@ -12,7 +12,7 @@
 </div>
 <div class="clearfix"></div>
 <s:if test="formations.size() > 0">
-	<s:form action="batch" name="batch-actions">
+	<s:form action="batch" name="batch-actions" cssClass="form-horizontal">
 		<div class="span12">
 			<table class="table table-bordered">
 				<thead>
@@ -56,7 +56,7 @@
 								</s:a>
 								
 								<s:if test="schedule == null">
-									<s:url var="newScheduleURL" action="addSchedule!input" namespace="/admin/formation">
+									<s:url var="newScheduleURL" action="addSchedule" method="input" namespace="/admin/formation">
 										<s:param name="id" value="%{id}" />
 									</s:url> 
 									<s:a href="%{newScheduleURL}">

@@ -76,6 +76,18 @@
 				<s:url var="listDocument" action="list" namespace="/admin/document" />
 				<td><s:a href="%{listDocument}">Liste</s:a></td>
 			</tr>
+			
+			<tr>
+				<td class="">Matières</td>
+				<s:url var="createURL" action="create" method="input" namespace="/admin/subject" />
+				<td>
+					<s:a href="%{createURL}">
+						<img src="<s:url value="/backend/images/add.png" />" />
+					</s:a>
+				</td>
+				<s:url var="listSubject" action="list" namespace="/admin/subject" />
+				<td><s:a href="%{listSubject}">Liste</s:a></td>
+			</tr>
 		</tbody>
 	</table>
 </div>

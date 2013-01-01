@@ -5,13 +5,13 @@
 <div class="pull-right">
 	<ul>
 		<s:url var="createURL" action="create!input"
-			namespace="/admin/school-room" />
-		<li class="btn"><s:a href="%{createURL}">Ajouter une nouvelle salle</s:a>
+			namespace="/admin/subject" />
+		<li class="btn"><s:a href="%{createURL}">Ajouter une nouvelle matière</s:a>
 		</li>
 	</ul>
 </div>
 <div class="clearfix"></div>
-<s:if test="classrooms.size() > 0">
+<s:if test="subjects.size() > 0">
 	<s:form action="batch" name="batch-actions" cssClass="form-horizontal">
 		<div class="span12">
 			<table class="table table-bordered">
@@ -20,20 +20,21 @@
 						<th class=""><input type="checkbox" id="listBatchCheckbox" />
 						</th>
 						<th class="">Nom</th>
-						<th class="">Capacité</th>
+						<th class="">Formation</th>
+						<th class="">Filiale</th>
+						<th class="">Actions</th>
 					</tr>
 				</thead>
 				<tbody>
-					<s:iterator value="classrooms" status="classroomStatus">
+					<s:iterator value="subjects" status="subjectStatus">
 						<tr>
 							<td class=""><input type="checkbox" name="idx[]"
 								value="<s:property value="id" />" /></td>
 							<td><s:property value="name" /></td>
-							<td class="">
-								<s:property value="capacity" />
-							</td>
+							<td><s:property value="formation.name" /></td>
+							<td><s:property value="formation.affiliate.name" /></td>
 							<td><s:url id="editURL" action="edit"
-									namespace="/admin/school-room">
+									namespace="/admin/subject">
 									<s:param name="id" value="%{id}" />
 								</s:url> 
 								<s:a href="%{editURL}">
@@ -41,20 +42,19 @@
 										src="<s:url value="/backend/images/edit.png"/>" />
 								</s:a>
 								 <s:url id="deleteURL" action="delete"
-									namespace="/admin/school-room">
+									namespace="/admin/subject">
 									<s:param name="id" value="%{id}" />
 								</s:url> 
 								<s:a href="%{deleteURL}">
 									<img src="<s:url value="/backend/images/delete.png" />" />
 								</s:a>
-								
 							</td>
 						</tr>
 					</s:iterator>
 				</tbody>
-				<tfoot>
+				<tfoot>	
 					<tr>
-						<td colspan="4" class="pager">
+						<td colspan="5" class="pager">
 							<div class="pagination">
 								<ul>
 									<li><s:url var="firstPageURL" action="list" namespace="">

@@ -13,7 +13,7 @@
 <<s:property value="#session.user.username"/>
 <div class="clearfix"></div>
 <s:if test="documents.size() > 0">
-	<s:form action="batch" name="batch-actions">
+	<s:form action="batch" name="batch-actions" cssClass="form-horizontal">
 		<div class="span12">
 			<table class="table table-bordered">
 				<thead>

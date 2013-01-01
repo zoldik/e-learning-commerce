@@ -18,6 +18,6 @@
 		tooltip="Indiquer la filiale que cet administrateur doit administrer"/>
 		<s:checkbox name="enabled" label="Actif"/>
 	</s:push>
-		<s:submit cssClass="btn btn-inverse pull-right"
+		<s:submit cssClass="btn btn-inverse"
 			key="form.register.submit" />
 </s:form>
