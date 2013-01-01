@@ -79,6 +79,7 @@ public class AdministratorAction extends ActionSupport implements
 	 * 
 	 * @return String
 	 */
+	@SkipValidation
 	public String list() {
 		administrators = administratorService.findAll();
 		return SUCCESS;
@@ -89,12 +90,14 @@ public class AdministratorAction extends ActionSupport implements
 	 * 
 	 * @return String
 	 */
+	@SkipValidation
 	public String remove() {
 		administratorService.remove(administratorService.find(this.request
 				.get("id")));
 		return SUCCESS;
 	}
-
+	
+	@SkipValidation
 	public String batch() {
 		String[] checkedAll = parameters.get("all_elements");
 		String[] batchAction = parameters.get("action");
@@ -122,6 +125,7 @@ public class AdministratorAction extends ActionSupport implements
 		return SUCCESS;
 	}
 	
+	@SkipValidation
 	public String activate(){
 		Integer id = (Integer) this.request.get("id");
 		if (id > 0) {

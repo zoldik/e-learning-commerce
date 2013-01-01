@@ -13,6 +13,7 @@ import javax.naming.NamingException;
 
 import org.apache.struts2.interceptor.ParameterAware;
 import org.apache.struts2.interceptor.RequestAware;
+import org.apache.struts2.interceptor.validation.SkipValidation;
 import org.elearning.entities.Administrator;
 import org.elearning.entities.Formation;
 import org.elearning.entities.Role;
@@ -75,6 +76,7 @@ public class TeacherAction extends ActionSupport implements
 	 * @return String
 	 */
 	@SuppressWarnings("unchecked")
+	@SkipValidation
 	public String list() {
 		Map<String, Object> session = ActionContext.getContext().getSession();
 		User user = (User) session.get("user");
@@ -89,7 +91,8 @@ public class TeacherAction extends ActionSupport implements
 		}
 		return SUCCESS;
 	}
-
+	
+	@SkipValidation
 	public String edit() {
 		Integer id = (Integer) this.request.get("id");
 		if (id > 0) {
@@ -103,12 +106,14 @@ public class TeacherAction extends ActionSupport implements
 	 * 
 	 * @return String
 	 */
+	@SkipValidation
 	public String remove() {
 		userService.remove(userService.find(this.request.get("id")));
 		return SUCCESS;
 	}
 
 	@SuppressWarnings("unchecked")
+	@SkipValidation
 	public String batch() {
 		String[] checkedAll = parameters.get("all_elements");
 		String[] batchAction = parameters.get("action");
@@ -136,6 +141,7 @@ public class TeacherAction extends ActionSupport implements
 		return SUCCESS;
 	}
 	
+	@SkipValidation
 	public String activate(){
 		Integer id = (Integer) this.request.get("id");
 		if (id > 0) {
