@@ -21,7 +21,7 @@ public class Schedule implements Serializable {
 	@OneToOne
 	private Formation formation;
 	
-	@OneToMany(targetEntity=Session.class,mappedBy="schedule",cascade=CascadeType.ALL)
+	@OneToMany(targetEntity=Session.class,mappedBy="schedule")
 	private List<Session> sessions;
 
 	public Schedule() {
