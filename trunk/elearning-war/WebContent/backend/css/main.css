@@ -13,3 +13,7 @@ html,body {
 .push,.footer {
 	height: 60px;
 }
+
+li.logged-user{
+	padding: 10px;
+}

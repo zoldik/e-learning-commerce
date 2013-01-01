@@ -1,7 +1,7 @@
 @font-face {
 	font-family: Optima;
 	font-size: 32px;
-	src: url('../fonts/Optima_Bold.ttf');
+	src: url('/fonts/Optima_Bold.ttf');
 }
 
 @CHARSET "ISO-8859-1";
@@ -19,15 +19,17 @@ body {
 	min-height: 100%;
 	height: auto !important;
 	height: 100%;
-	margin: 0 100px -60px;
+	margin: 0 100px -25px;
 }
 
 .push,.footer {
-	height: 60px;
+	height: 25px;
 }
 
 .footer {
+	padding: 8px;
 	margin: 0 100px;
+	background: url('../images/menu.png') repeat transparent;
 }
 
 .content {
@@ -97,7 +99,7 @@ body {
 }
 
 .affiliate-element {
-	background: url("../images/boule.png") no-repeat scroll 7px 0
+	background: url("../images/boule.png") no-repeat scroll -14px 0
 		transparent;
 	font-family: Optima;
 	height: 132px;
