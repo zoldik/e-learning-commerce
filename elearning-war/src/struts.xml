@@ -172,7 +172,8 @@
 			<result name="input" type="tiles">admin.formation.schedule</result>
 		</action>
 
-		<action name="manageSchedule" class="com.elearning.admin.actions.ScheduleAction">
+		<action name="manageSchedule" class="com.elearning.admin.actions.ScheduleAction"
+		method="execute">
 			<result name="success">/backend/formation/success.jsp</result>
 		</action>
 
@@ -279,5 +280,35 @@
 
 	</package>
 
+	<package name="adminSubject" namespace="/admin/subject"
+		extends="admin">
 
+		<default-action-ref name="list" />
+		<action name="list" class="com.elearning.admin.actions.MaterialAction"
+			method="list">
+			<result name="success" type="tiles">admin.subject.list</result>
+		</action>
+
+		<action name="create" class="com.elearning.admin.actions.MaterialAction"
+			method="save">
+			<result name="success" type="redirect">list</result>
+			<result name="input" type="tiles">admin.subject.add</result>
+		</action>
+
+		<action name="edit" class="com.elearning.admin.actions.MaterialAction"
+			method="edit">
+			<result name="input" type="tiles">admin.subject.edit</result>
+		</action>
+
+		<action name="delete" class="com.elearning.admin.actions.MaterialAction"
+			method="remove">
+			<result name="success" type="redirect">list</result>
+		</action>
+
+		<action name="batch" class="com.elearning.admin.actions.MaterialAction"
+			method="batch">
+			<result name="success" type="redirect">list</result>
+		</action>
+
+	</package>
 </struts>
