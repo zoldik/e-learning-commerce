@@ -66,8 +66,8 @@
 				</li>
 			</ul>
 			<ul class="nav pull-right">
-				<li>
-					Bienvenu <s:property value="#session.user"/>
+				<li class="logged-user" >
+					Bienvenu(e) <s:property value="#session.user.username"/>
 				</li>
 				<s:url id="logoutURL" action="logout" namespace="/pages"/>
 				<li>
