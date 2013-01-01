@@ -3,6 +3,7 @@ package org.elearning.entities;
 import java.io.Serializable;
 import java.lang.String;
 import java.util.ArrayList;
+import java.util.List;
 
 import javax.persistence.*;
 
@@ -15,8 +16,9 @@ public class Classroom implements Serializable {
 	private String name;
 	private int capacity;
 	private String reservation;
-	@Column(name = "session_list")
-	private ArrayList<Session> sessionList;
+	
+	@OneToMany(targetEntity=Session.class, mappedBy="classroom")
+	private List<Session> sessions;
 
 	public Classroom() {
 		super();
@@ -54,13 +56,11 @@ public class Classroom implements Serializable {
 		this.reservation = reservation;
 	}
 
-	@OneToMany
-	public ArrayList<Session> getSessionList() {
-		return sessionList;
+	public List<Session> getSessions() {
+		return sessions;
 	}
 
-	public void setSessionList(ArrayList<Session> sessionList) {
-		this.sessionList = sessionList;
+	public void setSessions(List<Session> sessions) {
+		this.sessions = sessions;
 	}
-
 }

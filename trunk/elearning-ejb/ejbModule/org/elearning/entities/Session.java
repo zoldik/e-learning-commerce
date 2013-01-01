@@ -1,20 +1,39 @@
 package org.elearning.entities;
 
 import java.io.Serializable;
-import java.lang.String;
 import javax.persistence.*;
 
 @Entity
+@Table(name="session")
 public class Session implements Serializable {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private int id;
-	private String coefficient;
-	private Schedule schedule;
+	
+	@ManyToOne(targetEntity=Material.class)
+	@JoinColumn(name="material_id",referencedColumnName="id")
 	private Material material;
+	
+	@ManyToOne(targetEntity=Classroom.class)
+	@JoinColumn(name="classroom_id",referencedColumnName="id")
 	private Classroom classroom;
+	
+	@ManyToOne(targetEntity=Teacher.class)
+	@JoinColumn(name="teacher_id",referencedColumnName="id")
 	private Teacher teacher;
+	
+	@ManyToOne(targetEntity=Day.class)
+	@JoinColumn(name="day_id",referencedColumnName="id")
+	private Day day;
+	
+	@ManyToOne(targetEntity=TimeSlot.class)
+	@JoinColumn(name="time_slot_id",referencedColumnName="id")
+	private Day timeSlot;
+	
+	@ManyToOne(targetEntity=Schedule.class)
+	@JoinColumn(name="schedule_id",referencedColumnName="id")
+	private Schedule schedule;
 
 	public Session() {
 		super();
@@ -28,28 +47,10 @@ public class Session implements Serializable {
 		this.id = id;
 	}
 
-	public String getCoefficient() {
-		return this.coefficient;
-	}
-
-	public void setCoefficient(String coefficient) {
-		this.coefficient = coefficient;
-	}
-
-	public void setSchedule(Schedule schedule) {
-		this.schedule = schedule;
-	}
-
-	@ManyToOne
-	public Schedule getSchedule() {
-		return schedule;
-	}
-
 	public void setMaterial(Material material) {
 		this.material = material;
 	}
 
-	@ManyToOne
 	public Material getMaterial() {
 		return material;
 	}
@@ -57,8 +58,7 @@ public class Session implements Serializable {
 	public void setClassroom(Classroom classroom) {
 		this.classroom = classroom;
 	}
-
-	@ManyToOne
+	
 	public Classroom getClassroom() {
 		return classroom;
 	}
@@ -66,10 +66,32 @@ public class Session implements Serializable {
 	public void setTeacher(Teacher teacher) {
 		this.teacher = teacher;
 	}
-
-	@ManyToOne
+	
 	public Teacher getTeacher() {
 		return teacher;
 	}
 
+	public Day getDay() {
+		return day;
+	}
+
+	public void setDay(Day day) {
+		this.day = day;
+	}
+
+	public Day getTimeSlot() {
+		return timeSlot;
+	}
+
+	public void setTimeSlot(Day timeSlot) {
+		this.timeSlot = timeSlot;
+	}
+
+	public Schedule getSchedule() {
+		return schedule;
+	}
+
+	public void setSchedule(Schedule schedule) {
+		this.schedule = schedule;
+	}
 }
