@@ -39,7 +39,10 @@ public class FormationSession implements FormationSessionRemote {
     }
     
     public Formation find(Object id){
-    	return em.find(Formation.class, id);
+    	Formation formation = em.find(Formation.class, id);
+    	formation.getSubjects().size();
+    	formation.getTeachers().size();
+    	return formation;
     }
     
     @SuppressWarnings("unchecked")
@@ -48,6 +51,7 @@ public class FormationSession implements FormationSessionRemote {
     	for(Formation formation : formations){
 			formation.getDocuments().size();
 			formation.getTeachers().size();
+			formation.getSubjects().size();
 		}
     	return formations;
     }
@@ -59,6 +63,7 @@ public class FormationSession implements FormationSessionRemote {
 		for(Formation formation : formations){
 			formation.getDocuments().size();
 			formation.getTeachers().size();
+			formation.getSubjects().size();
 		}
 		return formations;
 	}
