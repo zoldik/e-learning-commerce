@@ -2,8 +2,10 @@ package com.elearning.admin.actions;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 
 import javax.naming.InitialContext;
 import javax.naming.NameNotFoundException;
@@ -33,7 +35,7 @@ public class TeacherAction extends ActionSupport implements
 	private Map<String, String[]> parameters;
 	private Map<Integer, String> formationSelect = new HashMap<Integer,String>();
 	private Teacher teacher = new Teacher();
-	private List<Teacher> teachers = new ArrayList<Teacher>();
+	private Set<Teacher> teachers = (Set<Teacher>) new HashSet<Teacher>();
 	private UserSessionRemote userService;
 	private FormationSessionRemote formationService;
 
@@ -83,7 +85,7 @@ public class TeacherAction extends ActionSupport implements
 				teachers.addAll(teacherList);
 			}
 		} else {
-			teachers = (List<Teacher>) userService.findAll();
+			teachers = (Set<Teacher>) userService.findAll();
 		}
 		return SUCCESS;
 	}
@@ -106,11 +108,12 @@ public class TeacherAction extends ActionSupport implements
 		return SUCCESS;
 	}
 
+	@SuppressWarnings("unchecked")
 	public String batch() {
 		String[] checkedAll = parameters.get("all_elements");
 		String[] batchAction = parameters.get("action");
 		if (checkedAll[0].equals("true")) {
-			teachers = (List<Teacher>) userService.findAll();
+			teachers = (Set<Teacher>) userService.findAll();
 		} else {
 			String[] chekedTeachers = parameters.get("idx[]");
 
@@ -122,7 +125,7 @@ public class TeacherAction extends ActionSupport implements
 				}
 				;
 			}
-			teachers = (List<Teacher>) userService.findChecked(results);
+			teachers = (Set<Teacher>) userService.findChecked(results);
 		}
 
 		if (batchAction[0].equals("supprimer")) {
@@ -185,11 +188,11 @@ public class TeacherAction extends ActionSupport implements
 		this.teacher = teacher;
 	}
 
-	public List<? extends User> getTeachers() {
+	public Set<Teacher> getTeachers() {
 		return teachers;
 	}
 
-	public void setTeachers(List<Teacher> teachers) {
+	public void setTeachers(Set<Teacher> teachers) {
 		this.teachers = teachers;
 	}
 
