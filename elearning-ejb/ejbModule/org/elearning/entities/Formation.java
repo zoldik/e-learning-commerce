@@ -4,6 +4,8 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Date;
+import java.util.List;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -37,6 +39,9 @@ public class Formation implements Serializable {
 	
 	@OneToOne(targetEntity=Schedule.class, mappedBy="formation",cascade=CascadeType.REMOVE)
 	private Schedule schedule;
+	
+	@OneToMany(targetEntity=Material.class, mappedBy="formation",cascade=CascadeType.REMOVE)
+	private List<Material> subjects;
 	
 	@ManyToMany(targetEntity=Student.class, mappedBy="formations")
 	private Collection<Student> students;
@@ -108,13 +113,20 @@ public class Formation implements Serializable {
 		this.documents = documents;
 	}
 
-	@OneToOne
 	public Schedule getSchedule() {
 		return schedule;
 	}
 
 	public void setSchedule(Schedule schedule) {
 		this.schedule = schedule;
+	}
+
+	public List<Material> getSubjects() {
+		return subjects;
+	}
+
+	public void setSubjects(List<Material> subjects) {
+		this.subjects = subjects;
 	}
 
 	public Collection<Student> getStudents() {

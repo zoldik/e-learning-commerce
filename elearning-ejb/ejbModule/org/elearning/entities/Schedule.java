@@ -1,9 +1,15 @@
 package org.elearning.entities;
 
 import java.io.Serializable;
-import java.util.ArrayList;
+import java.util.List;
 
-import javax.persistence.*;
+import javax.persistence.CascadeType;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
 
 @Entity
 public class Schedule implements Serializable {
@@ -15,8 +21,8 @@ public class Schedule implements Serializable {
 	@OneToOne
 	private Formation formation;
 	
-	
-	private ArrayList<Session> sessionList;
+	@OneToMany(targetEntity=Session.class,mappedBy="schedule",cascade=CascadeType.ALL)
+	private List<Session> sessions;
 
 	public Schedule() {
 		super();
@@ -38,13 +44,15 @@ public class Schedule implements Serializable {
 		return formation;
 	}
 
-	public void setSession(ArrayList<Session> sessionList) {
-		this.sessionList = sessionList;
+	public List<Session> getSessions() {
+		return sessions;
 	}
 
-	@OneToMany
-	public ArrayList<Session> getSessionList() {
-		return sessionList;
+	public void setSessions(List<Session> sessions) {
+		this.sessions = sessions;
 	}
-
+	
+	public void addSession(Session session){
+		this.sessions.add(session);
+	}
 }
