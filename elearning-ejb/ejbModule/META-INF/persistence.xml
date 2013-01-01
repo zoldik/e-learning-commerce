@@ -22,6 +22,8 @@
 		<class>org.elearning.entities.CV</class>
 		<class>org.elearning.entities.Affiliate</class>
 		<class>org.elearning.entities.Administrator</class>
+		<class>org.elearning.entities.Day</class>
+		<class>org.elearning.entities.TimeSlot</class>
 		<validation-mode>AUTO</validation-mode>
 		<properties>
          <property name="hibernate.dialect" value="org.hibernate.dialect.MySQL5InnoDBDialect"/>
