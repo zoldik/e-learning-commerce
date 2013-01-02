@@ -87,7 +87,7 @@ public class TeacherAction extends ActionSupport implements
 				teachers.addAll(teacherList);
 			}
 		} else {
-			teachers = (Set<Teacher>) userService.findAll();
+			teachers.addAll((List<Teacher>)userService.findAll());
 		}
 		return SUCCESS;
 	}
