@@ -6,7 +6,7 @@
 <s:actionerror theme="bootstrap" />
 <s:actionmessage theme="bootstrap" />
 <s:form action="login" method="post" namespace="/pages">
-	<s:textfield name="username" key="Nom d'utilisateur ou e-mail"/>
+	<s:textfield name="username" label="Nom d'utilisateur ou e-mail"/>
 	<s:password name="password" key="password.label"/>
-	<s:submit cssClass="btn" key="form.connexion.submit"/>
+	<s:submit cssClass="btn" label="connexion"/>
 </s:form>
