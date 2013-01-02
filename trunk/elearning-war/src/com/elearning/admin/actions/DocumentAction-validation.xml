@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE validators PUBLIC "-//OpenSymphony Group//XWork Validator 1.0.2// 
-EN" "http://localhost:8080/elearning-war/pages/xwork-validator-1.0.2.dtd">
+EN" "http://www.opensymphony.com/xwork/xwork-validator-1.0.2.dtd">
 
 <validators>
 	<field name="name">
