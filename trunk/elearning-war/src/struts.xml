@@ -55,6 +55,10 @@
 				<param name="actionName">index</param>
 				<param name="namespace">/</param>
 			</result>
+			<result name="admin" type="redirectAction">
+				<param name="actionName">dashboard</param>
+				<param name="namespace">/admin</param>
+			</result>
 		</action>
 
 		<action name="logout" class="com.elearning.front.actions.LoginAction"
