@@ -6,14 +6,20 @@
 
 .session-drag{
 	border: 1px dotted black;
-    height: 156px;
-    padding: 10px;
+    height: 127px;
+    padding: 18px 10px 10px;
     width: 186px;
     background-color: #C0C0C0;
 }
 
+.session-label{
+	color: #FFFFFF;
+	text-decoration: underline;
+	font-style: italic;
+}
+
 .session-drop{
-	width: 100px;
+	width: 90px;
 	height: 138px;
 	color: #FFFFFF;
 	font-weight: bold;
