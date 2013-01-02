@@ -39,24 +39,23 @@
 	});
 </script>
 
-<div class="span2">
-	<sj:div id="draggable" draggable="true" 
-		draggableRevert="true" cssClass="session-drag">
-		<div class="seance-content">
-			<s:form id="sessionForm" name="session">	
-					<s:select id="teacherSelect" name="teacher" cssClass="span13"
-						list="teacherSelect" headerKey=""
-						headerValue="selectionner un enseignant" />
-					<s:select id="classRoomSelect" name="classRoom" cssClass="span13"
-						list="classroomSelect" headerKey=""
-						headerValue="selectionner une salle" />
-					<s:select id="subjectSelect" name="subject" cssClass="span13"
-						list="subjectSelect" headerKey=""
-						headerValue="selectionner une matière" />
-			</s:form>
-		</div>
-	</sj:div>
-</div>
+<sj:div id="draggable" draggable="true" 
+	draggableRevert="true" cssClass="session-drag pull-left">
+	<div class="seance-content">
+		<s:form id="sessionForm" name="session">	
+				<s:select id="teacherSelect" name="teacher" cssClass="span13"
+					list="teacherSelect" headerKey=""
+					headerValue="selectionner un enseignant" />
+				<s:select id="classRoomSelect" name="classRoom" cssClass="span13"
+					list="classroomSelect" headerKey=""
+					headerValue="selectionner une salle" />
+				<s:select id="subjectSelect" name="subject" cssClass="span13"
+					list="subjectSelect" headerKey=""
+					headerValue="selectionner une matière" />
+		</s:form>
+	</div>
+</sj:div>
+
 <div class="span9">
 	<table cellpadding="0" cellspacing="0" class="table table-bordered">
 		<thead>
@@ -71,7 +70,7 @@
 			<s:iterator value="timeSlots">
 				<s:set var="idTime" value="id"/>
 				<tr>
-					<td width="78" height="136"><s:property value="beginTime"/>H00-<s:property value="endTime"/>H00</td>
+					<td width="60" height="136"><s:property value="beginTime"/>H00-<s:property value="endTime"/>H00</td>
 					<s:iterator value="days">
 						<td bgcolor="#FFFFFF">
 							<sj:div id="droptarget%{id}%{idTime}" droppable="true"
