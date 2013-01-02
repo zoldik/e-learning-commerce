@@ -83,7 +83,7 @@ public class ContactAction extends ActionSupport implements
             
             // getting Transport
             SMTPTransport  transport = (SMTPTransport)session.getTransport("smtp");
-            transport.connect(SMTPHost, Integer.parseInt("587"), "fattouchsquall"," bqwfonfgdrmyifen");
+            transport.connect(SMTPHost, Integer.parseInt("587"), "aymen1212"," npfibdsyxrptglsi");
 
             // create a message
             Message msg = new MimeMessage(session);
