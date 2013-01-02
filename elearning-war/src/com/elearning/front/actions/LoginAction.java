@@ -11,6 +11,7 @@ import javax.security.auth.login.LoginContext;
 import org.apache.struts2.dispatcher.SessionMap;
 import org.apache.struts2.interceptor.SessionAware;
 import org.apache.struts2.interceptor.validation.SkipValidation;
+import org.elearning.entities.Administrator;
 import org.elearning.entities.Role;
 import org.elearning.entities.User;
 import org.elearning.entities.UserInterface;
@@ -53,12 +54,14 @@ public class LoginAction extends ActionSupport implements SessionAware {
 		if(user instanceof UserInterface){
 			if(user.getEnabled()){
 				session.put("user", user);
-				int i=0;
 				List<String> roles = new ArrayList<String>();
 				for( Role role : user.getRoles()){
-					roles.add(role.getName());  
+					roles.add(role.getName());
 				}
 				session.put("roles", roles );
+				if(user instanceof Administrator || roles.contains("admin")){
+					return "admin";
+				}
 				return SUCCESS;
 			}
 			addActionError("votre compte est désactivé");
