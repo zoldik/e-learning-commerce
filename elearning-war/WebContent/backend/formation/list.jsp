@@ -54,23 +54,12 @@
 								<s:a href="%{deleteURL}">
 									<img src="<s:url value="/backend/images/delete.png" />" />
 								</s:a>
-								
-								<s:if test="schedule == null">
-									<s:url var="newScheduleURL" action="addSchedule" method="input" namespace="/admin/formation">
-										<s:param name="id" value="%{id}" />
-									</s:url> 
-									<s:a href="%{newScheduleURL}">
-										Ajouter emploi du temps
-									</s:a>
-								</s:if>
-								<s:else>
-									<s:url var="editScheduleURL" action="editSchedule" namespace="/admin/formation">
-										<s:param name="id" value="%{schedule.id}" />
-									</s:url>
-									<s:a href="%{editScheduleURL}">
-										Editer emploi du temps
-									</s:a>
-								</s:else>
+								<s:url var="newScheduleURL" action="addSchedule" method="input" namespace="/admin/formation">
+									<s:param name="id" value="%{id}" />
+								</s:url> 
+								<s:a href="%{newScheduleURL}">
+									Gestion emploi de temps
+								</s:a>
 								
 							</td>
 						</tr>
