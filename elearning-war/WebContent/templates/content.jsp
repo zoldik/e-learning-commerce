@@ -2,7 +2,7 @@
 <div class="row-fluid">
 	<div class="presentation">
 		<div class="logo2"></div>
-		<div>je teste amineamine amine amine amine amine amine amine</div>
+		<div><s:actionmessage theme="bootstrap" /></div>
 	</div>
 	<div class="container affiliates-container">
 		<s:iterator value="affiliates">

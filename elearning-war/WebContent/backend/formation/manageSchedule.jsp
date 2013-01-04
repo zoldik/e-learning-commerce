@@ -39,7 +39,7 @@
 	});
 </script>
 
-<sj:div id="draggable" draggable="true" 
+<sj:div id="draggable" draggable="true"  draggableCursor="move"
 	draggableRevert="true" cssClass="session-drag pull-left">
 	<div class="seance-content">
 		<s:form id="sessionForm" name="session">	
