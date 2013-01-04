@@ -130,7 +130,7 @@ public class TeacherAction extends ActionSupport implements
 				}
 				;
 			}
-			teachers = (Set<Teacher>) userService.findChecked(results);
+			teachers.addAll((List<Teacher>)userService.findChecked(results));
 		}
 
 		if (batchAction[0].equals("supprimer")) {

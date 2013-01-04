@@ -6,7 +6,7 @@
 <struts>
 	<constant name="struts.devMode" value="true" />
 	<constant name="struts.custom.i18n.resources" value="global" />
-	<constant name="struts.multipart.maxSize" value="10000000" />
+	<constant name="struts.multipart.maxSize" value="100000000" />
 
 	<package name="default" namespace="/" extends="struts-default">
 
@@ -18,10 +18,16 @@
 		<interceptors>
 			<interceptor name="login"
 				class="com.elearning.interceptors.LoginInterceptor" />
+			<interceptor name="populate"
+				class="com.elearning.interceptors.InputDocumentPrepare" />
 			<interceptor-stack name="myStack">
 				<interceptor-ref name="login"/>
                 <interceptor-ref name="defaultStack"/>
             </interceptor-stack>
+<!--             <interceptor-stack name="myStack2"> -->
+<!-- 				<interceptor-ref name="myStack"/> -->
+<!--                 <interceptor-ref name="populate"/> -->
+<!--             </interceptor-stack> -->
 		</interceptors>
 		
 		<default-interceptor-ref name="myStack"/>
@@ -69,9 +75,17 @@
 			</result>
 		</action>
 
-		<action name="registerStep1" class="com.elearning.front.actions.RegisterStepAction">
+		<action name="registerStep1" class="com.elearning.front.actions.RegisterFirstStepAction">
 			<result name="input" type="tiles">base.register-step1</result>
-			<result name="registerStudent" type="tiles">.register</result>
+			<result name="registerStudent" type="tiles">register.formation.list</result>
+		</action>
+		
+		<action name="registerStudent" class="com.elearning.front.actions.RegisterStudentAction">
+			<result name="input" type="tiles">base.register.student</result>
+			<result name="success" type="chain">
+				<param name="actionName">index</param>
+				<param name="namespace">/</param>
+			</result>
 		</action>
 
 		<action name="translate" class="com.elearning.front.actions.Locale">
@@ -146,8 +160,7 @@
 
 		<default-action-ref name="list" />
 		<action name="list" class="com.elearning.admin.actions.FormationAction"
-			method="list">
-			
+			method="list">			
 			<result name="success" type="tiles">admin.formation.list</result>
 		</action>
 
