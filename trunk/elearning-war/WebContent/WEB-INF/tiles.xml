@@ -19,8 +19,13 @@
 		<put-attribute name="body" value="/pages/registerStep1.jsp" />
 	</definition>
 
-	<definition name=".register" extends="base">
-		<put-attribute name="title" value="Enregistrement" />
+	<definition name="register.formation.list" extends="base">
+		<put-attribute name="title" value="Choisir la formation" />
+		<put-attribute name="body" value="/pages/formationList.jsp" />
+	</definition>
+	
+	<definition name="base.register.student" extends="base">
+		<put-attribute name="title" value="Enregistrement d'étudiant" />
 		<put-attribute name="body" value="/pages/register.jsp" />
 	</definition>
 	

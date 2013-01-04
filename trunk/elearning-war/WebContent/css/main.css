@@ -107,3 +107,9 @@ body {
 	text-align: center;
 	height: 132px;
 }
+
+.separator{
+	height: 2px;
+	width: 402px;
+	background-color: #833B48;
+}
