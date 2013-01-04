@@ -31,7 +31,11 @@ public class AffiliateSession implements AffiliateSessionRemote {
     
     @SuppressWarnings("unchecked")
 	public List<Affiliate> findAll(){
-    	return em.createQuery("select object(o) from Affiliate as o").getResultList();
+    	List<Affiliate> affiliates = em.createQuery("select object(o) from Affiliate as o").getResultList();
+    	for(Affiliate affiliate : affiliates){
+    		affiliate.getFormations().size();
+    	}
+    	return affiliates;
     }
 
 }

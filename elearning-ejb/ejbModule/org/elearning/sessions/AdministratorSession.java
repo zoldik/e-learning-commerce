@@ -25,7 +25,7 @@ public class AdministratorSession extends UserSession implements AdministratorSe
 
 	@SuppressWarnings("unchecked")
 	public List<User> findAll() {
-		return em.createQuery("select object(o) from Administrator as o")
+		return em.createQuery("select object(o) from Administrator as o order by username")
 				.getResultList();
 	}
 

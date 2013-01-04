@@ -3,6 +3,7 @@
 	<persistence-unit name="elearning-ejb">
 		<jta-data-source>java:/ElearningDS</jta-data-source>
 		<class>org.elearning.entities.User</class>
+		<class>org.elearning.entities.TimeSlot</class>
 		<class>org.elearning.entities.Teacher</class>
 		<class>org.elearning.entities.Student</class>
 		<class>org.elearning.entities.Session</class>
@@ -16,14 +17,14 @@
 		<class>org.elearning.entities.External</class>
 		<class>org.elearning.entities.Domain</class>
 		<class>org.elearning.entities.Document</class>
+		<class>org.elearning.entities.Day</class>
 		<class>org.elearning.entities.Client</class>
 		<class>org.elearning.entities.Classroom</class>
 		<class>org.elearning.entities.Category</class>
 		<class>org.elearning.entities.CV</class>
 		<class>org.elearning.entities.Affiliate</class>
 		<class>org.elearning.entities.Administrator</class>
-		<class>org.elearning.entities.Day</class>
-		<class>org.elearning.entities.TimeSlot</class>
+		<class>org.elearning.entities.Gouvernorate</class>
 		<validation-mode>AUTO</validation-mode>
 		<properties>
          <property name="hibernate.dialect" value="org.hibernate.dialect.MySQL5InnoDBDialect"/>
