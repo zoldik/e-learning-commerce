@@ -1,28 +1,40 @@
-<!-- <?xml version="1.0" encoding="UTF-8"?> -->
-<!-- <!DOCTYPE validators PUBLIC "-//OpenSymphony Group//XWork Validator 1.0.2//  -->
-<!-- EN" "http://www.opensymphony.com/xwork/xwork-validator-1.0.2.dtd"> -->
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE validators PUBLIC "-//OpenSymphony Group//XWork Validator 1.0.2// 
+EN" "http://www.opensymphony.com/xwork/xwork-validator-1.0.2.dtd">
 
-<!-- <validators> -->
-<!-- 	<field name="username"> -->
-<!-- 		<field-validator type="requiredstring"> -->
-<!-- 			<message key="Le nom d'utilisateur est obligatoire" /> -->
-<!-- 		</field-validator> -->
-<!-- 	</field> -->
+<validators>
+	<field name="username">
+		<field-validator type="requiredstring">
+			<message key="Le nom d'utilisateur est obligatoire" />
+		</field-validator>
+	</field>
 	
-<!-- 	<field name="username"> -->
-<!-- 		<field-validator type="requiredstring"> -->
-<!-- 			<message key="Le mot de passe est obligatoire" /> -->
-<!-- 		</field-validator> -->
-<!-- 	</field> -->
+	<field name="password">
+		<field-validator type="requiredstring">
+			<message key="Le mot de passe est obligatoire" />
+		</field-validator>
+	</field>
 
-<!-- 	<field name="email"> -->
-<!-- 		<field-validator type="requiredstring"> -->
-<!-- 			<message  key = "adresse email est obligatoire" /> -->
-<!-- 		</field-validator> -->
-<!-- 		<field-validator type="email" short-circuit="true"> -->
-<!-- 			<message key="email.error" /> -->
-<!-- 		</field-validator> -->
-<!-- 	</field> -->
+	<field name="confirmPassword">
+		<field-validator type="requiredstring">
+			<message key="Vous devez confirmer votre mot de passe" />
+		</field-validator>
+	</field>
+
+	<field name="email">
+		<field-validator type="requiredstring">
+			<message>L'adresse email est obligatoire</message>
+		</field-validator>
+		<field-validator type="email" short-circuit="true">
+			<message key="email.error" />
+		</field-validator>
+	</field>
+	
+	<field name="sex">
+          <field-validator type="required">
+              <message>Selectionnez votre genre pour continuer</message>
+          </field-validator>
+	</field>
 	
 <!-- 	<field name="lastName" >  -->
 <!-- 	    <field-validator type="requiredstring" short-circuit="true">  -->
@@ -46,16 +58,27 @@
 <!-- 	    </field-validator>  -->
 <!--   </field>   -->
   
-<!--   <field name="phone" >  -->
-<!-- 	    <field-validator type="requiredstring" short-circuit="true">  -->
-<!-- 	      <message key="Le téléphone est obligatoire"/>  -->
-<!-- 	    </field-validator>  -->
-<!-- 	    <field-validator type="stringlength" short-circuit="true">  -->
-<!-- 	      <param name="minLength">3</param>  -->
-<!-- 	      <param name="maxLength">10</param>  -->
-<!-- 	      <message key="chaine.error"/>  -->
-<!-- 	    </field-validator>  -->
-<!--   </field>   -->
+  <field name="phone" > 
+	    <field-validator type="requiredstring" short-circuit="true"> 
+	      <message>Le numéro de téléphone est obligatoire</message>
+	    </field-validator> 
+	    <field-validator type="regex" short-circuit="true">
+			<param name="expression">^(\+216)?\d{8}$</param>
+			<param name="trim">true</param>
+			<message key="phone.error" />
+		</field-validator>
+  </field>  
+  
+    <field name="zipCode" > 
+	    <field-validator type="required"> 
+	      <message>Le code postal est obligatoire</message>
+	    </field-validator> 
+	    <field-validator type="int" >
+			<param name="minLength">4</param>
+			<param name="maxLength">4</param>
+			<message>Le code postal doit posséder exactement $(min) chiffres</message>
+		</field-validator>
+  </field>  
   
 <!--   <field name="adresse" >  -->
 <!-- 	    <field-validator type="requiredstring" short-circuit="true">  -->
@@ -79,4 +102,4 @@
 <!-- 	    </field-validator>  -->
 <!--   </field>   -->
   
-<!-- </validators> -->
+</validators>
