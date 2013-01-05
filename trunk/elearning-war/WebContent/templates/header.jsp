@@ -6,8 +6,7 @@
 <s:set var="classContact" value=""/>
 <s:set var="classRegister" value=""/>
 <s:set var="actionName" value="com.opensymphony.xwork2.ActionContext.name"/>
-
-<s:if test="%{#actionName=='registerStep1 || #actionName=='registerStudent' }">
+<s:if test="%{#actionName=='registerStep1' || #actionName=='registerStudent'}">
 	<s:set var="classRegister">active</s:set>
 </s:if>
 <s:elseif test="%{#actionName=='index'}">
