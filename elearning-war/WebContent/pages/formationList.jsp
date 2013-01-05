@@ -2,9 +2,17 @@
 <%@ taglib prefix="sb" uri="/struts-bootstrap-tags"%>
 <%@ taglib prefix="sj" uri="/struts-jquery-tags"%>
 
-<set var="classTab" value=""/>
+<script type="text/javascript">
+jQuery(document).ready(function(){
+	jQuery('#affiliatesTab .nav-tabs a').click(function (e) {
+	 	  e.preventDefault();
+		  jQuery(this).tab('show');
+		});	
+});
+</script>
+<s:set var="classTab" value=""/>
 
-<div class="tabbable tabs-left">
+<div class="tabbable tabs-left" id="affiliatesTab">
   <ul class="nav nav-tabs">
    	<s:iterator value="affiliates">
    		<s:set var="affiliateId" value="id"/>
