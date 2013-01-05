@@ -22,9 +22,10 @@ import org.jboss.security.Util;
 import com.elearning.front.actions.LoginRequired;
 import com.opensymphony.xwork2.ActionSupport;
 import com.opensymphony.xwork2.ModelDriven;
+import com.opensymphony.xwork2.Preparable;
 
 public class AdministratorAction extends ActionSupport implements
-		ModelDriven<Administrator>, RequestAware, ParameterAware, LoginRequired {
+		ModelDriven<Administrator>, RequestAware, ParameterAware, LoginRequired, Preparable {
 
 	private Map<String, Object> request;
 	private Map<String, String[]> parameters;
@@ -71,7 +72,7 @@ public class AdministratorAction extends ActionSupport implements
 		if (id > 0) {
 			administrator = (Administrator) administratorService.find(id);
 		}
-		return this.input();
+		return "edit";
 	}
 
 	/**
@@ -140,13 +141,13 @@ public class AdministratorAction extends ActionSupport implements
 		administratorService.edit(administrator);
 		return SUCCESS;
 	}
-
-	public String input() {
+	
+	@Override
+	public void prepare() throws Exception {
 		List<Affiliate> affiliates = affiliateService.findAll();
 		for (Affiliate affiliate : affiliates) {
 			this.affiliateSelect.put(affiliate.getId(), affiliate.getName());
 		}
-		return INPUT;
 	}
 
 	@Override

@@ -32,9 +32,10 @@ import com.elearning.front.actions.LoginRequired;
 import com.opensymphony.xwork2.ActionContext;
 import com.opensymphony.xwork2.ActionSupport;
 import com.opensymphony.xwork2.ModelDriven;
+import com.opensymphony.xwork2.Preparable;
 
 public class DocumentAction extends ActionSupport implements
-		ModelDriven<Document>, RequestAware, ParameterAware, LoginRequired {
+		ModelDriven<Document>, RequestAware, ParameterAware, LoginRequired, Preparable  {
 
 	private Map<String, Object> request;
 	private Map<String, String[]> parameters;
@@ -137,7 +138,7 @@ public class DocumentAction extends ActionSupport implements
 		if (id > 0) {
 			document = (Document) documentService.find(id);
 		}
-		return this.input();
+		return "edit";
 	}
 
 	/**
@@ -159,6 +160,11 @@ public class DocumentAction extends ActionSupport implements
 
 	@SkipValidation
 	public String input() {
+		return INPUT;
+	}
+	
+	@Override
+	public void prepare() throws Exception {
 		Map<String, Object> session = ActionContext.getContext().getSession();
 		User user = (User) session.get("user");
 		List<Formation> formations = new ArrayList<Formation>();
@@ -179,8 +185,6 @@ public class DocumentAction extends ActionSupport implements
 		for (Formation formation : formations) {
 			this.formationSelect.put(formation.getId(), formation.getName());
 		}
-
-		return INPUT;
 	}
 
 	@SkipValidation
@@ -255,5 +259,4 @@ public class DocumentAction extends ActionSupport implements
 	public void setUploadFileName(String filename) {
 		this.filename = filename;
 	}
-
 }

@@ -24,9 +24,10 @@ import com.elearning.front.actions.LoginRequired;
 import com.opensymphony.xwork2.ActionContext;
 import com.opensymphony.xwork2.ActionSupport;
 import com.opensymphony.xwork2.ModelDriven;
+import com.opensymphony.xwork2.Preparable;
 
 public class FormationAction extends ActionSupport implements
-		ModelDriven<Formation>, RequestAware, ParameterAware, LoginRequired {
+		ModelDriven<Formation>, RequestAware, ParameterAware, LoginRequired, Preparable  {
 
 	private Map<String, Object> request;
 	private Map<String, String[]> parameters;
@@ -75,7 +76,7 @@ public class FormationAction extends ActionSupport implements
 		if (id > 0) {
 			formation = (Formation) formationService.find(id);
 		}
-		return input();
+		return "edit";
 	}
 
 	/**
@@ -144,11 +145,15 @@ public class FormationAction extends ActionSupport implements
 	}
 	
 	public String input(){
+		return INPUT;
+	}
+	
+	@Override
+	public void prepare() throws Exception {
 		List<Affiliate> affiliates = affiliateService.findAll();
 		for(Affiliate affiliate : affiliates){
 			affiliateSelect.put(affiliate.getId(), affiliate.getName());
 		}
-		return INPUT;
 	}
 
 	@Override

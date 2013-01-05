@@ -17,9 +17,10 @@ import org.elearning.sessions.ClassroomSessionRemote;
 import com.elearning.front.actions.LoginRequired;
 import com.opensymphony.xwork2.ActionSupport;
 import com.opensymphony.xwork2.ModelDriven;
+import com.opensymphony.xwork2.Preparable;
 
 public class ClassroomAction extends ActionSupport implements
-		ModelDriven<Classroom>, RequestAware, ParameterAware, LoginRequired {
+		ModelDriven<Classroom>, RequestAware, ParameterAware, LoginRequired, Preparable  {
 
 	private Map<String, Object> request;
 	private Map<String, String[]> parameters;
@@ -59,7 +60,7 @@ public class ClassroomAction extends ActionSupport implements
 		if (id > 0) {
 			classroom = (Classroom) classRoomService.find(id);
 		}
-		return this.input();
+		return "edit";
 	}
 
 	/**
@@ -115,6 +116,10 @@ public class ClassroomAction extends ActionSupport implements
 	public String input() {
 		return INPUT;
 	}
+	
+	@Override
+	public void prepare() throws Exception {
+	}
 
 	@Override
 	public void setRequest(Map<String, Object> request) {
@@ -140,5 +145,4 @@ public class ClassroomAction extends ActionSupport implements
 	public void setParameters(Map<String, String[]> parameters) {
 		this.parameters = parameters;
 	}
-
 }
