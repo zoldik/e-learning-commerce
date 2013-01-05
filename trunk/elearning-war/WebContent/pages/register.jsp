@@ -2,7 +2,6 @@
 <%@ taglib prefix="sb" uri="/struts-bootstrap-tags"%>
 <%@ taglib prefix="sj" uri="/struts-jquery-tags"%>
 
-<s:actionerror theme="bootstrap" />
 <s:actionmessage theme="bootstrap" />
 <s:fielderror theme="bootstrap" />
 <div class="container-fluid">
@@ -31,9 +30,9 @@
 			<sj:datepicker name="birthday" id="birthday" changeYear="true" 
 				parentTheme="bootstrap" displayFormat="dd/mm/yy" label="Date de naissance"
 				tooltip="Indiquer votre date de naissance" minDate="-50y 0m 0d"  />
-			<s:select list="#{'homme' : 'homme' , 'femme' : 'femme' }"headerValue="Je suis un/une..."
-			headerKey="-1" name="sexe" label="Sexe"
-			tooltip="Veuillez indiquer votre sexe" />
+			<s:select list="gender" headerValue="Je suis un/une..."
+			headerKey="" name="sex" label="Genre"
+			tooltip="Veuillez indiquer votre genre" />
 			<s:textfield name="phone" label="Téléphone mobile" 
 				tooltip="Veuillez indiquer votre numéro de téléphone" />
 			<s:textfield name="fixedPhone" label="Téléphone fixe" 
@@ -44,9 +43,10 @@
 				tooltip="Enter your adress here" />			
 			<s:textfield name="zipCode" label="Code postal" 
 				tooltip="Veuillez indiquer votre code postal" />	
-			<s:select list="formationSelect" name="formations" disabled="true" label="Formation"/>
+			<s:select list="formationSelect" name="formations" onfocus="this.defaultIndex=this.selectedIndex;" onchange="this.selectedIndex=this.defaultIndex" label="Formation"/>
 			<s:select list="affiliateSelect" name="" disabled="true" label="Filiale"/>
 		</s:push>
+		<s:hidden name="id"><s:property value='#request["id"]'/></s:hidden>
 		<s:submit cssClass="btn btn-inverse offset7"
 			label="terminer" />
 	</s:form>
