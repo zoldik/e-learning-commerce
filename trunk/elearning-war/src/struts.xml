@@ -24,10 +24,6 @@
 				<interceptor-ref name="login"/>
                 <interceptor-ref name="defaultStack"/>
             </interceptor-stack>
-<!--             <interceptor-stack name="myStack2"> -->
-<!-- 				<interceptor-ref name="myStack"/> -->
-<!--                 <interceptor-ref name="populate"/> -->
-<!--             </interceptor-stack> -->
 		</interceptors>
 		
 		<default-interceptor-ref name="myStack"/>
