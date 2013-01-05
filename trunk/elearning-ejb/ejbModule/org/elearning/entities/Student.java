@@ -9,6 +9,7 @@ import javax.persistence.*;
 
 import org.eclipse.persistence.internal.oxm.schema.model.All;
 
+import com.elearning.enums.Sex;
 import com.sun.xml.bind.v2.schemagen.xmlschema.List;
 
 @Entity
@@ -25,7 +26,8 @@ public class Student extends User implements Serializable,UserInterface {
 	
 	private String situation;
 	
-	private String sexe;
+	@Enumerated
+	private Sex sex;
 	
 	private String zipCode;
 	
@@ -62,12 +64,12 @@ public class Student extends User implements Serializable,UserInterface {
 		this.situation = Situation;
 	}
 
-	public String getSexe() {
-		return sexe;
+	public Sex getSex() {
+		return sex;
 	}
 
-	public void setSexe(String sexe) {
-		this.sexe = sexe;
+	public void setSex(Sex sex) {
+		this.sex = sex;
 	}
 
 	public String getZipCode() {
