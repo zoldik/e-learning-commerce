@@ -26,17 +26,20 @@ import org.elearning.sessions.GouvernorateSessionRemote;
 import org.elearning.sessions.UserSessionRemote;
 import org.jboss.security.Util;
 
+import com.elearning.enums.Sex;
 import com.elearning.front.actions.LoginRequired;
 import com.opensymphony.xwork2.ActionContext;
 import com.opensymphony.xwork2.ActionSupport;
 import com.opensymphony.xwork2.ModelDriven;
+import com.opensymphony.xwork2.Preparable;
 
 public class RegisterStudentAction extends ActionSupport implements
-		ModelDriven<Student>, RequestAware {
+		ModelDriven<Student>, RequestAware, Preparable {
 
 	private Map<String, Object> request;
 	private Map<Integer, String> formationSelect = new HashMap<Integer,String>();
 	private Map<Integer, String> gouvernorateSelect = new HashMap<Integer,String>();
+	private Sex[] gender;
 	private Student student = new Student();
 	private UserSessionRemote userService;
 	private FormationSessionRemote formationService;
@@ -65,24 +68,32 @@ public class RegisterStudentAction extends ActionSupport implements
 	
 	public String execute() {
 		addActionMessage("Votre demande d'inscription a été effectuée avec succès. <br/> Vous recevrez un mail d'activation de votre compte et d'adhésion à la formation dans les 24heures qui suivent. <br/><br/> Merci pour votre inscription.");
-//		student.setPassword(Util.createPasswordHash("MD5",
-//				Util.BASE64_ENCODING, null, null, student.getPassword()));
+		student.setPassword(Util.createPasswordHash("MD5",
+				Util.BASE64_ENCODING, null, null, student.getPassword()));
 //		userService.edit(student);
 		return SUCCESS;
 	}
 
 	public String input() {
-		Integer id = (Integer) this.request.get("id");
-		formation = formationService.find(id);
+		return INPUT;
+	}
+	
+	@Override
+	public void prepare() throws Exception {
+		if(formation==null){
+			Map<String, Object> parameters = ActionContext.getContext().getParameters();
+			String[] id = (String[]) parameters.get("id");
+			formation = formationService.find(Integer.parseInt(id[0]));
+		}
 		List<Gouvernorate> gouvernorates = new ArrayList<Gouvernorate>();
 		gouvernorates = gouvernorateService.findAll();
 		for (Gouvernorate gouvernorate : gouvernorates) {
 			this.gouvernorateSelect.put(gouvernorate.getId(), gouvernorate.getName());
 		}
+		this.gender=Sex.values();
 		this.formationSelect.put(formation.getId(), formation.getName());
 		this.affiliateSelect .put(formation.getAffiliate().getId(),formation.getAffiliate().getName());
-//		}
-		return INPUT;
+		
 	}
 
 	@Override
@@ -129,4 +140,15 @@ public class RegisterStudentAction extends ActionSupport implements
 	public void setGouvernorateSelect(Map<Integer, String> gouvernorateSelect) {
 		this.gouvernorateSelect = gouvernorateSelect;
 	}
+
+	public Sex[] getGender() {
+		return gender;
+	}
+
+	public void setGender(Sex[] gender) {
+		this.gender = gender;
+	}
+	
+	
+	
 }

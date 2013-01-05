@@ -135,7 +135,7 @@
 
 		<action name="edit" class="com.elearning.admin.actions.TeacherAction"
 			method="edit">
-			<result name="input" type="tiles">admin.teacher.edit</result>
+			<result name="edit" type="tiles">admin.teacher.edit</result>
 		</action>
 
 		<action name="delete" class="com.elearning.admin.actions.TeacherAction"
@@ -172,7 +172,7 @@
 
 		<action name="edit" class="com.elearning.admin.actions.FormationAction"
 			method="edit">
-			<result name="input" type="tiles">admin.formation.edit</result>
+			<result name="edit" type="tiles">admin.formation.edit</result>
 		</action>
 
 		<action name="delete" class="com.elearning.admin.actions.FormationAction"
@@ -213,7 +213,7 @@
 
 		<action name="edit" class="com.elearning.admin.actions.ClassroomAction"
 			method="edit">
-			<result name="input" type="tiles">admin.classroom.edit</result>
+			<result name="edit" type="tiles">admin.classroom.edit</result>
 		</action>
 
 		<action name="delete" class="com.elearning.admin.actions.ClassroomAction"
@@ -245,7 +245,7 @@
 
 		<action name="edit" class="com.elearning.admin.actions.DocumentAction"
 			method="edit">
-			<result name="input" type="tiles">admin.document.edit</result>
+			<result name="edit" type="tiles">admin.document.edit</result>
 		</action>
 
 		<action name="delete" class="com.elearning.admin.actions.DocumentAction"
@@ -277,7 +277,7 @@
 
 		<action name="edit" class="com.elearning.admin.actions.AdministratorAction"
 			method="edit">
-			<result name="input" type="tiles">admin.administrator.edit</result>
+			<result name="edit" type="tiles">admin.administrator.edit</result>
 		</action>
 
 		<action name="delete" class="com.elearning.admin.actions.AdministratorAction"
@@ -314,7 +314,7 @@
 
 		<action name="edit" class="com.elearning.admin.actions.MaterialAction"
 			method="edit">
-			<result name="input" type="tiles">admin.subject.edit</result>
+			<result name="edit" type="tiles">admin.subject.edit</result>
 		</action>
 
 		<action name="delete" class="com.elearning.admin.actions.MaterialAction"
