@@ -28,9 +28,10 @@ import com.elearning.front.actions.LoginRequired;
 import com.opensymphony.xwork2.ActionContext;
 import com.opensymphony.xwork2.ActionSupport;
 import com.opensymphony.xwork2.ModelDriven;
+import com.opensymphony.xwork2.Preparable;
 
 public class TeacherAction extends ActionSupport implements
-		ModelDriven<Teacher>, RequestAware, ParameterAware, LoginRequired {
+		ModelDriven<Teacher>, RequestAware, ParameterAware, LoginRequired, Preparable  {
 
 	private Map<String, Object> request;
 	private Map<String, String[]> parameters;
@@ -98,7 +99,7 @@ public class TeacherAction extends ActionSupport implements
 		if (id > 0) {
 			this.teacher = (Teacher) userService.find(id);
 		}
-		return this.input();
+		return "edit";
 	}
 
 	/**
@@ -158,6 +159,11 @@ public class TeacherAction extends ActionSupport implements
 	}
 
 	public String input() {
+		return INPUT;
+	}
+	
+	@Override
+	public void prepare() throws Exception {
 		Map<String, Object> session = ActionContext.getContext().getSession();
 		User user = (User) session.get("user");
 		List<Formation> formations = new ArrayList<Formation>();
@@ -178,7 +184,6 @@ public class TeacherAction extends ActionSupport implements
 		for (Formation formation : formations) {
 			this.formationSelect.put(formation.getId(), formation.getName());
 		}
-		return INPUT;
 	}
 
 	@Override

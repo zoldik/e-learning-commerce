@@ -33,9 +33,10 @@ import org.elearning.sessions.UserSessionRemote;
 import com.elearning.front.actions.LoginRequired;
 import com.opensymphony.xwork2.ActionSupport;
 import com.opensymphony.xwork2.ModelDriven;
+import com.opensymphony.xwork2.Preparable;
 
 public class ScheduleAction extends ActionSupport implements
-		ModelDriven<Schedule>, RequestAware, ParameterAware {
+		ModelDriven<Schedule>, RequestAware, ParameterAware, Preparable  {
 
 	private Map<String, Object> request;
 	private Map<String, String[]> parameters;
@@ -120,7 +121,12 @@ public class ScheduleAction extends ActionSupport implements
 		return ERROR;
 	}
 	
-	public String input(){		
+	public String input(){
+		return INPUT;
+	}
+	
+	@Override
+	public void prepare() throws Exception {
 		Integer id = (Integer) request.get("id");
 		Formation formation = formationService.find(id);
 		if(formation.getSchedule() == null){
@@ -149,8 +155,6 @@ public class ScheduleAction extends ActionSupport implements
 		
 		days = this.dayService.findAll();
 		timeSlots = this.timeSlotService.findAll();
-		
-		return INPUT;
 	}
 
 	@Override
@@ -245,8 +249,5 @@ public class ScheduleAction extends ActionSupport implements
 
 	public Material getSubject() {
 		return subject;
-	}
-	
-	
-	
+	}	
 }
