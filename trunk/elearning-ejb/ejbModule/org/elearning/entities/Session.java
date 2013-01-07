@@ -29,7 +29,7 @@ public class Session implements Serializable {
 	
 	@ManyToOne(targetEntity=TimeSlot.class)
 	@JoinColumn(name="time_slot_id",referencedColumnName="id")
-	private Day timeSlot;
+	private TimeSlot timeSlot;
 	
 	@ManyToOne(targetEntity=Schedule.class)
 	@JoinColumn(name="schedule_id",referencedColumnName="id")
@@ -79,11 +79,11 @@ public class Session implements Serializable {
 		this.day = day;
 	}
 
-	public Day getTimeSlot() {
+	public TimeSlot getTimeSlot() {
 		return timeSlot;
 	}
 
-	public void setTimeSlot(Day timeSlot) {
+	public void setTimeSlot(TimeSlot timeSlot) {
 		this.timeSlot = timeSlot;
 	}
 

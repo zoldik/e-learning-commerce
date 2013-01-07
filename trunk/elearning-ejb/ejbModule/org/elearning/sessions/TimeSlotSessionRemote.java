@@ -11,6 +11,6 @@ public interface TimeSlotSessionRemote extends Serializable{
     
     public List<TimeSlot> findAll();
     
-    public TimeSlot findByName(String name);
+    public TimeSlot findByBeginTime(Integer beginTime);
 
 }
