@@ -46,7 +46,7 @@
 			<s:select list="formationSelect" name="formations" onfocus="this.defaultIndex=this.selectedIndex;" onchange="this.selectedIndex=this.defaultIndex" label="Formation"/>
 			<s:select list="affiliateSelect" name="" disabled="true" label="Filiale"/>
 		</s:push>
-		<s:hidden name="id"><s:property value='#request["id"]'/></s:hidden>
+		<s:hidden name="id" value="%{#request['id']}"/>
 		<s:submit cssClass="btn btn-inverse offset7"
 			label="terminer" />
 	</s:form>
