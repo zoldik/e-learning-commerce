@@ -27,12 +27,12 @@ public class TimeSlotSession implements TimeSlotSessionRemote {
     
     @SuppressWarnings("unchecked")
 	public List<TimeSlot> findAll(){
-    	return em.createQuery("select object(o) from TimeSlot as o").getResultList();
+    	return em.createQuery("select object(t) from TimeSlot as t").getResultList();
     }
     
-    public TimeSlot findByName(String name){
-    	return (TimeSlot)em.createQuery("select object(d) from TimeSlot d where d.name =:timeSlot")
-    	.setParameter("timeSlot",name)
+    public TimeSlot findByBeginTime(Integer beginTime){
+    	return (TimeSlot)em.createQuery("select object(t) from TimeSlot t where t.beginTime =:timeSlot")
+    	.setParameter("timeSlot",beginTime)
     	.getSingleResult();
     }
 

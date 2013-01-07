@@ -42,6 +42,7 @@ public class FormationSession implements FormationSessionRemote {
     	Formation formation = em.find(Formation.class, id);
     	formation.getSubjects().size();
     	formation.getTeachers().size();
+    	formation.getSchedule().getSessions().size();
     	return formation;
     }
     
