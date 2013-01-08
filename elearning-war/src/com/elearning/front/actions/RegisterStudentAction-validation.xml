@@ -20,6 +20,11 @@ EN" "http://www.opensymphony.com/xwork/xwork-validator-1.0.2.dtd">
 			<message key="Vous devez confirmer votre mot de passe" />
 		</field-validator>
 	</field>
+	
+	<validator type="expression">
+	      <param name="expression">confirmPassword.equals(password)</param>
+	      <message>Les deux mots de passe ne sont pas identiques</message>
+	 	</validator>
 
 	<field name="email">
 		<field-validator type="requiredstring">

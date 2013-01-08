@@ -31,12 +31,13 @@ import org.elearning.sessions.TimeSlotSessionRemote;
 import org.elearning.sessions.UserSessionRemote;
 
 import com.elearning.front.actions.LoginRequired;
+import com.opensymphony.xwork2.ActionContext;
 import com.opensymphony.xwork2.ActionSupport;
 import com.opensymphony.xwork2.ModelDriven;
 import com.opensymphony.xwork2.Preparable;
 
 public class ScheduleAction extends ActionSupport implements
-		ModelDriven<Schedule>, RequestAware, ParameterAware, Preparable  {
+		ModelDriven<Schedule>, RequestAware, Preparable  {
 
 	private Map<String, Object> request;
 	private Map<String, String[]> parameters;
@@ -49,6 +50,7 @@ public class ScheduleAction extends ActionSupport implements
 	private Classroom classRoom;
 	private Teacher teacher;
 	private Day day;
+	private TimeSlot timeSlot;
 	private Material subject;
 	private Session session;
 //	private TimeSlot timeSlot;
@@ -108,12 +110,17 @@ public class ScheduleAction extends ActionSupport implements
 	
 	public String execute(){
 		if(this.teacher != null && this.subject != null && this.classRoom != null){
+			Session conflictualSession = sessionService.findConflictualSession(day, classRoom, timeSlot, teacher);
+			if(conflictualSession != null){
+				return ERROR;
+			}
 			this.schedule=subject.getFormation().getSchedule();
 			this.session=new Session();
 			this.session.setTeacher(teacher);
 			this.session.setMaterial(subject);
 			this.session.setClassroom(classRoom);
 			this.session.setDay(day);
+			this.session.setTimeSlot(timeSlot);
 			this.session.setSchedule(schedule);
 			sessionService.edit(session);
 			return SUCCESS;
@@ -127,8 +134,8 @@ public class ScheduleAction extends ActionSupport implements
 	
 	@Override
 	public void prepare() throws Exception {
-		Integer id = (Integer) request.get("id");
-		Formation formation = formationService.find(id);
+		String[] id= (String[]) ActionContext.getContext().getParameters().get("id");
+		Formation formation = formationService.find(Integer.parseInt(id[0]));
 		if(formation.getSchedule() == null){
 			schedule = new Schedule();
 			schedule.setFormation(formation);
@@ -162,10 +169,7 @@ public class ScheduleAction extends ActionSupport implements
 		this.request = request;
 	}
 	
-	@Override
-	public void setParameters(Map<String, String[]> parameters) {
-		 this.parameters = parameters;
-	}
+
 
 	public Schedule getSchedule() {
 		return schedule;
@@ -249,5 +253,13 @@ public class ScheduleAction extends ActionSupport implements
 
 	public Material getSubject() {
 		return subject;
+	}
+
+	public TimeSlot getTimeSlot() {
+		return timeSlot;
+	}
+
+	public void setTimeSlot(TimeSlot timeSlot) {
+		this.timeSlot = timeSlot;
 	}	
 }
