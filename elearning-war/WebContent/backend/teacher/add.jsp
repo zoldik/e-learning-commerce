@@ -17,7 +17,7 @@
 		<s:textfield name="firstName" key="firstname.label" />
 		<s:textfield name="lastName" key="lastname.label" />
 		<s:textfield name="adress" key="adress.label" />
-		<s:select list="formationSelect" multiple="true" name="formations" value="formations" label="formatios"
+		<s:select list="formationSelect" multiple="true" name="formations" value="formations" label="formations"
 		tooltip="Entrez les formations associées"/>
 		<s:checkbox name="enabled" label="Actif"/>
 <%-- 		<s:optiontransferselect --%>
