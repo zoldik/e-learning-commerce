@@ -104,7 +104,7 @@ public class FormationAction extends ActionSupport implements
 	 */
 	@SkipValidation
 	public String remove() {
-		formationService.remove(formationService.find(this.request.get("id")));
+		formationService.remove(formationService.find((Integer)this.request.get("id")));
 		return SUCCESS;
 	}
 
