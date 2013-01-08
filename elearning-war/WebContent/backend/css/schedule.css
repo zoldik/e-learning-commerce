@@ -21,10 +21,10 @@
 .session-drop{
 	width: 90px;
 	height: 138px;
-	color: #FFFFFF;
-	font-weight: bold;
 }
 
 .dropped{
 	background-color: #AEA7FF;
+	color: #FFFFFF;
+	font-weight: bold;
 }
