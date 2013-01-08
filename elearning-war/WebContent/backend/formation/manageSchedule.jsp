@@ -10,6 +10,11 @@
 
 <s:property value="#myURL" />
 <script type="text/javascript">
+	function onCloseClick(){
+		jQuery(".close").click(function(){
+			jQuery(this).closest("td").removeClass("alert-error");
+		});
+	}
 	$.subscribe('ondrop', function(event, data) {
 		if (jQuery("#teacherSelect").val() != ""
 				&& jQuery("#classRoomSelect").val() != ""
@@ -25,11 +30,17 @@
 				type : "post",
 				data : dataToSend,
 				success : function(serverData) {
-					console.log(jQuery(serverData).find("error").data());
-// 					console.log(serverData);
-// 					if(serverData){
+					console.log(jQuery(serverData).filter(".conflictual"));
+					if(jQuery(serverData).filter(".conflictual").size() > 0){
 						jQuery(data).html(serverData);
-						jQuery(data).closest("td").addClass("dropped");	
+						jQuery(data).closest("td").addClass("alert-error");
+						onCloseClick();
+					}
+					else{
+						jQuery(data).closest("td").html(serverData).addClass("dropped");	
+					}
+// 					if(serverData){
+					
 // 					}
 // 					else{
 // 						jQuery(data).closest("td").addClass("alert alert-error");
