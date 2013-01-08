@@ -16,7 +16,7 @@ public interface FormationSessionRemote extends Serializable{
 
     public void remove(Formation formation);
     
-    public Formation find(Object id);
+    public Formation find(Integer id);
     
     public List<Formation> findAll();
     
