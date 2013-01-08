@@ -5,11 +5,10 @@ import java.util.List;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
-import javax.persistence.criteria.CriteriaQuery;
 
 import org.elearning.entities.Affiliate;
 import org.elearning.entities.Formation;
-import org.elearning.entities.User;
+import org.elearning.entities.Schedule;
 
 /**
  * Session Bean implementation class FormationSession
@@ -38,11 +37,14 @@ public class FormationSession implements FormationSessionRemote {
         em.remove(em.merge(formation));
     }
     
-    public Formation find(Object id){
+    public Formation find(Integer id){
     	Formation formation = em.find(Formation.class, id);
     	formation.getSubjects().size();
     	formation.getTeachers().size();
-    	formation.getSchedule().getSessions().size();
+    	Schedule schedule=formation.getSchedule();
+    	if( schedule != null ){
+    		schedule.getSessions().size();
+    	}
     	return formation;
     }
     
