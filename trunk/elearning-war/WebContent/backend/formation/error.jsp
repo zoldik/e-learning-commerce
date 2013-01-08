@@ -1,4 +1,4 @@
-<td class="alert alert-error">
+<div class="conflictual">
 	<button type="button" class="close" data-dismiss="alert">×</button>
 	Il y a une séance en conflit
-</td>
+</div>
