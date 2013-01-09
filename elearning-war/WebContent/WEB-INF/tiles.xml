@@ -29,7 +29,17 @@
 		<put-attribute name="body" value="/pages/register.jsp" />
 	</definition>
 	
-	<definition name=".contact" extends="base">
+	<definition name="base.student.personal_space" extends="base">
+		<put-attribute name="title" value="Mon espace personnel" />
+		<put-attribute name="body" value="/pages/studentPersonalSpace.jsp" />
+	</definition>
+	
+	<definition name="base.presentation" extends="base">
+		<put-attribute name="title" value="Presentation" />
+		<put-attribute name="body" value="/pages/presentation.jsp" />
+	</definition>
+	
+	<definition name="base.contact" extends="base">
 		<put-attribute name="title" value="Contactez-nous" />
 		<put-attribute name="menu" value="" />
 		<put-attribute name="body" value="/pages/contact.jsp" />
