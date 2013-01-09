@@ -162,6 +162,18 @@ public class TeacherAction extends ActionSupport implements
 		return INPUT;
 	}
 	
+	public void validate() {
+		UserInterface user= userService.findUserByUsernameOrEmail(this.teacher.getEmail());
+		if(user instanceof UserInterface){
+			addFieldError(this.teacher.getEmail(), "L'adresse email existe déjà");
+		}
+		user = userService.findUserByUsernameOrEmail(this.teacher.getUsername());
+		if(user instanceof UserInterface){
+			addFieldError(this.teacher.getUsername(), "Le nom d'utilisateur existe déjà");
+			addActionError("Le nom d'utilisateur existe déjà");
+		}
+	}
+	
 	@Override
 	public void prepare() throws Exception {
 		Map<String, Object> session = ActionContext.getContext().getSession();

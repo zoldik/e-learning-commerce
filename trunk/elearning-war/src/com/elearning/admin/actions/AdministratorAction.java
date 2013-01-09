@@ -15,6 +15,7 @@ import org.apache.struts2.interceptor.validation.SkipValidation;
 import org.elearning.entities.Administrator;
 import org.elearning.entities.Affiliate;
 import org.elearning.entities.User;
+import org.elearning.entities.UserInterface;
 import org.elearning.sessions.AdministratorSessionRemote;
 import org.elearning.sessions.AffiliateSessionRemote;
 import org.jboss.security.Util;
@@ -140,6 +141,18 @@ public class AdministratorAction extends ActionSupport implements
 		}
 		administratorService.edit(administrator);
 		return SUCCESS;
+	}
+	
+	public void validate() {
+		UserInterface user= administratorService.findUserByUsernameOrEmail(this.administrator.getEmail());
+		if(user instanceof UserInterface){
+			addFieldError(this.administrator.getEmail(), "L'adresse email existe déjà");
+		}
+		user = administratorService.findUserByUsernameOrEmail(this.administrator.getUsername());
+		if(user instanceof UserInterface){
+			addFieldError(this.administrator.getUsername(), "Le nom d'utilisateur existe déjà");
+			addActionError("Le nom d'utilisateur existe déjà");
+		}
 	}
 	
 	@Override
