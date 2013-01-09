@@ -67,7 +67,7 @@ public class LoginAction extends ActionSupport implements SessionAware {
 			addActionError("votre compte est désactivé");
 			return ERROR;
 		}
-		addActionError("vérifiez votre mot de passe ou bien votre login");
+		addActionError("vérifiez votre mot de passe ou bien votre nom d'utilisateur");
 		return ERROR;
 	}
 

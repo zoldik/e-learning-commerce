@@ -23,6 +23,7 @@ import org.elearning.entities.User;
 import org.elearning.entities.UserInterface;
 import org.elearning.sessions.FormationSessionRemote;
 import org.elearning.sessions.GouvernorateSessionRemote;
+import org.elearning.sessions.RoleSessionRemote;
 import org.elearning.sessions.UserSessionRemote;
 import org.jboss.security.Util;
 
@@ -40,9 +41,11 @@ public class RegisterStudentAction extends ActionSupport implements
 	private Map<Integer, String> formationSelect = new HashMap<Integer,String>();
 	private Map<Integer, String> gouvernorateSelect = new HashMap<Integer,String>();
 	private Sex[] gender;
+	private String confirmPassword;
 	private Student student = new Student();
 	private UserSessionRemote userService;
 	private FormationSessionRemote formationService;
+	private RoleSessionRemote roleService;
 	private GouvernorateSessionRemote gouvernorateService;
 	private Formation formation;
 	private Map<Integer,String> affiliateSelect = new HashMap<Integer,String>();
@@ -50,12 +53,14 @@ public class RegisterStudentAction extends ActionSupport implements
 	public RegisterStudentAction() throws NamingException {
 		try {
 			InitialContext ctx = new InitialContext();
-//			userService = (UserSessionRemote) ctx
-//					.lookup("StudentSession/remote");
+			userService = (UserSessionRemote) ctx
+					.lookup("StudentSession/remote");
 			gouvernorateService = (GouvernorateSessionRemote) ctx
 			.lookup("GouvernorateSession/remote");
 			formationService = (FormationSessionRemote) ctx
 			.lookup("FormationSession/remote");
+			roleService = (RoleSessionRemote) ctx
+			.lookup("RoleSession/remote");
 		} catch (NameNotFoundException e) {
 			e.printStackTrace();
 		}
@@ -70,8 +75,26 @@ public class RegisterStudentAction extends ActionSupport implements
 		addActionMessage("Votre demande d'inscription a été effectuée avec succès. <br/> Vous recevrez un mail d'activation de votre compte et d'adhésion à la formation dans les 24heures qui suivent. <br/><br/> Merci pour votre inscription.");
 		student.setPassword(Util.createPasswordHash("MD5",
 				Util.BASE64_ENCODING, null, null, student.getPassword()));
-//		userService.edit(student);
+		Role role = roleService.findByName("student");
+		ArrayList<Role> roles = new ArrayList<Role>();
+		roles.add(role);
+		student.setRoles(roles);
+		student.setEnabled(true);
+		userService.edit(student);
 		return SUCCESS;
+	}
+	
+	public void validate() {
+		String email = this.student.getEmail();
+		UserInterface user= userService.findUserByUsernameOrEmail(email);
+		if(user instanceof UserInterface){
+			addFieldError(this.student.getEmail(), "L'adresse email existe déjà");
+		}
+		user = userService.findUserByUsernameOrEmail(this.student.getUsername());
+		if(user instanceof UserInterface){
+			addFieldError(this.student.getUsername(), "Le nom d'utilisateur existe déjà");
+			addActionError("Le nom d'utilisateur existe déjà");
+		}
 	}
 
 	public String input() {
@@ -148,7 +171,13 @@ public class RegisterStudentAction extends ActionSupport implements
 	public void setGender(Sex[] gender) {
 		this.gender = gender;
 	}
-	
-	
+
+	public String getConfirmPassword() {
+		return confirmPassword;
+	}
+
+	public void setConfirmPassword(String confirmPassword) {
+		this.confirmPassword = confirmPassword;
+	}	
 	
 }
