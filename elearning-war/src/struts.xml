@@ -18,8 +18,6 @@
 		<interceptors>
 			<interceptor name="login"
 				class="com.elearning.interceptors.LoginInterceptor" />
-			<interceptor name="populate"
-				class="com.elearning.interceptors.InputDocumentPrepare" />
 			<interceptor-stack name="myStack">
 				<interceptor-ref name="login"/>
                 <interceptor-ref name="defaultStack"/>
@@ -83,13 +81,30 @@
 				<param name="namespace">/</param>
 			</result>
 		</action>
+		
+		<action name="personalSpace" class="com.elearning.front.actions.PersonalSpaceAction">
+			<result name="success" type="tiles">base.student.personal_space</result>
+		</action>
+		
+		<action name="previewPdf" class="com.elearning.front.actions.PreviewPDFAction">
+	    	<result name="success" type="stream">
+	            <param name="contentType">application/pdf</param>
+	            <param name="inputName">inputStream</param>
+	            <param name="contentDisposition">filename="test.pdf"</param>
+	            <param name="bufferSize">1024</param>
+	    	</result>
+	   </action>
+		
+		<action name="presentation" class="com.elearning.front.actions.PresentationAction">
+			<result name="success" type="tiles">base.presentation</result>
+		</action>
 
 		<action name="translate" class="com.elearning.front.actions.Locale">
 			<result name="success">index.jsp</result>
 		</action>
 
 		<action name="contact" class="com.elearning.front.actions.ContactAction">
-			<result name="input" type="tiles">.contact</result>
+			<result name="input" type="tiles">base.contact</result>
 			<result name="success" type="redirect">contact</result>
 		</action>
 

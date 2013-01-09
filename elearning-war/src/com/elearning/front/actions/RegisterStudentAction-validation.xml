@@ -14,23 +14,17 @@ EN" "http://www.opensymphony.com/xwork/xwork-validator-1.0.2.dtd">
 			<message key="Le mot de passe est obligatoire" />
 		</field-validator>
 	</field>
-
-	<field name="confirmPassword">
-		<field-validator type="requiredstring">
-			<message key="Vous devez confirmer votre mot de passe" />
-		</field-validator>
-	</field>
 	
 	<validator type="expression">
-	      <param name="expression">confirmPassword.equals(password)</param>
+	      <param name="expression">password.equals(confirmPassword)</param>
 	      <message>Les deux mots de passe ne sont pas identiques</message>
-	 	</validator>
+ 	</validator>
 
 	<field name="email">
 		<field-validator type="requiredstring">
 			<message>L'adresse email est obligatoire</message>
 		</field-validator>
-		<field-validator type="email" short-circuit="true">
+		<field-validator type="email">
 			<message key="email.error" />
 		</field-validator>
 	</field>
@@ -64,10 +58,10 @@ EN" "http://www.opensymphony.com/xwork/xwork-validator-1.0.2.dtd">
 <!--   </field>   -->
   
   <field name="phone" > 
-	    <field-validator type="requiredstring" short-circuit="true"> 
+	    <field-validator type="requiredstring"> 
 	      <message>Le numéro de téléphone est obligatoire</message>
 	    </field-validator> 
-	    <field-validator type="regex" short-circuit="true">
+	    <field-validator type="regex">
 			<param name="expression">^(\+216)?\d{8}$</param>
 			<param name="trim">true</param>
 			<message key="phone.error" />
@@ -83,7 +77,18 @@ EN" "http://www.opensymphony.com/xwork/xwork-validator-1.0.2.dtd">
 			<param name="maxLength">4</param>
 			<message>Le code postal doit posséder exactement $(min) chiffres</message>
 		</field-validator>
-  </field>  
+  </field>
+  
+  <field name="cin" > 
+	    <field-validator type="required"> 
+	      <message>Le numéro de la carte d'identité est obligatoire'</message>
+	    </field-validator> 
+	    <field-validator type="int" >
+			<param name="minLength">8</param>
+			<param name="maxLength">8</param>
+			<message>Le numéro de la carte d'identité doit posséder exactement $(min) chiffres</message>
+		</field-validator>
+  </field>    
   
 <!--   <field name="adresse" >  -->
 <!-- 	    <field-validator type="requiredstring" short-circuit="true">  -->
