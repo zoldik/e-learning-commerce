@@ -86,14 +86,14 @@
 			<result name="success" type="tiles">base.student.personal_space</result>
 		</action>
 		
-		<action name="previewPdf" class="com.elearning.front.actions.PreviewPDFAction">
-	    	<result name="success" type="stream">
-	            <param name="contentType">application/pdf</param>
-	            <param name="inputName">inputStream</param>
-	            <param name="contentDisposition">filename="test.pdf"</param>
-	            <param name="bufferSize">1024</param>
-	    	</result>
-	   </action>
+<!-- 		<action name="previewPdf" class="com.elearning.front.actions.PreviewPDFAction"> -->
+<!-- 	    	<result name="success" type="stream"> -->
+<!-- 	            <param name="contentType">application/pdf</param> -->
+<!-- 	            <param name="inputName">inputStream</param> -->
+<!-- 	            <param name="contentDisposition">filename="test.pdf"</param> -->
+<!-- 	            <param name="bufferSize">1024</param> -->
+<!-- 	    	</result> -->
+<!-- 	   </action> -->
 		
 		<action name="presentation" class="com.elearning.front.actions.PresentationAction">
 			<result name="success" type="tiles">base.presentation</result>
