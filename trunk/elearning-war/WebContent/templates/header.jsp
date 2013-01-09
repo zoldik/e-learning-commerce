@@ -5,6 +5,8 @@
 <s:set var="classIndex" value=""/>
 <s:set var="classContact" value=""/>
 <s:set var="classRegister" value=""/>
+<s:set var="classPersonalSpace" value=""/>
+<s:set var="classPresentation" value=""/>
 <s:set var="actionName" value="com.opensymphony.xwork2.ActionContext.name"/>
 <s:if test="%{#actionName=='registerStep1' || #actionName=='registerStudent'}">
 	<s:set var="classRegister">active</s:set>
@@ -14,6 +16,12 @@
 </s:elseif>
 <s:elseif test="%{#actionName=='contact'}">
 	<s:set var="classContact">active</s:set>
+</s:elseif>
+<s:elseif test="%{#actionName=='personalSpace'}">
+	<s:set var="classPersonalSpace">active</s:set>
+</s:elseif>
+<s:elseif test="%{#actionName=='presentation'}">
+	<s:set var="classPresentation">active</s:set>
 </s:elseif>
 
 <div class="header-container">
@@ -29,7 +37,7 @@
 					<s:a href="%{indexUrl}">Accueil</s:a>
 				</li>
 				<s:url var="presenationUrl" action="presentation" namespace="/pages"/>
-				<li>
+				<li class="<s:property value="#classPresentation"/>">
 					<s:a href="%{presenationUrl}"> Présentation </s:a>
 				</li>
 
@@ -42,7 +50,7 @@
 					<s:action name="listAffiliate" namespace="/pages" executeResult="true"/>
 				</li>
 				
-				<s:url var="contactUrl" action="contact!input" namespace="/pages"/>
+				<s:url var="contactUrl" action="contact" method="input" namespace="/pages"/>
 				<li class='<s:property value="#classContact"/>'>
 					<s:a href="%{contactUrl}">Contact </s:a>
 				</li>
@@ -65,7 +73,6 @@
 						</a>
 						<ul class="dropdown-menu login-container">
 							<li><s:fielderror theme="bootstrap" /></li>
-							<li><s:actionmessage theme="bootstrap" /></li>
 							<s:form action="login" method="post" namespace="/pages" theme="bootstrap" cssClass="form-vertical">
 							<li>
 								<s:textfield name="username" placeholder="nom d'utilisateur ou e-mail" />
@@ -81,6 +88,12 @@
 					</li>
 				</s:if>
 				<s:else>
+					<s:if test="#session.roles.contains('student')">
+						<s:url var="myFormations" action="personalSpace" namespace="/pages"/> 
+						<li class="<s:property value="#classPersonalSpace"/>">
+							<s:a href="%{myFormations}">Mon espace personnel</s:a>
+						</li>
+					</s:if>
 					<s:url id="logoutURL" action="logout" namespace="/pages"/>
 					<li>
 					    <s:a href="%{logoutURL}">
