@@ -9,6 +9,7 @@ import javax.persistence.NoResultException;
 import javax.persistence.PersistenceContext;
 import javax.persistence.Query;
 
+import org.elearning.entities.Student;
 import org.elearning.entities.User;
 import org.elearning.entities.UserInterface;
 import org.jboss.security.Util;
@@ -55,9 +56,19 @@ public class UserSession implements UserSessionLocal, UserSessionRemote {
 	@SuppressWarnings("unchecked")
 	public List<User> findChecked(List<Integer> idx) {
 		return em
-				.createQuery(
-						"select object(o) from User as o where o.id in :param")
+				.createQuery("select object(o) from User as o where o.id in :param")
 				.setParameter("param", idx).getResultList();
+	}
+
+	public UserInterface findUserByUsernameOrEmail(String usernmaeOrEmail) {
+		UserInterface user = null;
+		try {
+			user = (UserInterface) em
+					.createQuery("select u from User u where u.username=:p1 or u.email=:p1")
+					.setParameter("p1", usernmaeOrEmail)
+					.getSingleResult();
+		} catch (NoResultException exception) {};
+		return user;
 	}
 
 	public UserInterface login(String usernameOrEmail, String password) {
@@ -70,20 +81,25 @@ public class UserSession implements UserSessionLocal, UserSessionRemote {
 			user = (UserInterface) query.setParameter("p1", usernameOrEmail)
 					.setParameter("pwd", hashedPassword).getSingleResult();
 		} catch (NoResultException exception) {
-		};
+		}
+		;
 
 		if (!(user instanceof UserInterface)) {
 			try {
-				user = (UserInterface) query.setParameter("p1", usernameOrEmail)
+				user = (UserInterface) query
+						.setParameter("p1", usernameOrEmail)
 						.setParameter("pwd", password).getSingleResult();
 			} catch (NoResultException exception) {
 			}
 			;
 		}
-		if(user instanceof UserInterface){
-			((User)user).setLastLogin(new Date());
+		if (user instanceof UserInterface) {
+			((User) user).setLastLogin(new Date());
 			this.edit(user);
-			((User)user).getRoles().size();
+			((User) user).getRoles().size();
+			if (user instanceof Student) {
+				((Student) user).getFormations().size();
+			}
 		}
 		return user;
 	}

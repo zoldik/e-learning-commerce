@@ -23,6 +23,8 @@ public interface UserSessionRemote extends Serializable{
     
     public List<? extends User> findChecked(List<Integer> results);
     
+    public UserInterface findUserByUsernameOrEmail(String usernmaeOrEmail);
+    
     public Object login(String usernameOrEmail, String password);
 
 }
