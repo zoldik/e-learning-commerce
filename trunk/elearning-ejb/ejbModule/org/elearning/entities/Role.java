@@ -25,9 +25,7 @@ public class Role implements Serializable {
 	@GeneratedValue(strategy=GenerationType.AUTO)
 	private int id;
 	
-	@ManyToMany(targetEntity=User.class,fetch=FetchType.LAZY)
-	@JoinTable(name="user_role",joinColumns=@JoinColumn(name="role_id")
-			,inverseJoinColumns=@JoinColumn(name="user_id"))
+	@ManyToMany(targetEntity=User.class,fetch=FetchType.LAZY, mappedBy="roles")
 	private Collection<User> users;
 	
 	private String name;
