@@ -31,6 +31,7 @@
 	
 	<definition name="base.student.personal_space" extends="base">
 		<put-attribute name="title" value="Mon espace personnel" />
+		<put-attribute name="menu" value="/pages/sideBarStudent.jsp" />
 		<put-attribute name="body" value="/pages/studentPersonalSpace.jsp" />
 	</definition>
 	
