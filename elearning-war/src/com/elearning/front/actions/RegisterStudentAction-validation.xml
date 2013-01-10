@@ -81,7 +81,7 @@ EN" "http://www.opensymphony.com/xwork/xwork-validator-1.0.2.dtd">
   
   <field name="cin" > 
 	    <field-validator type="required"> 
-	      <message>Le numéro de la carte d'identité est obligatoire'</message>
+	      <message>Le numéro de la carte d'identité est obligatoire</message>
 	    </field-validator> 
 	    <field-validator type="int" >
 			<param name="minLength">8</param>
