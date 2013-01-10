@@ -9,6 +9,7 @@ import javax.persistence.NoResultException;
 import javax.persistence.PersistenceContext;
 import javax.persistence.Query;
 
+import org.elearning.entities.Formation;
 import org.elearning.entities.Student;
 import org.elearning.entities.User;
 import org.elearning.entities.UserInterface;
@@ -18,7 +19,7 @@ import org.jboss.security.Util;
  * Session Bean implementation class UserSession
  */
 @Stateless
-public class UserSession implements UserSessionLocal, UserSessionRemote {
+public class UserSession implements UserSessionRemote {
 	@PersistenceContext
 	EntityManager em;
 
@@ -99,6 +100,10 @@ public class UserSession implements UserSessionLocal, UserSessionRemote {
 			((User) user).getRoles().size();
 			if (user instanceof Student) {
 				((Student) user).getFormations().size();
+				for(Formation formation : ((Student) user).getFormations()){
+					formation.getSchedule().getSessions().size();
+					formation.getDocuments().size();
+				}
 			}
 		}
 		return user;
