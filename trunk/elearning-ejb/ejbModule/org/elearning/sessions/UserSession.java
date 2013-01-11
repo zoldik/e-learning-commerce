@@ -101,7 +101,9 @@ public class UserSession implements UserSessionRemote {
 			if (user instanceof Student) {
 				((Student) user).getFormations().size();
 				for(Formation formation : ((Student) user).getFormations()){
-					formation.getSchedule().getSessions().size();
+					if(formation.getSchedule()!=null){
+						formation.getSchedule().getSessions().size();
+					}
 					formation.getDocuments().size();
 				}
 			}
