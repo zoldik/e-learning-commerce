@@ -98,6 +98,9 @@
 		<action name="listAffiliate" class="com.elearning.front.actions.AffiliateAction"
 			method="list">
 			<result name="success">/pages/afilialeList.jsp</result>
+			<result name="affiliate" type="tiles">base.view_affiliate</result>
+			<result name="subscribe" type="redirect">personalSpace</result>
+			<result name="error" type="redirect">login</result>
 		</action>
 
 	</package>
