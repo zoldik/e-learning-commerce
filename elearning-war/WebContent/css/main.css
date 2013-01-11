@@ -113,3 +113,9 @@ body {
 	width: 402px;
 	background-color: #833B48;
 }
+
+.dropped{
+	background-color: #AEA7FF;
+	color: #FFFFFF;
+	font-weight: bold;
+}
