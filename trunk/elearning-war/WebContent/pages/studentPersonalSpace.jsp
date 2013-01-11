@@ -57,6 +57,7 @@ jQuery(document).ready(function(){
     </div>
     
    	<div class="tab-pane" id="tab2">
+   	  <s:if test="documents.size()>0">
 			<s:iterator value="documents">
   			<li class="nav-header"><s:property value="key"/></li>
   				<s:iterator value="value">
@@ -67,6 +68,10 @@ jQuery(document).ready(function(){
   					</li>
   				</s:iterator>
   			</s:iterator>
+  		</s:if>
+  		<s:else>
+  			Pas de cours disponibles pour cette formation.
+  		</s:else>
    	</div>
 </div>
   	

@@ -6,11 +6,11 @@
 	</div>
 	<div class="container affiliates-container">
 		<s:iterator value="affiliates">
-			<s:url var="affiliateURL" action="index" namespace="/">
-
+			<s:url var="affiliateURL" action="listAffiliate" namespace="/pages" method="viewAffiliate" >
+				<s:param name="id" value="%{id}"/>
 			</s:url>
 			<div class="span3 inline">
-				<s:a href="%{affiliateURL%}">
+				<s:a href="%{affiliateURL}">
 					<div class="affiliate-element">
 						<s:property value="name" />
 					</div>

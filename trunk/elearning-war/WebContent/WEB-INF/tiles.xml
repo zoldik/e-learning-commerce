@@ -46,6 +46,12 @@
 		<put-attribute name="body" value="/pages/contact.jsp" />
 	</definition>
 	
+	<definition name="base.view_affiliate" extends="base">
+		<put-attribute name="title" value="La filiale" />
+		<put-attribute name="menu" value="" />
+		<put-attribute name="body" value="/pages/affiliate.jsp" />
+	</definition>
+	
 	<definition name="front.login" extends="base">
 		<put-attribute name="title" value="Connectez-vous" />
 		<put-attribute name="menu" value="" />
