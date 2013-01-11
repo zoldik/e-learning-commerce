@@ -9,6 +9,7 @@ import java.util.Map;
 import javax.naming.InitialContext;
 import javax.naming.NamingException;
 
+import org.apache.struts2.interceptor.ParameterAware;
 import org.apache.struts2.interceptor.SessionAware;
 import org.elearning.entities.Affiliate;
 import org.elearning.entities.Classroom;
@@ -29,7 +30,7 @@ import com.opensymphony.xwork2.ActionContext;
 import com.opensymphony.xwork2.ActionSupport;
 import com.opensymphony.xwork2.Preparable;
 
-public class PersonalSpaceAction extends ActionSupport implements SessionAware , LoginRequired, Preparable {
+public class PersonalSpaceAction extends ActionSupport implements ParameterAware,SessionAware , LoginRequired, Preparable {
 
 	
 	private Map<String,List<Formation>> affiliates = new HashMap<String, List<Formation>>();
@@ -39,6 +40,7 @@ public class PersonalSpaceAction extends ActionSupport implements SessionAware ,
 	private Schedule schedule;
 	private TimeSlotSessionRemote timeSlotService;
 	private Map<String,Object> session;
+	private Map<String, String[]> parameters;
 	private List<Day> days = new ArrayList<Day>();
 	private List<TimeSlot> timeSlots = new ArrayList<TimeSlot>();
 	
@@ -54,12 +56,12 @@ public class PersonalSpaceAction extends ActionSupport implements SessionAware ,
 	public String execute(){
 		Student student = (Student) session.get("user");
 		if(student instanceof Student){
-			Integer id=(Integer) ActionContext.getContext().get("id");
+			String[] idArray=this.parameters.get("id");
 			List<Formation> formations= (List<Formation>) student.getFormations();
 			Formation selectedFormation = formations.get(0);
 			for (Formation formation : formations){
-				if(id!=null){
-					if(formation.getId()==id){
+				if(idArray!=null){
+					if(formation.getId()==Integer.parseInt(idArray[0])){
 						selectedFormation = formation;
 					}
 				}
@@ -95,6 +97,11 @@ public class PersonalSpaceAction extends ActionSupport implements SessionAware ,
 	public void prepare() throws Exception {
 		days = this.dayService.findAll();
 		timeSlots = this.timeSlotService.findAll();
+	}
+	
+	@Override
+	public void setParameters(Map<String, String[]> parameters) {
+		this.parameters = parameters;
 	}
 	
 	@Override
