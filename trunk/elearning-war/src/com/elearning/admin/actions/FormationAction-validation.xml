@@ -8,12 +8,14 @@ EN" "http://www.opensymphony.com/xwork/xwork-validator-1.0.2.dtd">
 			<message key="Le nom est obligatoire" />
 		</field-validator>
 	</field>
-	<field name="capacity">
+	<field name="startDate">
 		<field-validator type="required">
-			<message>La capacité est obligatoire</message>
+			<message>La date est obligatoire</message>
 		</field-validator>
-		<field-validator type="int">
-			<message>La capacité ne peut contenir que des numéros entiers</message>
+	</field>
+	<field name="endDate">
+		<field-validator type="required">
+			<message>La date est obligatoire</message>
 		</field-validator>
 	</field>
 </validators>
